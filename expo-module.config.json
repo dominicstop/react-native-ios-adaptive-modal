@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android", "web"],
+  "ios": {
+    "modules": ["ReactNativeIosAdaptiveModalModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.iosadaptivemodal.ReactNativeIosAdaptiveModalModule"]
+  }
+}
