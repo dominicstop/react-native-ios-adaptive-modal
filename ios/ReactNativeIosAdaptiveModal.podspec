@@ -17,6 +17,12 @@ Pod::Spec.new do |s|
 
   s.dependency 'ExpoModulesCore'
 
+  s.dependency 'ReactNativeIosUtilities'
+  s.dependency 'DGSwiftUtilities'
+
+  s.dependency 'AdaptiveModal', '~> 0.3'
+  s.dependency 'ComputableLayout'
+
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
