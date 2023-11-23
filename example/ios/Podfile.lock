@@ -1,19 +1,23 @@
 PODS:
+  - AdaptiveModal (0.1.0):
+    - ComputableLayout (= 0.4.0)
   - boost (1.76.0)
+  - ComputableLayout (0.4.0)
+  - DGSwiftUtilities (0.6.2)
   - DoubleConversion (1.1.6)
   - EXApplication (5.3.1):
     - ExpoModulesCore
   - EXConstants (14.4.2):
     - ExpoModulesCore
-  - EXFileSystem (15.4.4):
+  - EXFileSystem (15.4.5):
     - ExpoModulesCore
   - EXFont (11.4.0):
     - ExpoModulesCore
-  - Expo (49.0.13):
+  - Expo (49.0.20):
     - ExpoModulesCore
   - ExpoKeepAwake (12.3.0):
     - ExpoModulesCore
-  - ExpoModulesCore (1.5.11):
+  - ExpoModulesCore (1.5.12):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-NativeModulesApple
@@ -444,6 +448,13 @@ PODS:
     - React-logger (= 0.72.5)
     - React-perflogger (= 0.72.5)
   - ReactNativeIosAdaptiveModal (0.1.0):
+    - AdaptiveModal (~> 0.1)
+    - ComputableLayout
+    - DGSwiftUtilities
+    - ExpoModulesCore
+    - ReactNativeIosUtilities
+  - ReactNativeIosUtilities (4.2.2):
+    - DGSwiftUtilities (~> 0.6)
     - ExpoModulesCore
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
@@ -496,11 +507,15 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - ReactNativeIosAdaptiveModal (from `../../ios`)
+  - ReactNativeIosAdaptiveModal (from `../..`)
+  - ReactNativeIosUtilities (from `../node_modules/react-native-ios-utilities`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - AdaptiveModal
+    - ComputableLayout
+    - DGSwiftUtilities
     - fmt
     - libevent
     - SocketRocket
@@ -598,20 +613,25 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeIosAdaptiveModal:
-    :path: "../../ios"
+    :path: "../.."
+  ReactNativeIosUtilities:
+    :path: "../node_modules/react-native-ios-utilities"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  AdaptiveModal: 04758b210336455daafefb24b1beafa481f9cf79
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
+  ComputableLayout: 6dd2d980bd76f918dc17bf41499b970c901f0824
+  DGSwiftUtilities: c0a3708bacecddbbeb107e167eb5a55cb00bd768
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EXApplication: 042aa2e3f05258a16962ea1a9914bf288db9c9a1
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
-  EXFileSystem: 2b826a3bf1071a4b80a8457e97124783d1ac860e
+  EXFileSystem: f8b838a880254de42a5a7da20ed5ce12e2697c1b
   EXFont: 738c44c390953ebcbab075a4848bfbef025fd9ee
-  Expo: e7d2116b947e2e6fdeb09ee4f2754f819426d1b6
+  Expo: 25b41ba5d4a3af57234dca132f6b9e1f5b0bd4b5
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
-  ExpoModulesCore: 51cb2e7ab4c8da14be3f40b66d54c1781002e99d
+  ExpoModulesCore: c480fd4e3c7c8e81f0a6ba3a7c56869f25fe016d
   FBLazyVector: 71803c074f6325f10b5ec891c443b6bbabef0ca7
   FBReactNativeSpec: 448e08a759d29a96e15725ae532445bf4343567c
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
@@ -650,10 +670,11 @@ SPEC CHECKSUMS:
   React-runtimescheduler: cc32add98c45c5df18436a6a52a7e1f6edec102c
   React-utils: 7a9918a1ffdd39aba67835d42386f592ea3f8e76
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
-  ReactNativeIosAdaptiveModal: b270d73b811bb2cd9ecf800edc11ff579c57ad05
+  ReactNativeIosAdaptiveModal: a14936a3496258f884075b005fad9f4db0dbc6e2
+  ReactNativeIosUtilities: 0b67162175d8fd40ba8c4fbe8513e33ad24513b6
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6
 
 PODFILE CHECKSUM: 6a5ef93626966f45f97d6f3eba01827d3f50f62e
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.14.2
