@@ -1,6 +1,9 @@
 {
   "platforms": ["ios"],
   "ios": {
-    "modules": ["ReactNativeIosAdaptiveModalModule"]
+    "modules": [
+      "ReactNativeIosAdaptiveModalModule"
+    ],
+    "podspecPath": "./ReactNativeIosAdaptiveModal.podspec"
   }
 }
