@@ -7,8 +7,7 @@ import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveM
 
 
 const NATIVE_ID_KEYS = {
-  contextMenuPreview: 'contextMenuPreview',
-  contextMenuAuxiliaryPreview: 'contextMenuAuxiliaryPreview',
+  modalContent: 'modalContent',
 };
 
 export class AdaptiveModalView extends 
@@ -59,6 +58,10 @@ export class AdaptiveModalView extends
     };
   };
 
+  presentModal = async () => {
+    await this.nativeRef.presentModal();
+  };
+
   //#region - Handlers
   //#endregion
 
@@ -77,8 +80,9 @@ export class AdaptiveModalView extends
         internalCleanupMode={props.internalCleanupMode}
       >
         {shouldMount && (
-          <RNIDetachedView 
-            nativeID={NATIVE_ID_KEYS.contextMenuAuxiliaryPreview}
+          <RNIDetachedView
+            style={styles.modalContent}
+            nativeID={NATIVE_ID_KEYS.modalContent}
             shouldCleanupOnComponentWillUnmount={false}
           >
             {props.viewProps.children}
@@ -91,5 +95,8 @@ export class AdaptiveModalView extends
 
 const styles = StyleSheet.create({
   nativeView: {
+  },
+  modalContent: {
+    backgroundColor: 'blue'
   },
 });

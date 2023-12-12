@@ -11,6 +11,62 @@ import UIKit
 import ExpoModulesCore
 import ReactNativeIosUtilities
 import DGSwiftUtilities
+import AdaptiveModal
+import ComputableLayout
+
+
+class RNIAdaptiveModalController: UIViewController {
+
+  weak var adaptiveModalView: RNIAdaptiveModalView?;
+  weak var modalContentView: RNIDetachedView?;
+  
+  init(
+    adaptiveModalView: RNIAdaptiveModalView,
+    modalContentView: RNIDetachedView
+  ) {
+    super.init(nibName: nil, bundle: nil);
+  
+    self.adaptiveModalView = adaptiveModalView;
+    self.modalContentView = modalContentView;
+  };
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  };
+  
+  override func viewDidLoad() {
+    super.viewDidLoad();
+    
+    let modalContent = self.modalContentView!;
+    
+    modalContent.translatesAutoresizingMaskIntoConstraints = false;
+    self.view.addSubview(modalContent);
+    
+    NSLayoutConstraint.activate([
+      modalContent.topAnchor.constraint(
+        equalTo: self.view.topAnchor
+      ),
+      modalContent.bottomAnchor.constraint(
+        equalTo: self.view.bottomAnchor
+      ),
+      modalContent.leadingAnchor.constraint(
+        equalTo: self.view.leadingAnchor
+      ),
+      modalContent.trailingAnchor.constraint(
+        equalTo: self.view.trailingAnchor
+      ),
+
+    ]);
+  };
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews();
+    
+    let modalContent = self.modalContentView!;
+    modalContent.updateBounds(newSize: self.view.bounds.size);
+  };
+};
+
 
 public class RNIAdaptiveModalView:
   ExpoView, RNICleanable, RNIJSComponentWillUnmountNotifiable {
@@ -19,8 +75,7 @@ public class RNIAdaptiveModalView:
   // ----------------------
   
   enum NativeIDKey: String {
-    // WIP - TBA
-    case placeholder;
+    case modalContent;
   };
   
   // MARK: - Properties
@@ -28,7 +83,11 @@ public class RNIAdaptiveModalView:
 
   var detachedViews: [WeakRef<RNIDetachedView>] = [];
   
+  var modalContentView: RNIDetachedView?;
+  
   var navigationEventsController: RNINavigationEventsReportingViewController?;
+  
+  var modalManager: AdaptiveModalManager?;
   
   // MARK: - Properties - Flags
   // --------------------------
@@ -76,6 +135,8 @@ public class RNIAdaptiveModalView:
 
   public required init(appContext: AppContext? = nil) {
     super.init(appContext: appContext);
+    
+    self.setupInitModalManager();
   };
   
   public required init?(coder: NSCoder) {
@@ -98,8 +159,8 @@ public class RNIAdaptiveModalView:
     else { return };
     
     switch nativeIDKey {
-        case .placeholder:
-          // WIP - TBA
+        case .modalContent:
+          self.modalContentView = detachedView;
           break;
     };
     
@@ -163,6 +224,132 @@ public class RNIAdaptiveModalView:
   
   // MARK: - Functions
   // -----------------
+  
+  func setupInitModalManager() {
+  
+    let dummyConfig = {
+      let maxSize = CGSize(width: 375, height: 667);
+      
+      return AdaptiveModalConfig(
+        snapPoints: [
+          // Snap Point 1
+          AdaptiveModalSnapPointConfig(
+            layoutConfig: ComputableLayout(
+              horizontalAlignment: .center,
+              verticalAlignment: .bottom,
+              width: .stretch,
+              height: .percent(percentValue: 0.3)
+            ),
+            keyframeConfig: AdaptiveModalKeyframeConfig(
+              modalShadowOffset: .init(width: 0, height: -2),
+              modalShadowOpacity: 0.2,
+              modalShadowRadius: 7,
+              modalCornerRadius: 25,
+              modalMaskedCorners: .topCorners,
+              modalBackgroundOpacity: 0.9,
+              modalBackgroundVisualEffect: UIBlurEffect(style: .systemUltraThinMaterial),
+              modalBackgroundVisualEffectIntensity: 1,
+              backgroundOpacity: 0,
+              backgroundVisualEffect: UIBlurEffect(style: .systemUltraThinMaterialDark),
+              backgroundVisualEffectIntensity: 0
+            )
+          ),
+          
+          // Snap Point 2
+          AdaptiveModalSnapPointConfig(
+            layoutConfig: ComputableLayout(
+              horizontalAlignment: .center,
+              verticalAlignment: .bottom,
+              width: .stretch,
+              height: .percent(percentValue: 0.5),
+              marginLeft: .constant(15),
+              marginRight: .constant(15),
+              marginBottom: .safeAreaInsets(
+                insetKey: \.bottom,
+                minValue: .constant(15)
+              )
+            ),
+            keyframeConfig: AdaptiveModalKeyframeConfig(
+              secondaryGestureAxisDampingPercent: 1,
+              modalShadowOffset: .init(width: 2, height: 2),
+              modalShadowOpacity: 0.2,
+              modalShadowRadius: 15,
+              modalCornerRadius: 10,
+              modalMaskedCorners: .allCorners,
+              modalBackgroundOpacity: 0.85,
+              modalBackgroundVisualEffectIntensity: 0.6,
+              backgroundOpacity: 0.1,
+              backgroundVisualEffectIntensity: 0.075
+            )
+          ),
+          
+          // Snap Point 3
+          AdaptiveModalSnapPointConfig(
+            layoutConfig: ComputableLayout(
+              horizontalAlignment: .center,
+              verticalAlignment: .center,
+              width: .percent(
+                percentValue: 0.85,
+                maxValue: .constant(maxSize.width)
+              ),
+              height: .percent(
+                percentValue: 0.75,
+                maxValue: .constant(maxSize.height)
+              )
+            ),
+            keyframeConfig: AdaptiveModalKeyframeConfig(
+              secondaryGestureAxisDampingPercent: 0.8,
+              modalShadowOffset: .init(width: 2, height: 2),
+              modalShadowOpacity: 0.3,
+              modalShadowRadius: 10,
+              modalCornerRadius: 20,
+              modalMaskedCorners: .allCorners,
+              modalBackgroundOpacity: 0.8,
+              modalBackgroundVisualEffectIntensity: 1,
+              backgroundOpacity: 0,
+              backgroundVisualEffectIntensity: 0.5
+            )
+          ),
+          
+          // Snap Point 4
+          AdaptiveModalSnapPointConfig(
+            layoutConfig: ComputableLayout(
+              horizontalAlignment: .center,
+              verticalAlignment: .bottom,
+              width: ComputableLayoutValue(
+                mode: .stretch
+              ),
+              height: ComputableLayoutValue(
+                mode: .stretch
+              ),
+              marginTop: .safeAreaInsets(insetKey: \.top)
+            ),
+            keyframeConfig: AdaptiveModalKeyframeConfig(
+              secondaryGestureAxisDampingPercent: 1,
+              modalShadowOffset: .init(width: 0, height: -1),
+              modalShadowOpacity: 0.4,
+              modalShadowRadius: 10,
+              modalCornerRadius: 25,
+              modalMaskedCorners: .topCorners,
+              modalBackgroundOpacity: 0.83,
+              modalBackgroundVisualEffectIntensity: 1,
+              backgroundVisualEffectIntensity: 1
+            )
+          ),
+        ],
+        snapDirection: .bottomToTop,
+        overshootSnapPoint: AdaptiveModalSnapPointPreset(
+          layoutPreset: .fitScreen
+        )
+      )
+    }();
+  
+    let modalManager = AdaptiveModalManager(
+      staticConfig: dummyConfig
+    );
+    
+    self.modalManager = modalManager;
+  };
 
   func attachToParentVC(){
     guard self.cleanupMode.shouldAttachToParentVC,
@@ -195,6 +382,25 @@ public class RNIAdaptiveModalView:
     
     childVC.willMove(toParent: nil);
     childVC.removeFromParent();
+  };
+  
+  func presentModal(){
+    guard let modalManager = self.modalManager,
+          let modalContentView = self.modalContentView,
+          
+          let window = self.window,
+          let topVC = window.topmostPresentedViewController
+    else { return };
+    
+    let modalVC = RNIAdaptiveModalController(
+      adaptiveModalView: self,
+      modalContentView: modalContentView
+    );
+    
+    modalManager.presentModal(
+      viewControllerToPresent: modalVC,
+      presentingViewController: topVC
+    );
   };
   
   // MARK: - Functions - View Module Commands

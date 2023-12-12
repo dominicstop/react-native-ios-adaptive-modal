@@ -19,14 +19,33 @@ public class RNIAdaptiveModalViewModule: Module {
       
       DispatchQueue.main.async {
         do {
-          let contextMenuView = try RNIModuleHelpers.getView(
+          let adaptiveModalView = try RNIModuleHelpers.getView(
             withErrorType: RNIAdaptiveModalError.self,
             forNode: reactTag,
             type: RNIAdaptiveModalView.self
           );
           
-          contextMenuView.notifyOnJSComponentWillUnmount();
+          adaptiveModalView.notifyOnJSComponentWillUnmount();
           promise.resolve();
+        
+        } catch let error {
+          promise.reject(error);
+        };
+      };
+    };
+    
+    AsyncFunction("presentModal") {
+      (reactTag: Int, promise: Promise) in
+      
+      DispatchQueue.main.async {
+        do {
+          let adaptiveModalView = try RNIModuleHelpers.getView(
+            withErrorType: RNIAdaptiveModalError.self,
+            forNode: reactTag,
+            type: RNIAdaptiveModalView.self
+          );
+          
+          adaptiveModalView.presentModal();
         
         } catch let error {
           promise.reject(error);

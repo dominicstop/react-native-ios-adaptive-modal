@@ -40,6 +40,15 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalPr
     );
   };
 
+  presentModal = async () => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.presentModal(
+      reactTag
+    );
+  };
+
   private _handleOnLayout = ({nativeEvent}: LayoutChangeEvent) => {
     // @ts-ignore
     this.reactTag = nativeEvent.target;

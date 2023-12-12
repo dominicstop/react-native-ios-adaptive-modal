@@ -8,7 +8,10 @@
 import ReactNativeIosUtilities
 
 extension RNIAdaptiveModalView: RNINavigationEventsNotifiable {
-  public func notifyViewControllerDidPop(sender: RNINavigationEventsReportingViewController) {
+
+  public func notifyViewControllerDidPop(
+    sender: RNINavigationEventsReportingViewController
+  ) {
     if self.cleanupMode == .viewController {
       // trigger cleanup
       self.cleanup();
