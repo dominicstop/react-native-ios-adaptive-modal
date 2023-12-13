@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   nativeView: {
   },
   modalContent: {
-    backgroundColor: 'blue'
+    //backgroundColor: 'blue'
   },
 });

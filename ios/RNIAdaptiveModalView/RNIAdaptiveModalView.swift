@@ -4,68 +4,13 @@
 //
 //  Created by Dominic Go on 11/24/23.
 //
-
-import Foundation
-
 import UIKit
 import ExpoModulesCore
+
 import ReactNativeIosUtilities
 import DGSwiftUtilities
 import AdaptiveModal
 import ComputableLayout
-
-
-class RNIAdaptiveModalController: UIViewController {
-
-  weak var adaptiveModalView: RNIAdaptiveModalView?;
-  weak var modalContentView: RNIDetachedView?;
-  
-  init(
-    adaptiveModalView: RNIAdaptiveModalView,
-    modalContentView: RNIDetachedView
-  ) {
-    super.init(nibName: nil, bundle: nil);
-  
-    self.adaptiveModalView = adaptiveModalView;
-    self.modalContentView = modalContentView;
-  };
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  };
-  
-  override func viewDidLoad() {
-    super.viewDidLoad();
-    
-    let modalContent = self.modalContentView!;
-    
-    modalContent.translatesAutoresizingMaskIntoConstraints = false;
-    self.view.addSubview(modalContent);
-    
-    NSLayoutConstraint.activate([
-      modalContent.topAnchor.constraint(
-        equalTo: self.view.topAnchor
-      ),
-      modalContent.bottomAnchor.constraint(
-        equalTo: self.view.bottomAnchor
-      ),
-      modalContent.leadingAnchor.constraint(
-        equalTo: self.view.leadingAnchor
-      ),
-      modalContent.trailingAnchor.constraint(
-        equalTo: self.view.trailingAnchor
-      ),
-
-    ]);
-  };
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews();
-    
-    let modalContent = self.modalContentView!;
-    modalContent.updateBounds(newSize: self.view.bounds.size);
-  };
-};
 
 
 public class RNIAdaptiveModalView:
@@ -443,5 +388,4 @@ public class RNIAdaptiveModalView:
     
     self.cleanup();
   };
-
 };
