@@ -15,6 +15,10 @@
 
 <br>
 
+- [ ] `TODO:2023-12-16-07-00-47` - Fix: Modal Content Layout/Animation Bug - Modal content size not resizing properly during modal snapping/animation.
+
+<br><br>
+
 ## Completed
 
 - [x] `TODO:2023-12-15-21-39-18` - Impl: `AdaptiveModalView.mountModalContent`
