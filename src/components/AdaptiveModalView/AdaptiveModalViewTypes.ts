@@ -10,4 +10,5 @@ export type AdaptiveModalViewProps =
   AdaptiveModalViewBaseProps & ViewProps;
 
 export type AdaptiveModalViewState = {
+  shouldMountModalContent: boolean;
 };

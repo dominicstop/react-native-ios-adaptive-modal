@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { RNIDetachedView } from 'react-native-ios-utilities';
+import { RNIDetachedView, Helpers } from 'react-native-ios-utilities';
 
-import { RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
+import { OnModalContentDetachedEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
+import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
+import { TSEventEmitter } from '@dominicstop/ts-event-emitter';
 
 
 const NATIVE_ID_KEYS = {
@@ -14,12 +16,16 @@ export class AdaptiveModalView extends
   React.PureComponent<AdaptiveModalViewProps, AdaptiveModalViewState> {
 
   nativeRef!: RNIAdaptiveModalView;
+  emitter!: AdaptiveModalEventEmitter;
 
   constructor(props: AdaptiveModalViewProps){
     super(props);
 
     this.state = {
+      shouldMountModalContent: false,
     };
+
+    this.emitter = new TSEventEmitter();
   };
 
   componentWillUnmount(): void {
@@ -58,28 +64,42 @@ export class AdaptiveModalView extends
     };
   };
 
-  presentModal = async () => {
-    await this.nativeRef.presentModal();
+  private mountModalContent = async () => {
+    await Promise.all([
+      Helpers.setStateAsync<Partial<AdaptiveModalViewState>>(this, {
+        shouldMountModalContent: true
+      }),
+
+      Helpers.promiseWithTimeout(1000, new Promise<void>(resolve => {
+        this.emitter.once('onModalContentDetached', () => {
+          resolve();
+        });
+      })),
+    ]);
   };
 
-  //#region - Handlers
-  //#endregion
+  presentModal = async () => {
+    await this.mountModalContent();
+    await this.nativeRef.presentModal();
+  };
+  
+  _handleOnModalContentDetached: OnModalContentDetachedEvent = (event) => {
+    this.emitter.emit('onModalContentDetached', event.nativeEvent);
+  };
 
   render(){
     const props = this.getProps();
     const state = this.state;
 
-    const shouldMount = true;
-
     return (
       <RNIAdaptiveModalView
         {...props.viewProps}
-        // @ts-ignore
         ref={r => { this.nativeRef = r! }}
         style={[styles.nativeView, props.viewProps.style]}
         internalCleanupMode={props.internalCleanupMode}
+        onModalContentDetached={this._handleOnModalContentDetached}
       >
-        {shouldMount && (
+        {state.shouldMountModalContent && (
           <RNIDetachedView
             style={styles.modalContent}
             nativeID={NATIVE_ID_KEYS.modalContent}

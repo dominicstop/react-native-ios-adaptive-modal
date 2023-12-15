@@ -58,7 +58,7 @@ public class RNIAdaptiveModalView:
   // MARK: Properties - Props - Events
   // ---------------------------------
   
-  // TBA
+  public let onModalContentDetached = EventDispatcher("onModalContentDetached");
   
   // MARK: - Computed Properties
   // ---------------------------
@@ -104,16 +104,15 @@ public class RNIAdaptiveModalView:
     else { return };
     
     switch nativeIDKey {
-        case .modalContent:
-          self.modalContentView = detachedView;
-          break;
+      case .modalContent:
+        self.modalContentView = detachedView;
+        detachedView.detach();
+        self.onModalContentDetached.callAsFunction();
     };
     
     self.detachedViews.append(
       .init(with: detachedView)
     );
-    
-    detachedView.detach();
   };
   
   #if DEBUG
