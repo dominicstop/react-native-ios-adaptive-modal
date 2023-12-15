@@ -70,7 +70,6 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalPr
         this.props.style,
         styles.nativeView
       ],
-      onModalContentDetached: this.props.onModalContentDetached,
     });
   };
 };

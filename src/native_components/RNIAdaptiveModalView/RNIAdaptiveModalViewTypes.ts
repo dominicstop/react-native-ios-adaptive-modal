@@ -5,6 +5,7 @@ import { RNIAdaptiveModalNativeViewBaseProps } from './RNIAdaptiveModalNativeVie
 export type RNIAdaptiveModalBaseProps = Pick<RNIAdaptiveModalNativeViewBaseProps,
   | 'internalCleanupMode'
   | 'onModalContentDetached'
+  | 'onModalDidHide'
 >;
 
 export type RNIAdaptiveModalProps = 

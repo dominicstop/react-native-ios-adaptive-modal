@@ -59,6 +59,7 @@ public class RNIAdaptiveModalView:
   // ---------------------------------
   
   public let onModalContentDetached = EventDispatcher("onModalContentDetached");
+  public let onModalDidHide = EventDispatcher("onModalDidHide");
   
   // MARK: - Computed Properties
   // ---------------------------
@@ -292,6 +293,7 @@ public class RNIAdaptiveModalView:
       staticConfig: dummyConfig
     );
     
+    modalManager.presentationEventsDelegate.add(self);
     self.modalManager = modalManager;
   };
 

@@ -55,6 +55,7 @@ public class RNIAdaptiveModalViewModule: Module {
 
     View(RNIAdaptiveModalView.self) {
       Events("onModalContentDetached");
+      Events("onModalDidHide");
     };
   };
 };

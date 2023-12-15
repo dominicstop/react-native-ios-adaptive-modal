@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { RNIDetachedView, Helpers } from 'react-native-ios-utilities';
 
-import { OnModalContentDetachedEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
+import { OnModalContentDetachedEvent, OnModalDidHideEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
 import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
 import { TSEventEmitter } from '@dominicstop/ts-event-emitter';
@@ -18,6 +18,9 @@ export class AdaptiveModalView extends
   nativeRef!: RNIAdaptiveModalView;
   emitter!: AdaptiveModalEventEmitter;
 
+  // Lifecycle
+  // ---------
+
   constructor(props: AdaptiveModalViewProps){
     super(props);
 
@@ -31,6 +34,9 @@ export class AdaptiveModalView extends
   componentWillUnmount(): void {
     this.nativeRef.notifyOnComponentWillUnmount();
   };
+
+  // Internal Functions
+  // ------------------
 
   private getProps = () => {
     const {
@@ -78,15 +84,28 @@ export class AdaptiveModalView extends
     ]);
   };
 
+  // Public Functions
+  // ----------------
+
   presentModal = async () => {
     await this.mountModalContent();
     await this.nativeRef.presentModal();
   };
+
+  // Event Handlers
+  // --------------
   
   _handleOnModalContentDetached: OnModalContentDetachedEvent = (event) => {
     this.emitter.emit('onModalContentDetached', event.nativeEvent);
   };
 
+  _handleOnModalDidHide: OnModalDidHideEvent = (event) => {
+    this.setState({shouldMountModalContent: false});
+  };
+
+  // Render
+  // -----
+  
   render(){
     const props = this.getProps();
     const state = this.state;
@@ -98,6 +117,7 @@ export class AdaptiveModalView extends
         style={[styles.nativeView, props.viewProps.style]}
         internalCleanupMode={props.internalCleanupMode}
         onModalContentDetached={this._handleOnModalContentDetached}
+        onModalDidHide={this._handleOnModalDidHide}
       >
         {state.shouldMountModalContent && (
           <RNIDetachedView
