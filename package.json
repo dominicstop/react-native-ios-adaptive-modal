@@ -28,12 +28,14 @@
   "author": "Dominic Go <dominic@dominicgo.dev> (https://github.com/dominicstop)",
   "license": "MIT",
   "homepage": "https://github.com/dominicstop/react-native-ios-adaptive-modal#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@dominicstop/ts-event-emitter": "^1.1.0"
+  },
   "devDependencies": {
     "@types/react": "^18.0.25",
+    "@types/react-native": "^0.72.3",
     "expo-module-scripts": "^3.0.11",
     "expo-modules-core": "^1.5.11",
-    "@types/react-native": "^0.72.3",
     "react": "18.2.0",
     "react-native": "0.72.5",
     "react-native-ios-utilities": "^4.2.2",
