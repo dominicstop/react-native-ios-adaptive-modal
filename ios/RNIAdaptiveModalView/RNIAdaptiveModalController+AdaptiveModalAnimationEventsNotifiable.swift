@@ -12,6 +12,7 @@ import DGSwiftUtilities
 import AdaptiveModal
 
 
+
 extension RNIAdaptiveModalController: AdaptiveModalAnimationEventsNotifiable {
   func notifyOnModalAnimatorStart(
      sender: AdaptiveModalManager,
@@ -27,7 +28,7 @@ extension RNIAdaptiveModalController: AdaptiveModalAnimationEventsNotifiable {
     percent: CGFloat
   ) {
     
-    self.updateModalContentSize();
+    //self.updateModalContentSize();
   };
   
   func notifyOnModalAnimatorStop(sender: AdaptiveModalManager) {
@@ -39,6 +40,6 @@ extension RNIAdaptiveModalController: AdaptiveModalAnimationEventsNotifiable {
     position: UIViewAnimatingPosition
   ) {
     
-    self.updateModalContentSize();
+    //self.updateModalContentSize();
   };
 };

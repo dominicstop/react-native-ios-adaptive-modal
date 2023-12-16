@@ -16,6 +16,8 @@ import ComputableLayout
 
 class RNIAdaptiveModalController: UIViewController {
 
+  var _tempUpdateModalContentSizeCounter = 0;
+
   weak var adaptiveModalView: RNIAdaptiveModalView?;
   weak var modalContentView: RNIDetachedView?;
    
@@ -45,6 +47,7 @@ class RNIAdaptiveModalController: UIViewController {
   func setup(){
     guard let modalManager = self.modalManager else { return };
     modalManager.animationEventDelegate.add(self);
+    modalManager.presentationEventsDelegate.add(self);
   };
   
   override func viewDidLoad() {
@@ -83,19 +86,49 @@ class RNIAdaptiveModalController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews();
-    
-    guard !self.modalManager!.isAnimating else { return };
     self.updateModalContentSize();
   };
   
   func updateModalContentSize(){
-  
-    guard let modalContentView = self.modalContentView,
+    guard let modalManager = self.modalManager,
+          let modalContentView = self.modalContentView,
           let modalContentConstraintWidth = self.modalContentConstraintWidth,
           let modalContentConstraintHeight = self.modalContentConstraintHeight
     else { return };
     
-    let nextSize = self.view.bounds.size;
+    let nextSize: CGSize? = {
+      if modalManager.isAnimating {
+        guard let dummyModalView = modalManager.dummyModalView,
+              let dummyModalViewLayer = dummyModalView.layer.presentation()
+        else { return nil };
+        
+        return nil;
+        // return dummyModalViewLayer.bounds.size;
+      };
+      
+      return self.view.bounds.size;
+    }();
+    
+    guard let nextSize = nextSize else { return };
+    
+    let currentConstraintSize = CGSize(
+      width: modalContentConstraintWidth.constant,
+      height: modalContentConstraintHeight.constant
+    );
+    
+    let currentSize = modalContentView.frame.size;
+    
+    print(
+      "updateModalContentSize -", self._tempUpdateModalContentSizeCounter,
+      "\n - modalState", modalManager.modalState,
+      "\n - isAnimating", modalManager.isAnimating,
+      "\n - currentConstraintSize:", currentConstraintSize,
+      "\n - currentSize:", currentSize,
+      "\n - nextSize:", nextSize,
+      "\n"
+    );
+    
+    self._tempUpdateModalContentSizeCounter += 1;
     
     modalContentConstraintWidth.constant = nextSize.width;
     modalContentConstraintHeight.constant = nextSize.height;

@@ -135,8 +135,9 @@ export class AdaptiveModalView extends
 
 const styles = StyleSheet.create({
   nativeView: {
+    
   },
   modalContent: {
-    //backgroundColor: 'blue'
+    //backgroundColor: 'rgba(0,0,255,0.1)'
   },
 });
