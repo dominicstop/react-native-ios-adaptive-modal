@@ -7,6 +7,7 @@
 ## WIP
 
 - [ ] `TODO:2023-12-15-19-00-51` - Impl: Modal presentation events
+- [ ] `TODO:2023-12-16-18-10-20` - Impl: Types - Modal Config
 
 <br>
 
@@ -16,6 +17,7 @@
 <br>
 
 - [ ] `TODO:2023-12-16-07-00-47` - Fix: Modal Content Layout/Animation Bug - Modal content size not resizing properly during modal snapping/animation.
+- [ ] `TODO:2023-12-16-18-09-24` - Example: Recreate tests/demos from `adaptive-modal`
 
 <br><br>
 
