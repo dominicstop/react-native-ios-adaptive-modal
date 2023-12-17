@@ -1,7 +1,9 @@
 import { CGRect, CGSize } from "react-native-ios-utilities";
-import { UIEdgeInsets } from "../TempMiscTypes";
+import { UIEdgeInsets } from "../TempTypes/UIGeometry";
 import { ComputableLayoutValuePercentTarget } from "./ComputableLayoutValuePercentTarget";
 import { ComputableLayoutValueEvaluableCondition } from "./ComputableLayoutValueEvaluableCondition";
+import { EvaluableCondition } from "./EvaluableCondition";
+import { KeysWithType } from "../UtilityTypes";
 
 
 export type ComputableLayoutValueMode = {
@@ -15,7 +17,7 @@ export type ComputableLayoutValueMode = {
   percentValue: number;
 } | {
   mode: 'safeAreaInsets';
-  insetKey: keyof UIEdgeInsets;
+  insetKey: KeysWithType<UIEdgeInsets, number>;
 } | {
   mode: 'keyboardScreenRect';
   rectKey: keyof CGRect;

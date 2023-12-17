@@ -6,3 +6,8 @@ export type UIEdgeInsets = {
   bottom: number;
   right: number;
 };
+
+export type UIOffset = {
+  horizontal?: number;
+  vertical?: number;
+};
