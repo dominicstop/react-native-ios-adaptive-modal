@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.dependency 'DGSwiftUtilities'
   
   s.dependency 'ComputableLayout'
-  s.dependency 'AdaptiveModal', '~> 1.2'
+  s.dependency 'AdaptiveModal', '~> 1.3'
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
