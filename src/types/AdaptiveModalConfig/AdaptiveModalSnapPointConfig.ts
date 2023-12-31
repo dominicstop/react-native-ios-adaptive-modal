@@ -1,4 +1,5 @@
-import { ComputableLayout } from "../ComputableLayout/ComputableLayout";
+import { ComputableLayout } from "react-native-ios-utilities";
+import { AdaptiveModalKeyframeConfig } from "./AdaptiveModalKeyframeConfig";
 
 export type AdaptiveModalSnapPointConfigMode = 
  | 'standard'
