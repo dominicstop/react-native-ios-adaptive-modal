@@ -1,7 +1,31 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
-import { AdaptiveModalView } from 'react-native-ios-adaptive-modal';
+import { AdaptiveModalConfig, AdaptiveModalView } from 'react-native-ios-adaptive-modal';
+
+
+const modalConfig: AdaptiveModalConfig = {
+  snapPoints: [{
+    // Snap Point 1
+    mode: 'standard',
+    layoutConfig: {
+      horizontalAlignment: 'center',
+      verticalAlignment: 'bottom',
+      width: {
+        mode: {
+          mode: 'percent',
+          percentValue: 0.8,
+        },
+      },
+      height: {
+        mode: {
+          mode: 'stretch'
+        },
+      }
+    },
+  }],
+  snapDirection: 'bottomToTop',
+};
 
 export default function App() {
   const modalRef = React.createRef<AdaptiveModalView>();
@@ -10,6 +34,7 @@ export default function App() {
     <View style={styles.container}>
       <AdaptiveModalView
         ref={modalRef}
+        modalConfig={modalConfig}
       >
         <View style={styles.rootModalContainer}>
           <Text>"Adaptive Modal"</Text>
