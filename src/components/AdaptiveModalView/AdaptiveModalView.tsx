@@ -40,6 +40,7 @@ export class AdaptiveModalView extends
 
   private getProps = () => {
     const {
+      modalConfig,
       internalCleanupMode,
       ...viewProps
     } = this.props;
@@ -49,10 +50,9 @@ export class AdaptiveModalView extends
       internalCleanupMode: (
         internalCleanupMode ?? 'reactComponentWillUnmount'
       ),
-      // WIP - TBA
 
       // B. Pass down props...
-      // WIP - TBA
+      modalConfig,
 
       // C. Pass down, and group event props...
       // WIP - TBA
@@ -115,6 +115,7 @@ export class AdaptiveModalView extends
         {...props.viewProps}
         ref={r => { this.nativeRef = r! }}
         style={[styles.nativeView, props.viewProps.style]}
+        modalConfig={props.modalConfig}
         internalCleanupMode={props.internalCleanupMode}
         onModalContentDetached={this._handleOnModalContentDetached}
         onModalDidHide={this._handleOnModalDidHide}

@@ -53,7 +53,27 @@ public class RNIAdaptiveModalView:
       self.internalCleanupMode = cleanupMode;
     }
   };
-
+  
+  public var modalConfig: AdaptiveModalConfig?;
+  public var modalConfigProp: Dictionary<String, Any>? {
+    willSet {
+      guard let newValue = newValue else { return };
+    
+      do {
+        let modalConfig = try AdaptiveModalConfig(fromDict: newValue);
+        self.modalConfig = modalConfig;
+        
+      } catch {
+        #if DEBUG
+        print(
+          "RNIAdaptiveModalView.modalConfigProp",
+          "\n - error: \(error.localizedDescription)"
+        );
+        #endif
+      };
+    }
+  };
+  
   
   // MARK: Properties - Props - Events
   // ---------------------------------
