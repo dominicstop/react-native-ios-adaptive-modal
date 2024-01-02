@@ -82,24 +82,10 @@ extension AdaptiveModalKeyframeConfig: InitializableFromDictionary {
       type: CGFloat.self
     );
 
-    let modalMaskedCorners: CACornerMask? = {
-      let stringValues = try? dict.getValueFromDictionary(
-        forKey: "modalMaskedCorners",
-        type: [String].self
-      );
-      
-      guard let stringValues = stringValues else { return nil };
-      
-      var cornerMasks = stringValues.compactMap {
-        try? CACornerMask(fromString: $0);
-      };
-      
-      guard let cornerMaskItem = cornerMasks.popLast() else { return nil };
-      
-      return cornerMasks.reduce(cornerMaskItem) {
-        $0.union($1);
-      };
-    }();
+    let modalMaskedCorners = try? dict.getValueFromDictionary(
+      forKey: "modalMaskedCorners",
+      type: CACornerMask.self
+    );
 
     let modalOpacity = try? dict.getValueFromDictionary(
       forKey: "modalOpacity",
