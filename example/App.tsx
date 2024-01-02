@@ -20,13 +20,13 @@ const modalConfig: AdaptiveModalConfig = {
       verticalAlignment: 'bottom',
       width: {
         mode: {
-          mode: 'percent',
-          percentValue: 0.3,
+          mode: 'stretch',
         },
       },
       height: {
         mode: {
-          mode: 'stretch'
+          mode: 'percent',
+          percentValue: 0.3,
         },
       }
     },
@@ -137,7 +137,7 @@ const modalConfig: AdaptiveModalConfig = {
       modalShadowOpacity: 0.4,
       modalShadowRadius: 10,
       modalCornerRadius: 25,
-      modalMaskedCorners: ['topCorners'],
+      modalMaskedCorners: ['allCorners'],
       modalBackgroundOpacity: 0.83,
       modalBackgroundVisualEffectIntensity: 1,
       backgroundVisualEffectIntensity: 1
