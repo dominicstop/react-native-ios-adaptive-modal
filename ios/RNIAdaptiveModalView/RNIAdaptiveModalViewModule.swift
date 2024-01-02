@@ -45,7 +45,7 @@ public class RNIAdaptiveModalViewModule: Module {
             type: RNIAdaptiveModalView.self
           );
           
-          adaptiveModalView.presentModal();
+          try adaptiveModalView.presentModal();
         
         } catch let error {
           promise.reject(error);

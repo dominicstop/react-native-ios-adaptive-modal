@@ -63,6 +63,15 @@ public class RNIAdaptiveModalView:
         let modalConfig = try AdaptiveModalConfig(fromDict: newValue);
         self.modalConfig = modalConfig;
         
+        if let modalManager = self.modalManager {
+          modalManager.updateModalConfig(
+            .staticConfig(modalConfig)
+          );
+          
+        } else {
+          try self.setupInitModalManager();
+        };
+        
       } catch {
         #if DEBUG
         print(
@@ -101,8 +110,6 @@ public class RNIAdaptiveModalView:
 
   public required init(appContext: AppContext? = nil) {
     super.init(appContext: appContext);
-    
-    self.setupInitModalManager();
   };
   
   public required init?(coder: NSCoder) {
@@ -190,130 +197,20 @@ public class RNIAdaptiveModalView:
   // MARK: - Functions
   // -----------------
   
-  func setupInitModalManager() {
-  
-    let dummyConfig = {
-      let maxSize = CGSize(width: 375, height: 667);
-      
-      return AdaptiveModalConfig(
-        snapPoints: [
-          // Snap Point 1
-          AdaptiveModalSnapPointConfig(
-            layoutConfig: ComputableLayout(
-              horizontalAlignment: .center,
-              verticalAlignment: .bottom,
-              width: .stretch,
-              height: .percent(percentValue: 0.3)
-            ),
-            keyframeConfig: AdaptiveModalKeyframeConfig(
-              modalShadowOffset: .init(width: 0, height: -2),
-              modalShadowOpacity: 0.2,
-              modalShadowRadius: 7,
-              modalCornerRadius: 25,
-              modalMaskedCorners: .topCorners,
-              modalBackgroundOpacity: 0.9,
-              modalBackgroundVisualEffect: UIBlurEffect(style: .systemUltraThinMaterial),
-              modalBackgroundVisualEffectIntensity: 1,
-              backgroundOpacity: 0,
-              backgroundVisualEffect: UIBlurEffect(style: .systemUltraThinMaterialDark),
-              backgroundVisualEffectIntensity: 0
-            )
-          ),
-          
-          // Snap Point 2
-          AdaptiveModalSnapPointConfig(
-            layoutConfig: ComputableLayout(
-              horizontalAlignment: .center,
-              verticalAlignment: .bottom,
-              width: .stretch,
-              height: .percent(percentValue: 0.5),
-              marginLeft: .constant(15),
-              marginRight: .constant(15),
-              marginBottom: .safeAreaInsets(
-                insetKey: \.bottom,
-                minValue: .constant(15)
-              )
-            ),
-            keyframeConfig: AdaptiveModalKeyframeConfig(
-              secondaryGestureAxisDampingPercent: 1,
-              modalShadowOffset: .init(width: 2, height: 2),
-              modalShadowOpacity: 0.2,
-              modalShadowRadius: 15,
-              modalCornerRadius: 10,
-              modalMaskedCorners: .allCorners,
-              modalBackgroundOpacity: 0.85,
-              modalBackgroundVisualEffectIntensity: 0.6,
-              backgroundOpacity: 0.1,
-              backgroundVisualEffectIntensity: 0.075
-            )
-          ),
-          
-          // Snap Point 3
-          AdaptiveModalSnapPointConfig(
-            layoutConfig: ComputableLayout(
-              horizontalAlignment: .center,
-              verticalAlignment: .center,
-              width: .percent(
-                percentValue: 0.85,
-                maxValue: .constant(maxSize.width)
-              ),
-              height: .percent(
-                percentValue: 0.75,
-                maxValue: .constant(maxSize.height)
-              )
-            ),
-            keyframeConfig: AdaptiveModalKeyframeConfig(
-              secondaryGestureAxisDampingPercent: 0.8,
-              modalShadowOffset: .init(width: 2, height: 2),
-              modalShadowOpacity: 0.3,
-              modalShadowRadius: 10,
-              modalCornerRadius: 20,
-              modalMaskedCorners: .allCorners,
-              modalBackgroundOpacity: 0.8,
-              modalBackgroundVisualEffectIntensity: 1,
-              backgroundOpacity: 0,
-              backgroundVisualEffectIntensity: 0.5
-            )
-          ),
-          
-          // Snap Point 4
-          AdaptiveModalSnapPointConfig(
-            layoutConfig: ComputableLayout(
-              horizontalAlignment: .center,
-              verticalAlignment: .bottom,
-              width: ComputableLayoutValue(
-                mode: .stretch
-              ),
-              height: ComputableLayoutValue(
-                mode: .stretch
-              ),
-              marginTop: .safeAreaInsets(insetKey: \.top)
-            ),
-            keyframeConfig: AdaptiveModalKeyframeConfig(
-              secondaryGestureAxisDampingPercent: 1,
-              modalShadowOffset: .init(width: 0, height: -1),
-              modalShadowOpacity: 0.4,
-              modalShadowRadius: 10,
-              modalCornerRadius: 25,
-              modalMaskedCorners: .topCorners,
-              modalBackgroundOpacity: 0.83,
-              modalBackgroundVisualEffectIntensity: 1,
-              backgroundVisualEffectIntensity: 1
-            )
-          ),
-        ],
-        snapDirection: .bottomToTop,
-        overshootSnapPoint: AdaptiveModalSnapPointPreset(
-          layoutPreset: .fitScreen
-        )
-      )
-    }();
-  
-    let modalManager = AdaptiveModalManager(
-      staticConfig: dummyConfig
-    );
+  func setupInitModalManager() throws {
+    guard let modalConfig = self.modalConfig else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalConfig is nil",
+        extraDebugValues: [
+          "modalConfigProp": self.modalConfigProp ?? [:]
+        ]
+      );
+    };
     
+    let modalManager = AdaptiveModalManager(staticConfig: modalConfig);
     modalManager.presentationEventsDelegate.add(self);
+    
     self.modalManager = modalManager;
   };
 
@@ -350,13 +247,37 @@ public class RNIAdaptiveModalView:
     childVC.removeFromParent();
   };
   
-  func presentModal(){
-    guard let modalManager = self.modalManager,
-          let modalContentView = self.modalContentView,
-          
-          let window = self.window,
-          let topVC = window.topmostPresentedViewController
-    else { return };
+  func presentModal() throws {
+    guard let modalManager = self.modalManager else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalManager is nil",
+        extraDebugValues: [
+          "modalConfigProp": self.modalConfigProp ?? [:]
+        ]
+      );
+    };
+    
+    guard let modalContentView = self.modalContentView else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalContentView is nil"
+      );
+    };
+    
+    guard let window = self.window else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "window is nil"
+      );
+    };
+    
+    guard let topVC = window.topmostPresentedViewController else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "Unable to get topmostPresentedViewController"
+      );
+    };
     
     let modalVC = RNIAdaptiveModalController(
       adaptiveModalView: self,
