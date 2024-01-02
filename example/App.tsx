@@ -19,7 +19,9 @@ const modalConfig: AdaptiveModalConfig = {
       },
       height: {
         mode: {
-          mode: 'stretch'
+          mode: 'percent',
+          percentValue: 0.75,
+
         },
       }
     },
