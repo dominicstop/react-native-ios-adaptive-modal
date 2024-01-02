@@ -3,5 +3,5 @@ import { AdaptiveModalKeyframeConfig } from "./AdaptiveModalKeyframeConfig";
 
 export type AdaptiveModalSnapPointPreset = {
   layoutPreset: ComputableLayoutPresetConfig,
-  keyframeConfig: AdaptiveModalKeyframeConfig
+  keyframeConfig?: AdaptiveModalKeyframeConfig
 };
