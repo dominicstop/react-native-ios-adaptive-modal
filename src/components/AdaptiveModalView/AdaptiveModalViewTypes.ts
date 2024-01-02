@@ -1,7 +1,7 @@
 import { ViewProps } from "react-native";
-import { RNIAdaptiveModalBaseProps } from "../../native_components/RNIAdaptiveModalView";
+import { RNIAdaptiveModalViewBaseProps } from "../../native_components/RNIAdaptiveModalView";
 
-export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalBaseProps, 
+export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBaseProps,
   | 'internalCleanupMode'
 > & {
 }>;

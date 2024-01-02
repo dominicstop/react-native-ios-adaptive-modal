@@ -5,15 +5,15 @@ import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { RNIAdaptiveModalViewModule } from './RNIAdaptiveModalViewModule';
 import { RNIAdaptiveModalNativeView } from './RNIAdaptiveModalNativeView';
 
-import type { RNIAdaptiveModalProps } from './RNIAdaptiveModalViewTypes';
+import type { RNIAdaptiveModalViewProps } from './RNIAdaptiveModalViewTypes';
 
 
-export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalProps> {
+export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalViewProps> {
   
   nativeRef?: View;
   reactTag?: number;
 
-  constructor(props: RNIAdaptiveModalProps){
+  constructor(props: RNIAdaptiveModalViewProps){
     super(props);
   };
 

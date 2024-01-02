@@ -2,11 +2,11 @@ import { ViewProps } from 'react-native';
 import { RNIAdaptiveModalNativeViewBaseProps } from './RNIAdaptiveModalNativeViewTypes';
 
 
-export type RNIAdaptiveModalBaseProps = Pick<RNIAdaptiveModalNativeViewBaseProps,
+export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseProps,
   | 'internalCleanupMode'
   | 'onModalContentDetached'
   | 'onModalDidHide'
 >;
 
-export type RNIAdaptiveModalProps = 
-  RNIAdaptiveModalBaseProps & ViewProps;
+export type RNIAdaptiveModalViewProps = 
+  RNIAdaptiveModalViewBaseProps & ViewProps;
