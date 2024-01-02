@@ -1,4 +1,5 @@
 
+export * from './AdaptiveModalBackgroundInteractionMode';
 export * from './AdaptiveModalClampingConfig';
 export * from './AdaptiveModalClampingKeys';
 export * from './AdaptiveModalConfig';
