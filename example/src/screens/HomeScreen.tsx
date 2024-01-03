@@ -3,6 +3,7 @@ import { StyleSheet, SafeAreaView, FlatList, ListRenderItem } from 'react-native
 
 import type { ExampleItemProps } from '../examples/SharedExampleTypes';
 
+import { AdaptiveModalViewTest01 } from '../examples/AdaptiveModalViewTest01';
 
 import { DebugControls } from '../examples/DebugControls';
 import { SHARED_ENV } from '../constants/SharedEnv';
@@ -15,6 +16,7 @@ type ExampleListItem = {
 
 const EXAMPLE_COMPONENTS = (() => {
   const items = [
+    AdaptiveModalViewTest01,
   ];
 
   if(SHARED_ENV.enableReactNavigation){
