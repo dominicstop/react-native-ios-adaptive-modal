@@ -40,8 +40,9 @@ export function HomeScreen() {
   );
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.rootContainer}>
       <FlatList
+        style={styles.scrollView}
         contentContainerStyle={styles.scrollContentContainer}
         data={EXAMPLE_ITEMS}
         renderItem={renderItem}
@@ -52,6 +53,12 @@ export function HomeScreen() {
 };
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
   scrollContentContainer: {
     paddingHorizontal: 10,
     paddingBottom: 100,
