@@ -1,10 +1,12 @@
 {
   "name": "react-native-ios-adaptive-modal",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "TBA",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
+    "typescript": "tsc --noEmit",
+    "release": "release-it --only-version --npm.skipChecks --npm.publishArgs=\"--registry=https://registry.npmjs.org\"",
     "build": "expo-module build",
     "clean": "expo-module clean",
     "lint": "expo-module lint",
@@ -51,5 +53,17 @@
     "react": "*",
     "react-native": "*",
     "react-native-ios-utilities": "4.2.x"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "⚙️ Chore: Release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    }
   }
 }
