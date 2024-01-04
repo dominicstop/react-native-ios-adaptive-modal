@@ -9,7 +9,7 @@ const ScreenSizes: Record<string, CGSize> = {
 };
 
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
-  // Index: 0
+  // Index: 0 - demo01
   {
     snapPoints: [{
       // Snap Point 1
@@ -187,4 +187,103 @@ export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
       },
     },
   },
+
+  // Index: 1 - demo02
+  {
+    snapPoints: [{
+      // snap point - 1
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.8
+          }
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.2
+          }
+        }
+      },
+      keyframeConfig: {
+        modalTransform: {
+          rotateX: {
+            mode: 'degrees',
+            value: 0,
+          },
+        },
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 7,
+        modalCornerRadius: 10,
+        modalMaskedCorners: ['topCorners'],
+        modalContentOpacity: 1,
+        backgroundOpacity: 0,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0   
+      },
+    }, {
+      // snap point - 2
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.8,
+          },
+        },
+        height: {
+          mode:  {
+            mode: 'percent',
+            percentValue: 0.4,
+          },
+        },
+      },
+      keyframeConfig: {
+        backgroundTapInteraction: 'dismiss',
+        modalShadowOffset: {
+          width: 1, 
+          height: 1
+        },
+        modalShadowOpacity: 0.4,
+        modalShadowRadius: 7,
+        modalCornerRadius: 15,
+        modalMaskedCorners: ['topCorners'],
+        backgroundOpacity: 0.1
+      },
+    }],
+    snapDirection: 'bottomToTop',
+    undershootSnapPoint: {
+      layoutPreset: {
+        mode: 'preset',
+        preset: 'automatic'
+      },
+      keyframeConfig: {
+        modalTransform: {
+          rotateX: {
+            mode: 'degrees',
+            value: -25,
+          },
+          perspective: 1 / 500
+        },
+        modalContentOpacity: 0.5
+      },
+    },
+    overshootSnapPoint: {
+      layoutPreset: {
+        mode: 'preset',
+        preset: 'fitScreenVertically',
+      },
+    },
+  },
+  
 ];
