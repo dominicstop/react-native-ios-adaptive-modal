@@ -1,11 +1,11 @@
 PODS:
-  - AdaptiveModal (1.3.1):
+  - AdaptiveModal (1.4.2):
     - ComputableLayout (~> 0.7)
     - DGSwiftUtilities (~> 0.11)
   - boost (1.76.0)
   - ComputableLayout (0.7.0):
     - DGSwiftUtilities (~> 0.11)
-  - DGSwiftUtilities (0.12.2)
+  - DGSwiftUtilities (0.12.4)
   - DoubleConversion (1.1.6)
   - EXApplication (5.3.1):
     - ExpoModulesCore
@@ -634,10 +634,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AdaptiveModal: 72a9ece3dbad157a78eaa20cde011a0a695eaee1
+  AdaptiveModal: dd38f9e4c055c690264eb44965bdeffde6919753
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
-  DGSwiftUtilities: 5d838b2c27512ddc6ae08a04cc56db3893a21acc
+  DGSwiftUtilities: 1752d12a6fb87c127125a802f6a5e425eaf0d2bd
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EXApplication: 042aa2e3f05258a16962ea1a9914bf288db9c9a1
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
