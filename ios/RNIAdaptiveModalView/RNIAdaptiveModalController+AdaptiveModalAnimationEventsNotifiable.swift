@@ -32,7 +32,7 @@ extension RNIAdaptiveModalController: AdaptiveModalAnimationEventsNotifiable {
   };
   
   func notifyOnModalAnimatorStop(sender: AdaptiveModalManager) {
-    self.updateModalContentSize();
+    // self.updateModalContentSize();
   };
   
   func notifyOnModalAnimatorCompletion(

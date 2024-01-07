@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import UIKit
 import ExpoModulesCore
 
@@ -18,18 +17,19 @@ import AdaptiveModal
 extension RNIAdaptiveModalController: AdaptiveModalPresentationEventsNotifiable {
   
   func notifyOnModalWillSnap(
-    sender: AdaptiveModalManager, prevSnapPointIndex: Int?,
+    sender: AdaptiveModalManager,
+    prevSnapPointIndex: Int?,
     nextSnapPointIndex: Int,
     prevSnapPointConfig: AdaptiveModalSnapPointConfig?,
     nextSnapPointConfig: AdaptiveModalSnapPointConfig,
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     nextInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
-    // no-op
+    
   };
   
   func notifyOnModalDidSnap(
-    sender: AdaptiveModal.AdaptiveModalManager,
+    sender: AdaptiveModalManager,
     prevSnapPointIndex: Int?,
     currentSnapPointIndex: Int,
     prevSnapPointConfig: AdaptiveModalSnapPointConfig?,
@@ -37,6 +37,8 @@ extension RNIAdaptiveModalController: AdaptiveModalPresentationEventsNotifiable 
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     currentInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
+    
+    print("notifyOnModalDidSnap");
     self.updateModalContentSize();
   };
   

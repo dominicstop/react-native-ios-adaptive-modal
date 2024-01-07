@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    //backgroundColor: 'red',
+    backgroundColor: 'red',
   },
 });

@@ -13,19 +13,45 @@ import DGSwiftUtilities
 import AdaptiveModal
 import ComputableLayout
 
+enum ModalContentAnchorMode: String {
+  case center, stretch;
+};
+
 
 class RNIAdaptiveModalController: UIViewController {
 
   var _tempUpdateModalContentSizeCounter = 0;
-
+  
   weak var adaptiveModalView: RNIAdaptiveModalView?;
   weak var modalContentView: RNIDetachedView?;
-   
+  
+  var constraints: WeakArray<NSLayoutConstraint> = .init();
+  
   weak var modalContentConstraintWidth: NSLayoutConstraint?;
   weak var modalContentConstraintHeight: NSLayoutConstraint?;
   
+  var modalContentConstraintSize: CGSize? {
+    guard let modalContentConstraintWidth = self.modalContentConstraintWidth,
+          let modalContentConstraintHeight = self.modalContentConstraintHeight
+    else { return nil };
+
+    return CGSize(
+      width: modalContentConstraintWidth.constant,
+      height: modalContentConstraintHeight.constant
+    );
+  };
+  
   var modalManager: AdaptiveModalManager? {
     self.adaptiveModalView?.modalManager;
+  };
+  
+  var contentAnchorMode: ModalContentAnchorMode = .stretch {
+    didSet {
+      guard self.contentAnchorMode != oldValue else { return };
+      
+      self.clearConstraints();
+      self.setupConstraints();
+    }
   };
   
   init(
@@ -46,8 +72,69 @@ class RNIAdaptiveModalController: UIViewController {
   
   func setup(){
     guard let modalManager = self.modalManager else { return };
+    
     modalManager.animationEventDelegate.add(self);
     modalManager.presentationEventsDelegate.add(self);
+    modalManager.displayLinkEventsDelegate = self;
+  };
+  
+  func clearConstraints(){
+    NSLayoutConstraint.deactivate(self.constraints.array);
+    self.constraints = .init();
+    
+    self.modalContentConstraintWidth = nil;
+    self.modalContentConstraintHeight = nil;
+  };
+  
+  func setupConstraints(){
+    guard let modalContentView = self.modalContentView else { return };
+    
+    var constraints: [NSLayoutConstraint] = [];
+        
+    switch self.contentAnchorMode {
+      case .center:
+        let modalContentConstraintWidth = modalContentView.widthAnchor.constraint(
+          equalToConstant: self.view.bounds.width
+        );
+        
+        self.modalContentConstraintWidth = modalContentConstraintWidth;
+        constraints.append(modalContentConstraintWidth);
+        
+        let modalContentConstraintHeight = modalContentView.heightAnchor.constraint(
+          equalToConstant: self.view.bounds.height
+        );
+      
+        self.modalContentConstraintHeight = modalContentConstraintHeight;
+        constraints.append(modalContentConstraintHeight);
+      
+        constraints += [
+          modalContentView.centerXAnchor.constraint(
+            equalTo: self.view.centerXAnchor
+          ),
+          modalContentView.centerYAnchor.constraint(
+            equalTo: self.view.centerYAnchor
+          ),
+        ];
+      
+      case .stretch:
+        constraints += [
+          modalContentView.leadingAnchor.constraint(
+            equalTo: self.view.leadingAnchor
+          ),
+          modalContentView.trailingAnchor.constraint(
+            equalTo: self.view.trailingAnchor
+          ),
+          modalContentView.topAnchor.constraint(
+            equalTo: self.view.topAnchor
+          ),
+          modalContentView.bottomAnchor.constraint(
+            equalTo: self.view.bottomAnchor
+          ),
+        ];
+    };
+    
+    self.constraints = .init(initialItems: constraints);
+    NSLayoutConstraint.activate(constraints);
   };
   
   override func viewDidLoad() {
@@ -55,33 +142,10 @@ class RNIAdaptiveModalController: UIViewController {
     
     guard let modalContentView = self.modalContentView else { return };
     
-    
     modalContentView.translatesAutoresizingMaskIntoConstraints = false;
     self.view.addSubview(modalContentView);
     
-    let modalContentConstraintWidth = modalContentView.widthAnchor.constraint(
-      equalToConstant: self.view.bounds.width
-    );
-    
-    self.modalContentConstraintWidth = modalContentConstraintWidth;
-    
-    let modalContentConstraintHeight = modalContentView.heightAnchor.constraint(
-      equalToConstant: self.view.bounds.height
-    );
-  
-    self.modalContentConstraintHeight = modalContentConstraintHeight;
-    
-    NSLayoutConstraint.activate([
-      modalContentConstraintWidth,
-      modalContentConstraintHeight,
-    
-      modalContentView.centerXAnchor.constraint(
-        equalTo: self.view.centerXAnchor
-      ),
-      modalContentView.centerYAnchor.constraint(
-        equalTo: self.view.centerYAnchor
-      ),
-    ]);
+    self.setupConstraints();
   };
   
   override func viewDidLayoutSubviews() {
@@ -89,52 +153,50 @@ class RNIAdaptiveModalController: UIViewController {
     self.updateModalContentSize();
   };
   
+  func updateModalContentSize(withSize size: CGSize){
+    guard let modalContentView = self.modalContentView else { return };
+    
+    switch self.contentAnchorMode {
+      case .stretch:
+        modalContentView.updateBounds(newSize: size);
+        modalContentView.updateConstraints();
+        
+      case .center:
+        guard let modalContentConstraintWidth = self.modalContentConstraintWidth,
+              let modalContentConstraintHeight = self.modalContentConstraintHeight
+        else { return };
+        
+        modalContentConstraintWidth.constant = size.width;
+        modalContentConstraintHeight.constant = size.height;
+        
+        modalContentView.updateBounds(newSize: size);
+        modalContentView.updateConstraints();
+    };
+  };
+  
   func updateModalContentSize(){
     guard let modalManager = self.modalManager,
-          let modalContentView = self.modalContentView,
-          let modalContentConstraintWidth = self.modalContentConstraintWidth,
-          let modalContentConstraintHeight = self.modalContentConstraintHeight
-    else { return };
+          !modalManager.isAnimating
+    else { return }
     
-    let nextSize: CGSize? = {
-      if modalManager.isAnimating {
-        guard let dummyModalView = modalManager.dummyModalView,
-              let dummyModalViewLayer = dummyModalView.layer.presentation()
-        else { return nil };
-        
-        return nil;
-        // return dummyModalViewLayer.bounds.size;
-      };
-      
-      return self.view.bounds.size;
-    }();
-    
-    guard let nextSize = nextSize else { return };
-    
-    let currentConstraintSize = CGSize(
-      width: modalContentConstraintWidth.constant,
-      height: modalContentConstraintHeight.constant
-    );
-    
-    let currentSize = modalContentView.frame.size;
+    guard let modalContentView = self.modalContentView else { return };
+    let nextSize = self.view.bounds.size;
     
     print(
       "updateModalContentSize -", self._tempUpdateModalContentSizeCounter,
-      "\n - modalState", modalManager.modalState,
-      "\n - isAnimating", modalManager.isAnimating,
-      "\n - currentConstraintSize:", currentConstraintSize,
-      "\n - currentSize:", currentSize,
+      "\n - contentAnchorMode:", self.contentAnchorMode,
+      "\n - modalState:", modalManager.modalState,
+      "\n - isSnapping:", modalManager.modalState.isSnapping,
+      "\n - isAnimating:", modalManager.isAnimating,
+      "\n - currentConstraintSize:", self.modalContentConstraintSize ?? .zero,
+      "\n - modalContentView.size:", modalContentView.bounds.size,
       "\n - nextSize:", nextSize,
       "\n"
     );
     
     self._tempUpdateModalContentSizeCounter += 1;
     
-    modalContentConstraintWidth.constant = nextSize.width;
-    modalContentConstraintHeight.constant = nextSize.height;
-    
-    modalContentView.updateConstraints();
-    modalContentView.updateBounds(newSize: nextSize);
+    self.updateModalContentSize(withSize: nextSize);
   };
 };
 
