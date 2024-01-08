@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
 import { AdaptiveModalView } from 'react-native-ios-adaptive-modal';
 
@@ -40,10 +40,40 @@ export function AdaptiveModalViewTest02(props: ExampleItemProps) {
         modalConfig={currentModalConfigPreset}
         modalContentAnchorMode={'stretch'}
       >
-        <ExampleList
+        <ScrollView 
           style={styles.rootModalContainer}
           contentContainerStyle={styles.rootModalContentContainer}
-        />
+        >
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+          <Text style={styles.modalContentText}>Hello</Text>
+        </ScrollView>
       </AdaptiveModalView>
       <CardButton
         title={'Next Modal Config'}
@@ -72,9 +102,14 @@ const styles = StyleSheet.create({
   },
   rootModalContainer: {
     paddingHorizontal: 15,
-    marginTop: 25,
   },
   rootModalContentContainer: {
     paddingBottom: 200,
+  },
+  modalContentText: {
+    flex: 1,
+    fontSize: 32,
+    textAlign: 'center',
+    marginTop: 25,
   },
 });

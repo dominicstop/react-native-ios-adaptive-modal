@@ -1,6 +1,6 @@
 
 
 export const SHARED_ENV = {
-  enableReactNavigation: true,
+  enableReactNavigation: false,
   enableTabNavigation: false,
 };
