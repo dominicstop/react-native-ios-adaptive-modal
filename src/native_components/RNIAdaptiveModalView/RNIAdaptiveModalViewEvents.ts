@@ -3,14 +3,14 @@ import type { NativeSyntheticEvent } from 'react-native';
 // Event Object Types
 // ------------------
 
-export type OnModalContentDetachedEventObject = NativeSyntheticEvent<{}>;
+export type OnModalContentInitializedEventObject = NativeSyntheticEvent<{}>;
 export type OnModalDidHideEventObject = NativeSyntheticEvent<{}>;
 
 // Event Handler Types
 // -------------------
 
-export type OnModalContentDetachedEvent = (
-  event: OnModalContentDetachedEventObject
+export type OnModalContentInitializedEvent = (
+  event: OnModalContentInitializedEventObject
 ) => void;
 
 export type OnModalDidHideEvent = (

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { RNIDetachedView, Helpers } from 'react-native-ios-utilities';
 
-import { OnModalContentDetachedEvent, OnModalDidHideEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
+import { OnModalContentInitializedEvent, OnModalDidHideEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
 import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
 import { TSEventEmitter } from '@dominicstop/ts-event-emitter';
@@ -77,7 +77,7 @@ export class AdaptiveModalView extends
       }),
 
       Helpers.promiseWithTimeout(1000, new Promise<void>(resolve => {
-        this.emitter.once('onModalContentDetached', () => {
+        this.emitter.once('onModalContentInitialized', () => {
           resolve();
         });
       })),
@@ -95,8 +95,8 @@ export class AdaptiveModalView extends
   // Event Handlers
   // --------------
   
-  _handleOnModalContentDetached: OnModalContentDetachedEvent = (event) => {
-    this.emitter.emit('onModalContentDetached', event.nativeEvent);
+  _handleOnModalContentDetached: OnModalContentInitializedEvent = (event) => {
+    this.emitter.emit('onModalContentInitialized', event.nativeEvent);
   };
 
   _handleOnModalDidHide: OnModalDidHideEvent = (event) => {
@@ -117,11 +117,12 @@ export class AdaptiveModalView extends
         style={[styles.nativeView, props.viewProps.style]}
         modalConfig={props.modalConfig}
         internalCleanupMode={props.internalCleanupMode}
-        onModalContentDetached={this._handleOnModalContentDetached}
+        onModalContentInitialized={this._handleOnModalContentDetached}
         onModalDidHide={this._handleOnModalDidHide}
       >
         {state.shouldMountModalContent && (
           <RNIDetachedView
+            contentTargetMode={'subview'}
             style={styles.modalContent}
             nativeID={NATIVE_ID_KEYS.modalContent}
             shouldCleanupOnComponentWillUnmount={false}

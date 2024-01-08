@@ -28,7 +28,7 @@ public class RNIAdaptiveModalView:
 
   var detachedViews: [WeakRef<RNIDetachedView>] = [];
   
-  var modalContentView: RNIDetachedView?;
+  var modalContentDetachedView: RNIDetachedView?;
   
   var navigationEventsController: RNINavigationEventsReportingViewController?;
   
@@ -87,7 +87,7 @@ public class RNIAdaptiveModalView:
   // MARK: Properties - Props - Events
   // ---------------------------------
   
-  public let onModalContentDetached = EventDispatcher("onModalContentDetached");
+  public let onModalContentInitialized = EventDispatcher("onModalContentInitialized");
   public let onModalDidHide = EventDispatcher("onModalDidHide");
   
   // MARK: - Computed Properties
@@ -133,9 +133,8 @@ public class RNIAdaptiveModalView:
     
     switch nativeIDKey {
       case .modalContent:
-        self.modalContentView = detachedView;
-        detachedView.detach();
-        self.onModalContentDetached.callAsFunction();
+        self.modalContentDetachedView = detachedView;
+        self.onModalContentInitialized.callAsFunction();
     };
     
     self.detachedViews.append(
@@ -258,7 +257,16 @@ public class RNIAdaptiveModalView:
       );
     };
     
-    guard let modalContentView = self.modalContentView else {
+    guard let modalContentDetachedView = self.modalContentDetachedView else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalContentDetachedView is nil"
+      );
+    };
+    
+    try modalContentDetachedView.detach();
+    
+    guard modalContentDetachedView.contentView != nil else {
       throw RNIAdaptiveModalError(
         errorCode: .unexpectedNilValue,
         description: "modalContentView is nil"
@@ -281,7 +289,7 @@ public class RNIAdaptiveModalView:
     
     let modalVC = RNIAdaptiveModalController(
       adaptiveModalView: self,
-      modalContentView: modalContentView
+      modalContentDetachedView: modalContentDetachedView
     );
     
     modalManager.presentModal(

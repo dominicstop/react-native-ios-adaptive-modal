@@ -1,7 +1,7 @@
 import type { ViewProps } from 'react-native';
 import type { RNICleanupMode } from 'react-native-ios-utilities';
 
-import type { OnModalContentDetachedEvent, OnModalDidHideEvent } from './RNIAdaptiveModalViewEvents';
+import type { OnModalContentInitializedEvent, OnModalDidHideEvent } from './RNIAdaptiveModalViewEvents';
 import { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
 
 export type RNIAdaptiveModalNativeViewBaseProps = {
@@ -21,7 +21,7 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
   // Events - Lifecycle
   // ------------------
 
-  onModalContentDetached: OnModalContentDetachedEvent;
+  onModalContentInitialized: OnModalContentInitializedEvent;
   onModalDidHide: OnModalDidHideEvent;
 };
 

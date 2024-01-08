@@ -56,12 +56,12 @@ class RNIAdaptiveModalController: UIViewController {
   
   init(
     adaptiveModalView: RNIAdaptiveModalView,
-    modalContentView: RNIDetachedView
+    modalContentDetachedView: RNIDetachedView
   ) {
     super.init(nibName: nil, bundle: nil);
   
     self.adaptiveModalView = adaptiveModalView;
-    self.modalContentView = modalContentView;
+    self.modalContentView = modalContentDetachedView;
     
     self.setup();
   };
@@ -87,7 +87,8 @@ class RNIAdaptiveModalController: UIViewController {
   };
   
   func setupConstraints(){
-    guard let modalContentView = self.modalContentView else { return };
+    guard let modalContentView = self.modalContentView?.contentView
+    else { return };
     
     var constraints: [NSLayoutConstraint] = [];
         
@@ -140,7 +141,8 @@ class RNIAdaptiveModalController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad();
     
-    guard let modalContentView = self.modalContentView else { return };
+    guard let modalContentView = self.modalContentView?.contentView
+    else { return };
     
     modalContentView.translatesAutoresizingMaskIntoConstraints = false;
     self.view.addSubview(modalContentView);
@@ -158,7 +160,7 @@ class RNIAdaptiveModalController: UIViewController {
     
     switch self.contentAnchorMode {
       case .stretch:
-        modalContentView.updateBounds(newSize: size);
+        try? modalContentView.updateBounds(newSize: size);
         modalContentView.updateConstraints();
         
       case .center:
@@ -169,7 +171,7 @@ class RNIAdaptiveModalController: UIViewController {
         modalContentConstraintWidth.constant = size.width;
         modalContentConstraintHeight.constant = size.height;
         
-        modalContentView.updateBounds(newSize: size);
+        try? modalContentView.updateBounds(newSize: size);
         modalContentView.updateConstraints();
     };
   };
@@ -189,7 +191,7 @@ class RNIAdaptiveModalController: UIViewController {
       "\n - isSnapping:", modalManager.modalState.isSnapping,
       "\n - isAnimating:", modalManager.isAnimating,
       "\n - currentConstraintSize:", self.modalContentConstraintSize ?? .zero,
-      "\n - modalContentView.size:", modalContentView.bounds.size,
+      "\n - modalContentView.size:", modalContentView.contentView?.bounds.size ?? .zero,
       "\n - nextSize:", nextSize,
       "\n"
     );
