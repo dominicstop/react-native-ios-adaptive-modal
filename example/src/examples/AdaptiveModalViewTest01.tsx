@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-import { CGSize } from 'react-native-ios-utilities';
-import { AdaptiveModalConfig, AdaptiveModalView } from 'react-native-ios-adaptive-modal';
+import { AdaptiveModalView } from 'react-native-ios-adaptive-modal';
 
 import type { ExampleItemProps } from './SharedExampleTypes';
 import { ExampleItemCard } from '../components/ExampleItemCard';
 import { CardButton } from '../components/Card';
 import { AdaptiveModalConfigPresets } from '../constants/AdaptiveModalConfigPresets';
+import { RNIModalContentAnchorModes } from '../constants/RNIModalContentAnchorModes';
 
 
 export function AdaptiveModalViewTest01(props: ExampleItemProps) {
@@ -19,22 +19,34 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
   const currentModalConfigPreset = 
     AdaptiveModalConfigPresets[modalConfigPresetIndex];
 
+  const [modalContentAnchorModeCounter, setModalContentAnchorModeCounter] = React.useState(0);
+
+  const modalContentAnchorModeIndex = 
+    modalContentAnchorModeCounter % RNIModalContentAnchorModes.length;
+  
+  const currentModalContentAnchorMode = 
+    RNIModalContentAnchorModes[modalContentAnchorModeIndex];
+
   const modalRef = React.createRef<AdaptiveModalView>();
   
   return (
     <ExampleItemCard
       index={props.index}
+      style={props.style}
       title={'AdaptiveModalViewTest01'}
       subtitle={'TBA'}
       description={[
         `Test - TBA`,
-        `Current Modal Config Index: ${modalConfigPresetIndex}`,
+        (
+          `Current Modal Config Index: ${modalConfigPresetIndex}\n`
+          + `modalContentAnchorMode: ${currentModalContentAnchorMode}`
+        ),
       ]}
     >
       <AdaptiveModalView
         ref={modalRef}
         modalConfig={currentModalConfigPreset}
-        modalContentAnchorMode={'center'}
+        modalContentAnchorMode={currentModalContentAnchorMode}
       >
         <View style={styles.rootModalContainer}>
           <View style={styles.modalContent}>
@@ -49,6 +61,13 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         subtitle={'Cycle to next modal config preset...'}
         onPress={() => {
           setModalConfigPresetCounter(prev => prev + 1);
+        }}
+      />
+      <CardButton
+        title={'Cycle modalContentAnchorMode'}
+        subtitle={'Get next `RNIModalContentAnchorMode`'}
+        onPress={() => {
+          setModalContentAnchorModeCounter(prev => prev + 1);
         }}
       />
       <CardButton
