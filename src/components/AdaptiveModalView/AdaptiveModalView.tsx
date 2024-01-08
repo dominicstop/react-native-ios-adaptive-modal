@@ -146,5 +146,6 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     //backgroundColor: 'rgba(0,0,255,0.1)'
+    overflow: 'hidden',
   },
 });

@@ -144,6 +144,15 @@ class RNIAdaptiveModalController: UIViewController {
     modalContentView.translatesAutoresizingMaskIntoConstraints = false;
     self.view.addSubview(modalContentView);
     
+    print(
+      "RNIAdaptiveModalController - viewDidLoad",
+      "\n - modalContentView:", modalContentView,
+      "\n - modalContentView.subviews.first:", modalContentView.subviews.first,
+      "\n - modalContentView is UIScrollView:", modalContentView as? UIScrollView,
+      "\n - modalContentView is RCTScrollView:", modalContentView as? RCTScrollView,
+      "\n"
+    );
+    
     self.setupConstraints();
   };
   
@@ -181,17 +190,17 @@ class RNIAdaptiveModalController: UIViewController {
     guard let modalContentView = self.modalContentView else { return };
     let nextSize = self.view.bounds.size;
     
-    print(
-      "updateModalContentSize -", self._tempUpdateModalContentSizeCounter,
-      "\n - contentAnchorMode:", self.contentAnchorMode,
-      "\n - modalState:", modalManager.modalState,
-      "\n - isSnapping:", modalManager.modalState.isSnapping,
-      "\n - isAnimating:", modalManager.isAnimating,
-      "\n - currentConstraintSize:", self.modalContentConstraintSize ?? .zero,
-      "\n - modalContentView.size:", modalContentView.contentView?.bounds.size ?? .zero,
-      "\n - nextSize:", nextSize,
-      "\n"
-    );
+    // print(
+    //   "updateModalContentSize -", self._tempUpdateModalContentSizeCounter,
+    //   "\n - contentAnchorMode:", self.contentAnchorMode,
+    //   "\n - modalState:", modalManager.modalState,
+    //   "\n - isSnapping:", modalManager.modalState.isSnapping,
+    //   "\n - isAnimating:", modalManager.isAnimating,
+    //   "\n - currentConstraintSize:", self.modalContentConstraintSize ?? .zero,
+    //   "\n - modalContentView.size:", modalContentView.contentView?.bounds.size ?? .zero,
+    //   "\n - nextSize:", nextSize,
+    //   "\n"
+    // );
     
     self._tempUpdateModalContentSizeCounter += 1;
     

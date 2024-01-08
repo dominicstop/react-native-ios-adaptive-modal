@@ -20,6 +20,6 @@ extension RNIAdaptiveModalController: AdaptiveModalDisplayLinkEventsNotifiable {
     modalFrame: CGRect
   ) {
     
-    // self.updateModalContentSize(withSize: modalFrame.size);
+    self.updateModalContentSize(withSize: modalFrame.size);
   };
 };
