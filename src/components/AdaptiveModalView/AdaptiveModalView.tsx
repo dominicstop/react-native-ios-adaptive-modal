@@ -42,6 +42,7 @@ export class AdaptiveModalView extends
     const {
       modalConfig,
       internalCleanupMode,
+      modalContentAnchorMode,
       ...viewProps
     } = this.props;
 
@@ -49,6 +50,9 @@ export class AdaptiveModalView extends
       // A. Provide default values to props...
       internalCleanupMode: (
         internalCleanupMode ?? 'reactComponentWillUnmount'
+      ),
+      modalContentAnchorMode: (
+        modalContentAnchorMode ?? 'center'
       ),
 
       // B. Pass down props...
@@ -116,6 +120,7 @@ export class AdaptiveModalView extends
         ref={r => { this.nativeRef = r! }}
         style={[styles.nativeView, props.viewProps.style]}
         modalConfig={props.modalConfig}
+        modalContentAnchorMode={props.modalContentAnchorMode}
         internalCleanupMode={props.internalCleanupMode}
         onModalContentInitialized={this._handleOnModalContentDetached}
         onModalDidHide={this._handleOnModalDidHide}

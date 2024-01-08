@@ -55,7 +55,7 @@ public class RNIAdaptiveModalView:
   };
   
   public var modalConfig: AdaptiveModalConfig?;
-  public var modalConfigProp: Dictionary<String, Any>? {
+  var modalConfigProp: Dictionary<String, Any>? {
     willSet {
       guard let newValue = newValue else { return };
     
@@ -80,6 +80,18 @@ public class RNIAdaptiveModalView:
         );
         #endif
       };
+    }
+  };
+  
+  public var modalContentAnchorMode: RNIModalContentAnchorMode = .center;
+  var modalContentAnchorModeProp: String? {
+    willSet {
+      guard let newValue = newValue,
+            let modalContentAnchorMode =
+              try? RNIModalContentAnchorMode(fromString: newValue)
+      else { return };
+      
+      self.modalContentAnchorMode = modalContentAnchorMode;
     }
   };
   

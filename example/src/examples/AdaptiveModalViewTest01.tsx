@@ -34,6 +34,7 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
       <AdaptiveModalView
         ref={modalRef}
         modalConfig={currentModalConfigPreset}
+        modalContentAnchorMode={'center'}
       >
         <View style={styles.rootModalContainer}>
           <View style={styles.modalContent}>

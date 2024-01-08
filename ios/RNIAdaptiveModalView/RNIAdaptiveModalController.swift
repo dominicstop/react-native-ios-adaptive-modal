@@ -13,10 +13,6 @@ import DGSwiftUtilities
 import AdaptiveModal
 import ComputableLayout
 
-enum ModalContentAnchorMode: String {
-  case center, stretch;
-};
-
 
 class RNIAdaptiveModalController: UIViewController {
 
@@ -45,14 +41,7 @@ class RNIAdaptiveModalController: UIViewController {
     self.adaptiveModalView?.modalManager;
   };
   
-  var contentAnchorMode: ModalContentAnchorMode = .stretch {
-    didSet {
-      guard self.contentAnchorMode != oldValue else { return };
-      
-      self.clearConstraints();
-      self.setupConstraints();
-    }
-  };
+  var contentAnchorMode: RNIModalContentAnchorMode = .center;
   
   init(
     adaptiveModalView: RNIAdaptiveModalView,
@@ -63,6 +52,7 @@ class RNIAdaptiveModalController: UIViewController {
     self.adaptiveModalView = adaptiveModalView;
     self.modalContentView = modalContentDetachedView;
     
+    self.contentAnchorMode = adaptiveModalView.modalContentAnchorMode;
     self.setup();
   };
   
@@ -136,6 +126,13 @@ class RNIAdaptiveModalController: UIViewController {
     
     self.constraints = .init(initialItems: constraints);
     NSLayoutConstraint.activate(constraints);
+  };
+  
+  func setContentAnchorMode(_ contentAnchorMode: RNIModalContentAnchorMode){
+    self.contentAnchorMode = contentAnchorMode;
+    
+    self.clearConstraints();
+    self.setupConstraints();
   };
   
   override func viewDidLoad() {

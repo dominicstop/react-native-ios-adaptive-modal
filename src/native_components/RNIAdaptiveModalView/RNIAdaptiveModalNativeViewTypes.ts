@@ -3,6 +3,7 @@ import type { RNICleanupMode } from 'react-native-ios-utilities';
 
 import type { OnModalContentInitializedEvent, OnModalDidHideEvent } from './RNIAdaptiveModalViewEvents';
 import { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
+import { RNIModalContentAnchorMode } from './RNIModalContentAnchorMode';
 
 export type RNIAdaptiveModalNativeViewBaseProps = {
 
@@ -10,13 +11,12 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
   // --------
 
   internalCleanupMode: RNICleanupMode;
-  modalConfig: AdaptiveModalConfig | undefined;
-
 
   // Value Props
   // -----------
 
-  // WIP - TBA
+  modalConfig: AdaptiveModalConfig | undefined;
+  modalContentAnchorMode: RNIModalContentAnchorMode | undefined;
 
   // Events - Lifecycle
   // ------------------

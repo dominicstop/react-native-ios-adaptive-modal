@@ -6,6 +6,7 @@ export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBasePr
   | 'internalCleanupMode'
 > & Pick<RNIAdaptiveModalViewBaseProps, 
   | 'modalConfig'
+  | 'modalContentAnchorMode'
 > & {
 }>; 
 
