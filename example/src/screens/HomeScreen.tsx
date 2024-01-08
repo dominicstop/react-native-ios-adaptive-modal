@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, SafeAreaView, FlatList, ListRenderItem } from 'react-native';
+import { StyleSheet, SafeAreaView, FlatList, ListRenderItem, ViewStyle } from 'react-native';
 
 import type { ExampleItemProps } from '../examples/SharedExampleTypes';
 
 import { AdaptiveModalViewTest01 } from '../examples/AdaptiveModalViewTest01';
+import { AdaptiveModalViewTest02 } from '../examples/AdaptiveModalViewTest02';
 
 import { DebugControls } from '../examples/DebugControls';
 import { SHARED_ENV } from '../constants/SharedEnv';
@@ -17,6 +18,7 @@ type ExampleListItem = {
 const EXAMPLE_COMPONENTS = (() => {
   const items = [
     AdaptiveModalViewTest01,
+    AdaptiveModalViewTest02,
   ];
 
   if(SHARED_ENV.enableReactNavigation){
@@ -31,22 +33,34 @@ const EXAMPLE_ITEMS: ExampleListItem[] = EXAMPLE_COMPONENTS.map((item, index) =>
   component: item
 }));
 
-export function HomeScreen() {
+export function ExampleList(props: {
+  style: ViewStyle;
+  contentContainerStyle: ViewStyle;
+}){
   const renderItem: ListRenderItem<ExampleListItem>  = ({ item })  => (
     React.createElement(item.component, {
       index: item.id,
       style: styles.exampleListItem
     })
   );
+  
+  return (
+    <FlatList
+      style={props.style}
+      contentContainerStyle={props.contentContainerStyle}
+      data={EXAMPLE_ITEMS}
+      renderItem={renderItem}
+      keyExtractor={(item) => `item-${item.id}`}
+    />
+  );
+};
 
+export function HomeScreen() {
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <FlatList
+      <ExampleList 
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContentContainer}
-        data={EXAMPLE_ITEMS}
-        renderItem={renderItem}
-        keyExtractor={(item) => `item-${item.id}`}
       />
     </SafeAreaView>
   );
