@@ -36,7 +36,11 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         modalConfig={currentModalConfigPreset}
       >
         <View style={styles.rootModalContainer}>
-          <Text>"Adaptive Modal"</Text>
+          <View style={styles.modalContent}>
+            <Text>"Adaptive Modal"</Text>
+            <Text>"Red = inner container"</Text>
+            <Text>"blue = outer/root container"</Text>
+          </View>
         </View>
       </AdaptiveModalView>
       <CardButton
@@ -65,6 +69,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rootModalContainer: {
+    backgroundColor: 'blue',
+  },
+  modalContent: {
     flex: 1,
     alignSelf: 'stretch',
     alignItems: 'center',
