@@ -52,7 +52,14 @@ extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
   
   public func notifyOnAdaptiveModalDidHide(sender: AdaptiveModalManager) {
     self.onModalDidHide.callAsFunction();
-    self.modalContentDetachedView = nil;
+    
+    if let modalContentDetachedView = self.modalContentDetachedView {
+      modalContentDetachedView.cleanup();
+      self.modalContentDetachedView = nil;
+    };
+    
+    self.modalManager = nil;
+    self.modalViewController = nil;
   };
   
   public func notifyOnModalPresentCancelled(sender: AdaptiveModalManager) {

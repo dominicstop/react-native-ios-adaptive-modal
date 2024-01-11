@@ -34,6 +34,8 @@ public class RNIAdaptiveModalView:
   
   var modalManager: AdaptiveModalManager?;
   
+  weak var modalViewController: RNIAdaptiveModalController?;
+  
   // MARK: - Properties - Flags
   // --------------------------
   
@@ -67,9 +69,6 @@ public class RNIAdaptiveModalView:
           modalManager.updateModalConfig(
             .staticConfig(modalConfig)
           );
-          
-        } else {
-          try self.setupInitModalManager();
         };
         
       } catch {
@@ -92,6 +91,10 @@ public class RNIAdaptiveModalView:
       else { return };
       
       self.modalContentAnchorMode = modalContentAnchorMode;
+      
+      if let modalVC = self.modalViewController {
+        modalVC.setContentAnchorMode(modalContentAnchorMode);
+      };
     }
   };
   
@@ -281,6 +284,11 @@ public class RNIAdaptiveModalView:
   };
   
   func presentModal() throws {
+  
+    if self.modalManager == nil {
+      try? self.setupInitModalManager();
+    };
+  
     guard let modalManager = self.modalManager else {
       throw RNIAdaptiveModalError(
         errorCode: .unexpectedNilValue,
@@ -324,6 +332,15 @@ public class RNIAdaptiveModalView:
     let modalVC = RNIAdaptiveModalController(
       adaptiveModalView: self,
       modalContentDetachedView: modalContentDetachedView
+    );
+    
+    self.modalViewController = modalVC;
+    
+    print(
+      "presentModal",
+      "\n - modalManager.animationMode:", modalManager.animationMode,
+      "\n - modalVC.contentAnchorMode:", modalVC.contentAnchorMode,
+      "\n"
     );
     
     modalManager.presentModal(
