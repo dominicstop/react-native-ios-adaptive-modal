@@ -3,10 +3,13 @@ import { RNIAdaptiveModalNativeViewBaseProps } from './RNIAdaptiveModalNativeVie
 
 
 export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseProps,
+  // Props
   | 'internalCleanupMode'
   | 'modalConfig'
   | 'modalContentAnchorMode'
   | 'modalAnimationMode'
+  | 'shouldEnableContinuousLayoutResizingDuringAnimation'
+  // Events
   | 'onModalContentInitialized'
   | 'onModalDidHide'
 >;

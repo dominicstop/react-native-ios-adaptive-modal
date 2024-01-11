@@ -110,6 +110,12 @@ public class RNIAdaptiveModalView:
     }
   };
   
+  public var shouldEnableContinuousLayoutResizingDuringAnimation = true {
+    didSet {
+      guard let modalVC = self.modalViewController else { return };
+      modalVC.setupDisplayLinkEventsDelegate();
+    }
+  };
   
   // MARK: Properties - Props - Events
   // ---------------------------------

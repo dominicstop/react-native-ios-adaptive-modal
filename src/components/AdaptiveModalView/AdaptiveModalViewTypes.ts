@@ -5,7 +5,10 @@ export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBasePr
   // A - Optional Props from `RNIAdaptiveModalBaseProps`
   | 'internalCleanupMode'
   | 'modalAnimationMode'
+  | 'shouldEnableContinuousLayoutResizingDuringAnimation'
+  
 > & Pick<RNIAdaptiveModalViewBaseProps, 
+  // B - Required Props from `RNIAdaptiveModalBaseProps`
   | 'modalConfig'
   | 'modalContentAnchorMode'
 > & {

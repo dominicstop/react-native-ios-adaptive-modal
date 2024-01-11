@@ -68,6 +68,10 @@ public class RNIAdaptiveModalViewModule: Module {
       Prop("modalAnimationMode") {
         $0.modalAnimationModeProp = $1;
       };
+      
+      Prop("shouldEnableContinuousLayoutResizingDuringAnimation") {
+        $0.shouldEnableContinuousLayoutResizingDuringAnimation = $1;
+      };
     };
   };
 };

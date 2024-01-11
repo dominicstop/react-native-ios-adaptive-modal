@@ -19,6 +19,7 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
   modalConfig: AdaptiveModalConfig | undefined;
   modalContentAnchorMode: RNIModalContentAnchorMode | undefined;
   modalAnimationMode: AdaptiveModalAnimationMode | undefined;
+  shouldEnableContinuousLayoutResizingDuringAnimation: boolean;
 
   // Events - Lifecycle
   // ------------------

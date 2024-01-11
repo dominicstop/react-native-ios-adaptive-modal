@@ -61,11 +61,27 @@ class RNIAdaptiveModalController: UIViewController {
   };
   
   func setup(){
-    guard let modalManager = self.modalManager else { return };
+    guard let adaptiveModalView = self.adaptiveModalView,
+          let modalManager = self.modalManager
+    else { return };
     
     modalManager.animationEventDelegate.add(self);
     modalManager.presentationEventsDelegate.add(self);
-    modalManager.displayLinkEventsDelegate = self;
+    
+    self.setupDisplayLinkEventsDelegate();
+  };
+  
+  func setupDisplayLinkEventsDelegate(){
+    guard let adaptiveModalView = self.adaptiveModalView,
+          let modalManager = self.modalManager
+    else { return };
+    
+    if adaptiveModalView.shouldEnableContinuousLayoutResizingDuringAnimation {
+      modalManager.displayLinkEventsDelegate = self;
+      
+    } else {
+      modalManager.displayLinkEventsDelegate = nil;
+    };
   };
   
   func clearConstraints(){

@@ -44,33 +44,36 @@ export class AdaptiveModalView extends
       internalCleanupMode,
       modalContentAnchorMode,
       modalAnimationMode,
+      shouldEnableContinuousLayoutResizingDuringAnimation,
       ...viewProps
     } = this.props;
 
     return {
-      // A. Provide default values to props...
-      internalCleanupMode: (
-        internalCleanupMode ?? 'reactComponentWillUnmount'
-      ),
-      modalContentAnchorMode: (
-        modalContentAnchorMode ?? 'center'
-      ),
+      // A. Group native props for `RNIAdaptiveModalView`...
+      nativeProps: {
+        // Pass down props...
+        modalConfig,
+        modalAnimationMode,
 
-      // B. Pass down props...
-      modalConfig,
-      modalAnimationMode,
+        // Pass down props w/ default value...
+        internalCleanupMode: (
+          internalCleanupMode ?? 'reactComponentWillUnmount'
+        ),
+        modalContentAnchorMode: (
+          modalContentAnchorMode ?? 'center'
+        ),
+        shouldEnableContinuousLayoutResizingDuringAnimation: (
+          shouldEnableContinuousLayoutResizingDuringAnimation ?? true
+        ),
+      },
 
       // C. Pass down, and group event props...
       // WIP - TBA
       eventProps: {
       },
 
-      // D. Pass down, and group render props
-      // WIP - TBA
-      renderProps: {
-      },
 
-      // E. Move all the default view-related
+      // D. Move all the default view-related
       //    props here...
       viewProps,
     };
@@ -119,12 +122,9 @@ export class AdaptiveModalView extends
     return (
       <RNIAdaptiveModalView
         {...props.viewProps}
+        {...props.nativeProps}
         ref={r => { this.nativeRef = r! }}
         style={[styles.nativeView, props.viewProps.style]}
-        modalConfig={props.modalConfig}
-        modalContentAnchorMode={props.modalContentAnchorMode}
-        modalAnimationMode={props.modalAnimationMode}
-        internalCleanupMode={props.internalCleanupMode}
         onModalContentInitialized={this._handleOnModalContentDetached}
         onModalDidHide={this._handleOnModalDidHide}
       >
