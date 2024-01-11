@@ -1,11 +1,11 @@
 PODS:
-  - AdaptiveModal (1.4.2):
+  - AdaptiveModal (1.5.1):
     - ComputableLayout (~> 0.7)
     - DGSwiftUtilities (~> 0.11)
   - boost (1.76.0)
   - ComputableLayout (0.7.0):
     - DGSwiftUtilities (~> 0.11)
-  - DGSwiftUtilities (0.12.4)
+  - DGSwiftUtilities (0.12.5)
   - DoubleConversion (1.1.6)
   - EXApplication (5.3.1):
     - ExpoModulesCore
@@ -451,7 +451,7 @@ PODS:
     - React-jsi (= 0.72.5)
     - React-logger (= 0.72.5)
     - React-perflogger (= 0.72.5)
-  - ReactNativeIosAdaptiveModal (0.1.0):
+  - ReactNativeIosAdaptiveModal (0.1.1):
     - AdaptiveModal (~> 1.3)
     - ComputableLayout
     - DGSwiftUtilities
@@ -634,10 +634,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AdaptiveModal: dd38f9e4c055c690264eb44965bdeffde6919753
+  AdaptiveModal: 2c91cd067a97768911769f8b5d62990197f1db46
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
-  DGSwiftUtilities: 1752d12a6fb87c127125a802f6a5e425eaf0d2bd
+  DGSwiftUtilities: fb618e43cbba2411959a0fa9a8c41de5c5100bda
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EXApplication: 042aa2e3f05258a16962ea1a9914bf288db9c9a1
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
@@ -685,7 +685,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: cc32add98c45c5df18436a6a52a7e1f6edec102c
   React-utils: 7a9918a1ffdd39aba67835d42386f592ea3f8e76
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
-  ReactNativeIosAdaptiveModal: e9b1ea93914b13300c3b2392ee9d6f2555f6fd5c
+  ReactNativeIosAdaptiveModal: a793279e065cb9b5173cc29abd56f3de72b741a8
   ReactNativeIosUtilities: 2f7c328271bcb532e499bfb0357e762d75116d28
   RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
