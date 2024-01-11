@@ -8,6 +8,7 @@ import { ExampleItemCard } from '../components/ExampleItemCard';
 import { CardButton } from '../components/Card';
 import { AdaptiveModalConfigPresets } from '../constants/AdaptiveModalConfigPresets';
 import { RNIModalContentAnchorModes } from '../constants/RNIModalContentAnchorModes';
+import { AdaptiveModalAnimationModes } from '../constants/AdaptiveModalAnimationModes';
 
 
 export function AdaptiveModalViewTest01(props: ExampleItemProps) {
@@ -27,8 +28,16 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
   const currentModalContentAnchorMode = 
     RNIModalContentAnchorModes[modalContentAnchorModeIndex];
 
-  const [shouldShowModalBgColor, setShouldShowModalBgColor] = React.useState(true);
+  const [modalAnimationModeCounter, setModalAnimationModeCounter] = React.useState(0);
 
+  const modalAnimationModeIndex = 
+    modalAnimationModeCounter % AdaptiveModalAnimationModes.length;
+  
+  const currentModalAnimationMode = 
+    AdaptiveModalAnimationModes[modalAnimationModeIndex];
+
+  const [shouldShowModalBgColor, setShouldShowModalBgColor] = React.useState(false);
+  
   const rootModalContainerStyle: ViewStyle = {
     backgroundColor: (shouldShowModalBgColor
       ? 'blue'
@@ -55,7 +64,8 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         `Test - TBA`,
         (
           `Current Modal Config Index: ${modalConfigPresetIndex}\n`
-          + `modalContentAnchorMode: ${currentModalContentAnchorMode}`
+          + `modalContentAnchorMode: ${currentModalContentAnchorMode}\n`
+          + `modalAnimationMode: ${currentModalAnimationMode}`
         ),
       ]}
     >
@@ -63,6 +73,7 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         ref={modalRef}
         modalConfig={currentModalConfigPreset}
         modalContentAnchorMode={currentModalContentAnchorMode}
+        modalAnimationMode={currentModalAnimationMode}
       >
         <View style={[styles.rootModalContainer, rootModalContainerStyle]}>
           <View style={[styles.modalContent, modalContentStyle]}>
@@ -84,6 +95,13 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         subtitle={'Get next `RNIModalContentAnchorMode`'}
         onPress={() => {
           setModalContentAnchorModeCounter(prev => prev + 1);
+        }}
+      />
+      <CardButton
+        title={'Cycle AdaptiveModalAnimationModes'}
+        subtitle={'Get next `AdaptiveModalAnimationMode`'}
+        onPress={() => {
+          setModalAnimationModeCounter(prev => prev + 1);
         }}
       />
       <CardButton
