@@ -1,5 +1,5 @@
 PODS:
-  - AdaptiveModal (1.5.1):
+  - AdaptiveModal (1.5.4):
     - ComputableLayout (~> 0.7)
     - DGSwiftUtilities (~> 0.11)
   - boost (1.76.0)
@@ -634,7 +634,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AdaptiveModal: 2c91cd067a97768911769f8b5d62990197f1db46
+  AdaptiveModal: afe0d92e46116f826d26da531b02dcf4e222105b
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
   DGSwiftUtilities: fb618e43cbba2411959a0fa9a8c41de5c5100bda
