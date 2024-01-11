@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ViewStyle } from 'react-native';
 
 import { AdaptiveModalView } from 'react-native-ios-adaptive-modal';
 
@@ -27,6 +27,22 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
   const currentModalContentAnchorMode = 
     RNIModalContentAnchorModes[modalContentAnchorModeIndex];
 
+  const [shouldShowModalBgColor, setShouldShowModalBgColor] = React.useState(true);
+
+  const rootModalContainerStyle: ViewStyle = {
+    backgroundColor: (shouldShowModalBgColor
+      ? 'blue'
+      : 'clear'
+    ),
+  };
+
+  const modalContentStyle: ViewStyle = {
+    backgroundColor: (shouldShowModalBgColor
+      ? 'red'
+      : 'clear'
+    ),
+  };
+
   const modalRef = React.createRef<AdaptiveModalView>();
   
   return (
@@ -48,8 +64,8 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         modalConfig={currentModalConfigPreset}
         modalContentAnchorMode={currentModalContentAnchorMode}
       >
-        <View style={styles.rootModalContainer}>
-          <View style={styles.modalContent}>
+        <View style={[styles.rootModalContainer, rootModalContainerStyle]}>
+          <View style={[styles.modalContent, modalContentStyle]}>
             <Text>"Adaptive Modal"</Text>
             <Text>"Red = inner container"</Text>
             <Text>"blue = outer/root container"</Text>
@@ -68,6 +84,13 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         subtitle={'Get next `RNIModalContentAnchorMode`'}
         onPress={() => {
           setModalContentAnchorModeCounter(prev => prev + 1);
+        }}
+      />
+      <CardButton
+        title={'Toggle Modal Background Color'}
+        subtitle={'Show/hide solid bg color for modal bg'}
+        onPress={() => {
+          setShouldShowModalBgColor(prev => !prev);
         }}
       />
       <CardButton
