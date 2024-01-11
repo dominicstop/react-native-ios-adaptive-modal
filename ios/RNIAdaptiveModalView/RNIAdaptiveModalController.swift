@@ -160,14 +160,14 @@ class RNIAdaptiveModalController: UIViewController {
     modalContentView.translatesAutoresizingMaskIntoConstraints = false;
     self.view.addSubview(modalContentView);
     
-    print(
-      "RNIAdaptiveModalController - viewDidLoad",
-      "\n - modalContentView:", modalContentView,
-      "\n - modalContentView.subviews.first:", modalContentView.subviews.first,
-      "\n - modalContentView is UIScrollView:", modalContentView as? UIScrollView,
-      "\n - modalContentView is RCTScrollView:", modalContentView as? RCTScrollView,
-      "\n"
-    );
+    // print(
+    //   "RNIAdaptiveModalController - viewDidLoad",
+    //   "\n - modalContentView:", modalContentView,
+    //   "\n - modalContentView.subviews.first:", modalContentView.subviews.first,
+    //   "\n - modalContentView is UIScrollView:", modalContentView as? UIScrollView,
+    //   "\n - modalContentView is RCTScrollView:", modalContentView as? RCTScrollView,
+    //   "\n"
+    // );
     
     self.setupConstraints();
   };

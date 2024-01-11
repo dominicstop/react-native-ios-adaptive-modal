@@ -38,7 +38,7 @@ extension RNIAdaptiveModalController: AdaptiveModalPresentationEventsNotifiable 
     currentInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
     
-    print("notifyOnModalDidSnap");
+    // print("notifyOnModalDidSnap");
     self.updateModalContentSize();
   };
   
