@@ -4,6 +4,8 @@ import type { RNICleanupMode } from 'react-native-ios-utilities';
 import type { OnModalContentInitializedEvent, OnModalDidHideEvent } from './RNIAdaptiveModalViewEvents';
 import { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
 import { RNIModalContentAnchorMode } from './RNIModalContentAnchorMode';
+import { AdaptiveModalAnimationMode } from '../../types/AdaptiveModalAnimationMode';
+
 
 export type RNIAdaptiveModalNativeViewBaseProps = {
 
@@ -14,9 +16,9 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
 
   // Value Props
   // -----------
-
   modalConfig: AdaptiveModalConfig | undefined;
   modalContentAnchorMode: RNIModalContentAnchorMode | undefined;
+  modalAnimationMode: AdaptiveModalAnimationMode | undefined;
 
   // Events - Lifecycle
   // ------------------

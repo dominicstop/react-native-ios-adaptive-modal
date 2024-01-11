@@ -95,6 +95,21 @@ public class RNIAdaptiveModalView:
     }
   };
   
+  public var modalAnimationMode: AdaptiveModalAnimationMode = .default;
+  var modalAnimationModeProp: String? {
+    willSet {
+      guard let newValue = newValue,
+            let modalAnimationMode =
+              try? AdaptiveModalAnimationMode(fromString: newValue)
+      else { return };
+      
+      self.modalAnimationMode = modalAnimationMode;
+      
+      guard let modalManager = self.modalManager else { return };
+      modalManager.animationMode = modalAnimationMode;
+    }
+  };
+  
   
   // MARK: Properties - Props - Events
   // ---------------------------------
@@ -221,6 +236,7 @@ public class RNIAdaptiveModalView:
     
     let modalManager = AdaptiveModalManager(staticConfig: modalConfig);
     modalManager.presentationEventsDelegate.add(self);
+    modalManager.animationMode = self.modalAnimationMode;
     
     self.modalManager = modalManager;
   };

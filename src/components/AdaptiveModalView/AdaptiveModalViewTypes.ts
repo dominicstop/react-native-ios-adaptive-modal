@@ -4,6 +4,7 @@ import { RNIAdaptiveModalViewBaseProps } from "../../native_components/RNIAdapti
 export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBaseProps,
   // A - Optional Props from `RNIAdaptiveModalBaseProps`
   | 'internalCleanupMode'
+  | 'modalAnimationMode'
 > & Pick<RNIAdaptiveModalViewBaseProps, 
   | 'modalConfig'
   | 'modalContentAnchorMode'

@@ -64,6 +64,10 @@ public class RNIAdaptiveModalViewModule: Module {
       Prop("modalContentAnchorMode") {
         $0.modalContentAnchorModeProp = $1;
       };
+      
+      Prop("modalAnimationMode") {
+        $0.modalAnimationModeProp = $1;
+      };
     };
   };
 };

@@ -43,6 +43,7 @@ export class AdaptiveModalView extends
       modalConfig,
       internalCleanupMode,
       modalContentAnchorMode,
+      modalAnimationMode,
       ...viewProps
     } = this.props;
 
@@ -57,6 +58,7 @@ export class AdaptiveModalView extends
 
       // B. Pass down props...
       modalConfig,
+      modalAnimationMode,
 
       // C. Pass down, and group event props...
       // WIP - TBA
@@ -121,6 +123,7 @@ export class AdaptiveModalView extends
         style={[styles.nativeView, props.viewProps.style]}
         modalConfig={props.modalConfig}
         modalContentAnchorMode={props.modalContentAnchorMode}
+        modalAnimationMode={props.modalAnimationMode}
         internalCleanupMode={props.internalCleanupMode}
         onModalContentInitialized={this._handleOnModalContentDetached}
         onModalDidHide={this._handleOnModalDidHide}

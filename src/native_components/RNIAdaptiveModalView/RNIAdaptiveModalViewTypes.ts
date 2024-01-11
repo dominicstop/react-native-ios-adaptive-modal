@@ -6,6 +6,7 @@ export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseP
   | 'internalCleanupMode'
   | 'modalConfig'
   | 'modalContentAnchorMode'
+  | 'modalAnimationMode'
   | 'onModalContentInitialized'
   | 'onModalDidHide'
 >;
