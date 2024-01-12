@@ -112,7 +112,7 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
       />
       <CardButton
         title={'Cycle modalAnimationMode'}
-        subtitle={'Get next `AdaptiveModalAnimationMode`'}
+        subtitle={`Current Value: ${currentModalAnimationMode}`}
         onPress={() => {
           setModalAnimationModeCounter(prev => prev + 1);
         }}
