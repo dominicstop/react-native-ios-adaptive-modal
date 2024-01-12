@@ -12,31 +12,43 @@ import { AdaptiveModalAnimationModes } from '../constants/AdaptiveModalAnimation
 
 
 export function AdaptiveModalViewTest01(props: ExampleItemProps) {
-  const [modalConfigPresetCounter, setModalConfigPresetCounter] = React.useState(0);
+  const modalRef = React.createRef<AdaptiveModalView>();
+  
+  const [
+    modalConfigPresetCounter, 
+    setModalConfigPresetCounter
+  ] = React.useState(0);
+
+  const currentModalConfigPreset = (() => {
+    const index = modalConfigPresetCounter % AdaptiveModalConfigPresets.length;
+    return AdaptiveModalConfigPresets[index];;
+  })();
+
+  const [
+    modalContentAnchorModeCounter, 
+    setModalContentAnchorModeCounter
+  ] = React.useState(0);
 
   const modalConfigPresetIndex = 
-    modalConfigPresetCounter % AdaptiveModalConfigPresets.length;
-  
-  const currentModalConfigPreset = 
-    AdaptiveModalConfigPresets[modalConfigPresetIndex];
-
-  const [modalContentAnchorModeCounter, setModalContentAnchorModeCounter] = React.useState(0);
-
-  const modalContentAnchorModeIndex = 
     modalContentAnchorModeCounter % RNIModalContentAnchorModes.length;
   
   const currentModalContentAnchorMode = 
-    RNIModalContentAnchorModes[modalContentAnchorModeIndex];
+    RNIModalContentAnchorModes[modalConfigPresetIndex];
 
-  const [modalAnimationModeCounter, setModalAnimationModeCounter] = React.useState(0);
+  const [
+    modalAnimationModeCounter, 
+    setModalAnimationModeCounter
+  ] = React.useState(0);
 
-  const modalAnimationModeIndex = 
-    modalAnimationModeCounter % AdaptiveModalAnimationModes.length;
-  
-  const currentModalAnimationMode = 
-    AdaptiveModalAnimationModes[modalAnimationModeIndex];
+  const currentModalAnimationMode = (() => {
+    const index = modalAnimationModeCounter % AdaptiveModalAnimationModes.length;
+    return AdaptiveModalAnimationModes[index];
+  })();
 
-  const [shouldShowModalBgColor, setShouldShowModalBgColor] = React.useState(false);
+  const [
+    shouldShowModalBgColor, 
+    setShouldShowModalBgColor
+  ] = React.useState(false);
   
   const rootModalContainerStyle: ViewStyle = {
     backgroundColor: (shouldShowModalBgColor
@@ -52,7 +64,10 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
     ),
   };
 
-  const modalRef = React.createRef<AdaptiveModalView>();
+  const [
+    enableContinuousLayoutResizingDuringAnimation, 
+    setEnableContinuousLayoutResizingDuringAnimation
+  ] = React.useState(true);
   
   return (
     <ExampleItemCard
@@ -62,11 +77,6 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
       subtitle={'TBA'}
       description={[
         `Test - TBA`,
-        (
-          `Current Modal Config Index: ${modalConfigPresetIndex}\n`
-          + `modalContentAnchorMode: ${currentModalContentAnchorMode}\n`
-          + `modalAnimationMode: ${currentModalAnimationMode}`
-        ),
       ]}
     >
       <AdaptiveModalView
@@ -74,6 +84,7 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         modalConfig={currentModalConfigPreset}
         modalContentAnchorMode={currentModalContentAnchorMode}
         modalAnimationMode={currentModalAnimationMode}
+        shouldEnableContinuousLayoutResizingDuringAnimation={enableContinuousLayoutResizingDuringAnimation}
       >
         <View style={[styles.rootModalContainer, rootModalContainerStyle]}>
           <View style={[styles.modalContent, modalContentStyle]}>
@@ -85,28 +96,35 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
       </AdaptiveModalView>
       <CardButton
         title={'Next Modal Config'}
-        subtitle={'Cycle to next modal config preset...'}
+        subtitle={`Current preset index: ${modalConfigPresetIndex}`}
         onPress={() => {
           setModalConfigPresetCounter(prev => prev + 1);
         }}
       />
       <CardButton
         title={'Cycle modalContentAnchorMode'}
-        subtitle={'Get next `RNIModalContentAnchorMode`'}
+        subtitle={`Current Value: ${currentModalContentAnchorMode}`}
         onPress={() => {
           setModalContentAnchorModeCounter(prev => prev + 1);
         }}
       />
       <CardButton
-        title={'Cycle AdaptiveModalAnimationModes'}
+        title={'Cycle modalAnimationMode'}
         subtitle={'Get next `AdaptiveModalAnimationMode`'}
         onPress={() => {
           setModalAnimationModeCounter(prev => prev + 1);
         }}
       />
       <CardButton
+        title={'Toggle `continuousResizingDuringAnimation`'}
+        subtitle={`Current Value: ${enableContinuousLayoutResizingDuringAnimation}`}
+        onPress={() => {
+          setEnableContinuousLayoutResizingDuringAnimation(prev => !prev);
+        }}
+      />
+      <CardButton
         title={'Toggle Modal Background Color'}
-        subtitle={'Show/hide solid bg color for modal bg'}
+        subtitle={`Current Value: ${shouldShowModalBgColor}`}
         onPress={() => {
           setShouldShowModalBgColor(prev => !prev);
         }}
