@@ -19,21 +19,23 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
     setModalConfigPresetCounter
   ] = React.useState(0);
 
-  const currentModalConfigPreset = (() => {
-    const index = modalConfigPresetCounter % AdaptiveModalConfigPresets.length;
-    return AdaptiveModalConfigPresets[index];;
-  })();
+  const modalConfigPresetIndex = 
+    modalConfigPresetCounter % AdaptiveModalConfigPresets.length;
+
+  const currentModalConfigPreset = 
+    AdaptiveModalConfigPresets[modalConfigPresetIndex];
 
   const [
     modalContentAnchorModeCounter, 
     setModalContentAnchorModeCounter
   ] = React.useState(0);
 
-  const modalConfigPresetIndex = 
-    modalContentAnchorModeCounter % RNIModalContentAnchorModes.length;
-  
-  const currentModalContentAnchorMode = 
-    RNIModalContentAnchorModes[modalConfigPresetIndex];
+  const currentModalContentAnchorMode = (() => {
+    const index = 
+      modalContentAnchorModeCounter % RNIModalContentAnchorModes.length;
+
+    return RNIModalContentAnchorModes[index];
+  })();
 
   const [
     modalAnimationModeCounter, 
