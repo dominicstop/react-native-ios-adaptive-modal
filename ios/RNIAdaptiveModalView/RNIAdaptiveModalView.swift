@@ -340,6 +340,7 @@ public class RNIAdaptiveModalView:
       "presentModal",
       "\n - modalManager.animationMode:", modalManager.animationMode,
       "\n - modalVC.contentAnchorMode:", modalVC.contentAnchorMode,
+      "\n - shouldEnableContinuousLayoutResizingDuringAnimation:", self.shouldEnableContinuousLayoutResizingDuringAnimation,
       "\n"
     );
     
