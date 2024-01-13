@@ -441,10 +441,145 @@ export const AdaptiveModalConfigPresetDemo03: AdaptiveModalConfig = {
   },
 };
 
+export const AdaptiveModalConfigPresetDemo04: AdaptiveModalConfig = {
+  snapPoints: [
+    // Snap Point 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'top',
+        width: {
+          mode: {
+            mode: 'stretch'
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.2,
+          },
+        },
+        marginLeft: {
+          mode: {
+            mode: 'constant',
+            value: 10,
+          },
+        },
+        marginRight: {
+          mode: {
+            mode: 'constant',
+            value: 10,
+          },
+        },
+        marginTop: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'top',
+            }, {
+              mode: 'constant',
+              value: 10,
+            }],
+          },
+        },
+      },
+      keyframeConfig: {
+        modalTransform: {
+          translateX: 1,
+          translateY: 1,
+          scaleX: 1,
+          scaleY: 1
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 10,
+        modalCornerRadius: 10
+      },
+    },
+
+    // Snap Point 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'stretch',
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5,
+          },
+        },
+        marginLeft: {
+          mode: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+        marginRight: {
+          mode: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 2, 
+          height: 2
+        },
+        modalShadowOpacity: 0.2,
+        modalShadowRadius: 5,
+        modalCornerRadius: 15,
+        backgroundOpacity: 0.25
+      },
+    },
+  ],
+  snapDirection: 'topToBottom',
+  undershootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenTop',
+    },
+    keyframeConfig: {
+      modalTransform: {
+        scaleX: 0.75,
+        scaleY: 0.75
+      },
+    },
+  },
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenBottom'
+    },
+    keyframeConfig: {
+      modalTransform: {
+        scaleX: 0.9,
+        scaleY: 0.9
+      },
+      modalOpacity: 0.8,
+      backgroundOpacity: 0
+    },
+  },
+};
+
+
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
   // Index: 0 - demo01
   AdaptiveModalConfigPresetDemo01,
 
   // Index: 1 - demo02
   AdaptiveModalConfigPresetDemo02,
+
+  // Index: 2 - demo03
+  AdaptiveModalConfigPresetDemo03,
+
+  // Index: 3 - demo04
+  AdaptiveModalConfigPresetDemo04,
 ];
