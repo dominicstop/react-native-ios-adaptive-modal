@@ -135,10 +135,17 @@ extension AdaptiveModalKeyframeConfig: InitializableFromDictionary {
       forKey: "modalDragHandleOffset",
       type: CGFloat.self
     );
-
+    
+    
     let modalDragHandleColor = try? dict.getColorFromDictionary(
       forKey: "modalDragHandleColor"
     );
+    
+    print(
+      "modalDragHandleColor:",  dict["modalDragHandleColor"],
+      "\n - modalDragHandleColor:", modalDragHandleColor
+    );
+
 
     let modalDragHandleOpacity = try? dict.getValueFromDictionary(
       forKey: "modalDragHandleOpacity",

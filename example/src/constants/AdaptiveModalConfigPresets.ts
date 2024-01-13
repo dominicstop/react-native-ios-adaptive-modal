@@ -335,8 +335,10 @@ export const AdaptiveModalConfigPresetDemo03: AdaptiveModalConfig = {
           },
         },
         height: {
-          mode: 'percent',
-          percentValue: 0.65,
+          mode: {
+            mode: 'percent',
+            percentValue: 0.65,
+          },
         },
         marginLeft: {
           mode: {
