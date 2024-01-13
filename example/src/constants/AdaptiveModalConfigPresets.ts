@@ -126,7 +126,7 @@ export const AdaptiveModalConfigPresetDemo01: AdaptiveModalConfig = {
       }
     },
     keyframeConfig: {
-      secondaryGestureAxisDampingPercent: 1,
+      secondaryGestureAxisDampingPercent: 0.8,
       modalShadowOffset: {
         width: 0, 
         height: -1
@@ -187,77 +187,114 @@ export const AdaptiveModalConfigPresetDemo01: AdaptiveModalConfig = {
 };
 
 export const AdaptiveModalConfigPresetDemo02: AdaptiveModalConfig = {
-  snapPoints: [{
-    // snap point - 1
-    mode: 'standard',
-    layoutConfig: {
-      horizontalAlignment: 'center',
-      verticalAlignment: 'bottom',
-      width: {
-        mode: {
-          mode: 'percent',
-          percentValue: 0.8
+  snapPoints: [
+    // Snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.8
+          }
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.2
+          }
         }
       },
-      height: {
-        mode: {
-          mode: 'percent',
-          percentValue: 0.2
-        }
-      }
-    },
-    keyframeConfig: {
-      modalTransform: {
-        rotateX: {
-          mode: 'degrees',
-          value: 0,
+      keyframeConfig: {
+        modalTransform: {
+          rotateX: {
+            mode: 'degrees',
+            value: 0,
+          },
+        },
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 7,
+        modalCornerRadius: 10,
+        modalMaskedCorners: ['topCorners'],
+        modalContentOpacity: 1,
+        backgroundOpacity: 0,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0   
+      },
+    }, 
+
+    // Snap point - 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.8,
+          },
+        },
+        height: {
+          mode:  {
+            mode: 'percent',
+            percentValue: 0.4,
+          },
         },
       },
-      modalShadowOffset: {
-        width: 0, 
-        height: -2
+      keyframeConfig: {
+        backgroundTapInteraction: 'dismiss',
+        modalShadowOffset: {
+          width: 1, 
+          height: 1
+        },
+        modalShadowOpacity: 0.4,
+        modalShadowRadius: 7,
+        modalCornerRadius: 15,
+        modalMaskedCorners: ['topCorners'],
+        backgroundOpacity: 0.1
       },
-      modalShadowOpacity: 0.3,
-      modalShadowRadius: 7,
-      modalCornerRadius: 10,
-      modalMaskedCorners: ['topCorners'],
-      modalContentOpacity: 1,
-      backgroundOpacity: 0,
-      backgroundVisualEffect: 'regular',
-      backgroundVisualEffectIntensity: 0   
     },
-  }, {
-    // snap point - 2
-    mode: 'standard',
-    layoutConfig: {
-      horizontalAlignment: 'center',
-      verticalAlignment: 'bottom',
-      width: {
-        mode: {
-          mode: 'percent',
-          percentValue: 0.8,
+
+    // Snap point - 3
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.9
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.7,
+          },
         },
       },
-      height: {
-        mode:  {
-          mode: 'percent',
-          percentValue: 0.4,
+      keyframeConfig: {
+        backgroundTapInteraction: 'ignore',
+        modalShadowOffset: {
+          width: 2, 
+          height: 2
         },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 8,
+        backgroundOpacity: 0.3,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0.3
       },
     },
-    keyframeConfig: {
-      backgroundTapInteraction: 'dismiss',
-      modalShadowOffset: {
-        width: 1, 
-        height: 1
-      },
-      modalShadowOpacity: 0.4,
-      modalShadowRadius: 7,
-      modalCornerRadius: 15,
-      modalMaskedCorners: ['topCorners'],
-      backgroundOpacity: 0.1
-    },
-  }],
+  ],
   snapDirection: 'bottomToTop',
   undershootSnapPoint: {
     layoutPreset: {
