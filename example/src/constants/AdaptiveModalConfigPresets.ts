@@ -616,16 +616,17 @@ export const AdaptiveModalConfigPresetDemo05: AdaptiveModalConfig = {
           mode: {
             mode: 'stretch',
           },
+          offsetOperation: 'subtract',
           offsetValue: {
             mode: 'constant',
             value: 40,
           },
-          offsetOperation: 'subtract',
         },
         height: {
           mode: {
             mode: 'stretch',
           },
+          offsetOperation: 'subtract',
           offsetValue: {
             mode: 'multipleValues',
             values: [{
@@ -639,7 +640,6 @@ export const AdaptiveModalConfigPresetDemo05: AdaptiveModalConfig = {
               value: 40,
             }],
           },
-          offsetOperation: 'subtract',
         },
       },
       keyframeConfig: {
@@ -674,6 +674,185 @@ export const AdaptiveModalConfigPresetDemo05: AdaptiveModalConfig = {
   },
 };
 
+export const AdaptiveModalConfigPresetDemo06: AdaptiveModalConfig = {
+  snapPoints: [
+    // snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.8,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.2
+          },
+        },
+        marginBottom: {
+          mode: {
+            mode: 'safeAreaInsets',
+            insetKey: 'bottom',
+          },
+          minValue: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 7,
+        modalCornerRadius: 10,
+        backgroundOpacity: 0,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0
+      },
+    },
+
+    // snap point - 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.85,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5,
+          },
+        },
+        marginBottom: {
+          mode: {
+            mode: 'safeAreaInsets',
+            insetKey: 'bottom',
+          },
+          minValue: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 1, 
+          height: 1
+        },
+        modalShadowOpacity: 0.4,
+        modalShadowRadius: 7,
+        modalCornerRadius: 15,
+        backgroundOpacity: 0.1
+      },
+    },
+
+    // snap point - 3
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.87,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.7,
+          },
+        },
+        marginBottom: {
+          mode: {
+            mode: 'safeAreaInsets',
+            insetKey: 'bottom',
+          },
+          minValue: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 2, 
+          height: 2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 8,
+        backgroundOpacity: 0.3,
+        backgroundVisualEffectIntensity: 0.3
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'layoutConfig',
+      value: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.87,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'stretch',
+          }
+        },
+        marginTop: {
+          mode: {
+            mode: 'safeAreaInsets',
+            insetKey: 'top',
+          },
+          minValue: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+        marginBottom: {
+          mode: {
+            mode: 'safeAreaInsets',
+            insetKey: 'bottom',
+          },
+          minValue: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+      },
+    },
+    keyframeConfig: {
+      modalShadowOffset: {
+        width: 3, 
+        height: 3
+      },
+      modalShadowOpacity: 0.35,
+      modalShadowRadius: 15
+    },
+  },
+};
+
+
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
   // Index: 0 - demo01
   AdaptiveModalConfigPresetDemo01,
@@ -689,4 +868,7 @@ export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
 
   // Index: 4 - demo05
   AdaptiveModalConfigPresetDemo05,
+
+  // Index: 4 - demo06
+  AdaptiveModalConfigPresetDemo06,
 ];
