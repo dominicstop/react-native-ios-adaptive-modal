@@ -5,7 +5,7 @@ PODS:
   - boost (1.76.0)
   - ComputableLayout (0.7.0):
     - DGSwiftUtilities (~> 0.11)
-  - DGSwiftUtilities (0.12.5)
+  - DGSwiftUtilities (0.12.6)
   - DoubleConversion (1.1.6)
   - EXApplication (5.3.1):
     - ExpoModulesCore
@@ -457,7 +457,7 @@ PODS:
     - DGSwiftUtilities
     - ExpoModulesCore
     - ReactNativeIosUtilities
-  - ReactNativeIosUtilities (4.3.0-6):
+  - ReactNativeIosUtilities (4.3.0-7):
     - ComputableLayout (~> 0.7)
     - DGSwiftUtilities (~> 0.12)
     - ExpoModulesCore
@@ -637,7 +637,7 @@ SPEC CHECKSUMS:
   AdaptiveModal: afe0d92e46116f826d26da531b02dcf4e222105b
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
-  DGSwiftUtilities: fb618e43cbba2411959a0fa9a8c41de5c5100bda
+  DGSwiftUtilities: 46adca3abbb5b5fc83a785b7d7aeada4a6e38010
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EXApplication: 042aa2e3f05258a16962ea1a9914bf288db9c9a1
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
@@ -686,7 +686,7 @@ SPEC CHECKSUMS:
   React-utils: 7a9918a1ffdd39aba67835d42386f592ea3f8e76
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
   ReactNativeIosAdaptiveModal: c520ab2d909c7900d19f1bfb61d920b17103a558
-  ReactNativeIosUtilities: a30072ccdebcdc3f24c4fc50dfc5aa6898939850
+  ReactNativeIosUtilities: b3a9ff5f7823136d2a7d5408e8383980f8e3ba1e
   RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6

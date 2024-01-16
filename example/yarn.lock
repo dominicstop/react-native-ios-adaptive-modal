@@ -5395,10 +5395,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-ios-utilities@^4.3.0-6:
-  version "4.3.0-6"
-  resolved "https://registry.yarnpkg.com/react-native-ios-utilities/-/react-native-ios-utilities-4.3.0-6.tgz#6a23d727d9eb4821aab1ebc7df76070dc6f0a998"
-  integrity sha512-7VWgnH8arm350O0AeDhkh3zXP2igKcNHmt6PQObuwPyIhmdYKraJ3iGolKIaITCwaiKcWXPnXdZQnBmapPVjRA==
+react-native-ios-utilities@^4.3.0-7:
+  version "4.3.0-7"
+  resolved "https://registry.yarnpkg.com/react-native-ios-utilities/-/react-native-ios-utilities-4.3.0-7.tgz#6c2b5d53794e06ab84656c5ea254df7c250d9fb8"
+  integrity sha512-QV15Q2x4mK/D/fqh642KY3/kO2XCVFkDDwdTmAqV4omAqDcAC504GTFTd4rM3cpY/cYP5yZZp7sTxZgnPNTJJw==
 
 react-native-safe-area-context@^4.8.2:
   version "4.8.2"
