@@ -852,6 +852,116 @@ export const AdaptiveModalConfigPresetDemo06: AdaptiveModalConfig = {
   },
 };
 
+export const AdaptiveModalConfigPresetDemo07: AdaptiveModalConfig = {
+  snapPoints: [
+    // snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'left',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.7,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.65,
+          },
+        },
+        marginLeft: {
+          mode: {
+            mode: 'constant',
+            value: 15,
+          },
+        },
+      },
+      keyframeConfig: {
+        secondaryGestureAxisDampingPercent: 0.8,
+        modalTransform: {
+          scaleX: 1,
+          scaleY: 1
+        },
+        modalShadowOffset: {
+          width: 1, 
+          height: 1
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 10,
+        modalCornerRadius: 15,
+        modalBackgroundOpacity: 0.85,
+        modalBackgroundVisualEffectIntensity: 0.9,
+        backgroundColor: 'white',
+        backgroundOpacity: 0.15,
+        backgroundVisualEffectIntensity: 0.05
+      },
+    },
+
+    // snap point - 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'stretch'
+          }
+        },
+        height: {
+          mode: {
+            mode: 'stretch'
+          }
+        },
+      },
+      keyframeConfig: {
+        secondaryGestureAxisDampingPercent: 1,
+        modalShadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        modalShadowOpacity: 0,
+        modalShadowRadius: 0,
+        modalBackgroundOpacity: 0,
+        modalBackgroundVisualEffectOpacity: 0,
+        modalBackgroundVisualEffectIntensity: 0,
+        modalDragHandleOpacity: 0,
+        backgroundColor: 'white',
+        backgroundOpacity: 0.75,
+        backgroundVisualEffectIntensity: 1
+      },
+    },
+  ],
+  snapDirection: 'leftToRight',
+  undershootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenLeft',
+    },
+    keyframeConfig: {
+      modalTransform: {
+        scaleX: 0.5,
+        scaleY: 0.5
+      },
+      modalCornerRadius: 10,
+      modalBackgroundOpacity: 1,
+      modalBackgroundVisualEffect: 'regular',
+      modalBackgroundVisualEffectIntensity: 0,
+      backgroundVisualEffect: 'regular',
+      backgroundVisualEffectIntensity: 0
+    },
+  },
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenRight',
+    },
+  },
+};
+
 
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
   // Index: 0 - demo01
@@ -869,6 +979,9 @@ export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
   // Index: 4 - demo05
   AdaptiveModalConfigPresetDemo05,
 
-  // Index: 4 - demo06
+  // Index: 5 - demo06
   AdaptiveModalConfigPresetDemo06,
+
+  // Index: 6 - demo07
+  AdaptiveModalConfigPresetDemo07,
 ];
