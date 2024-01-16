@@ -56,3 +56,4 @@ yarn-error.log
 # Expo
 .expo/*
 docs/Colors-70.txt
+temp.ts
