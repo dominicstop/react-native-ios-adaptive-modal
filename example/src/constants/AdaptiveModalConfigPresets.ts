@@ -962,6 +962,7 @@ export const AdaptiveModalConfigPresetDemo07: AdaptiveModalConfig = {
   },
 };
 
+// Custom Snap Pont Test
 export const AdaptiveModalConfigPresetDemo08: AdaptiveModalConfig = {
   snapPoints: [
     // Snap Point 1
@@ -1047,6 +1048,92 @@ export const AdaptiveModalConfigPresetDemo08: AdaptiveModalConfig = {
   },
 };
 
+// Keyboard Test
+export const AdaptiveModalConfigPresetDemo09: AdaptiveModalConfig = {
+  snapPoints: [
+    // Snap Point 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'stretch'
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.3,
+          },
+        },
+        marginLeft: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'left',
+            }, {
+              mode: 'constant',
+              value: 15,
+            }],
+          },
+        },
+        marginRight: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'right',
+            }, {
+              mode: 'constant',
+              value: 15
+            }],
+          }
+        },
+        marginBottom: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'bottom',
+            }, {
+              mode: 'keyboardRelativeSize',
+              sizeKey: 'height',
+            }, {
+              mode: 'constant',
+              value: 15,
+            }],
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.2,
+        modalShadowRadius: 7,
+        modalCornerRadius: 12,
+        modalMaskedCorners: ['allCorners'],
+        modalBackgroundOpacity: 0.9,
+        modalBackgroundVisualEffect: 'systemUltraThinMaterial',
+        modalBackgroundVisualEffectIntensity: 1,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'fitScreenVertically',
+    }
+  },
+};
+
 
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
   // Index: 0 - demo01
@@ -1072,4 +1159,7 @@ export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
 
   // Index: 7 - demo08
   AdaptiveModalConfigPresetDemo08,
+
+  // Index: 8 - demo09
+  AdaptiveModalConfigPresetDemo09,
 ];
