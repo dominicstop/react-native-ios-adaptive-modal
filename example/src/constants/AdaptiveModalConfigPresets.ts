@@ -1134,32 +1134,67 @@ export const AdaptiveModalConfigPresetDemo09: AdaptiveModalConfig = {
   },
 };
 
-
-export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
+export const AdaptiveModalConfigPresetsWithMetadata: {
+  modalConfig: AdaptiveModalConfig;
+  shouldShowTextBox: boolean;
+}[] = [
   // Index: 0 - demo01
-  AdaptiveModalConfigPresetDemo01,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo01,
+    shouldShowTextBox: false,
+  },
 
   // Index: 1 - demo02
-  AdaptiveModalConfigPresetDemo02,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo02,
+    shouldShowTextBox: false,
+  },
 
   // Index: 2 - demo03
-  AdaptiveModalConfigPresetDemo03,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo03,
+    shouldShowTextBox: false,
+  },
 
   // Index: 3 - demo04
-  AdaptiveModalConfigPresetDemo04,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo04,
+    shouldShowTextBox: false,
+  },
 
   // Index: 4 - demo05
-  AdaptiveModalConfigPresetDemo05,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo05,
+    shouldShowTextBox: false,
+  },
 
   // Index: 5 - demo06
-  AdaptiveModalConfigPresetDemo06,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo06,
+    shouldShowTextBox: false,
+  },
 
   // Index: 6 - demo07
-  AdaptiveModalConfigPresetDemo07,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo07,
+    shouldShowTextBox: false,
+  },
 
   // Index: 7 - demo08
-  AdaptiveModalConfigPresetDemo08,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo08,
+    shouldShowTextBox: false,
+  },
 
   // Index: 8 - demo09
-  AdaptiveModalConfigPresetDemo09,
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo09,
+    shouldShowTextBox: true,
+  },
 ];
+
+export type AdaptiveModalConfigPresetWithMetadataItem = 
+  typeof AdaptiveModalConfigPresetsWithMetadata[number];
+
+export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = 
+  AdaptiveModalConfigPresetsWithMetadata.map(item => item.modalConfig);
