@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View, Image } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -58,6 +59,19 @@ export default function App() {
           <Stack.Screen 
             name="Home" 
             component={HomeScreen}
+            options={{
+              headerTitle: () => (
+                <Image
+                  source={require("./assets/beatgig-256.png")}
+                  style={{
+                    height: 45,
+                    width: 115,
+                    resizeMode: 'contain',
+                  }}
+                />
+              ),
+              headerTitleAlign: 'center',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
