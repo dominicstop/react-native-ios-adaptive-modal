@@ -1,15 +1,68 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, ViewStyle } from 'react-native';
+import { StyleSheet, View, Text, ViewStyle, TextInput } from 'react-native';
 
 import { AdaptiveModalView } from 'react-native-ios-adaptive-modal';
 
 import type { ExampleItemProps } from './SharedExampleTypes';
 import { ExampleItemCard } from '../components/ExampleItemCard';
 import { CardButton } from '../components/Card';
-import { AdaptiveModalConfigPresets } from '../constants/AdaptiveModalConfigPresets';
+import { AdaptiveModalConfigPresetWithMetadataItem, AdaptiveModalConfigPresetsWithMetadata } from '../constants/AdaptiveModalConfigPresets';
 import { RNIModalContentAnchorModes } from '../constants/RNIModalContentAnchorModes';
 import { AdaptiveModalAnimationModes } from '../constants/AdaptiveModalAnimationModes';
 
+function ModalContent(props: {
+  shouldShowModalBgColor: boolean;
+  currentModalConfigIndex: number;
+  presetItem: AdaptiveModalConfigPresetWithMetadataItem,
+}) {
+
+  const rootModalContainerStyle: ViewStyle = {
+    backgroundColor: (props.shouldShowModalBgColor
+      ? 'blue'
+      : 'clear'
+    ),
+  };
+
+  const modalContentStyle: ViewStyle = {
+    backgroundColor: (props.shouldShowModalBgColor
+      ? 'red'
+      : 'clear'
+    ),
+  };
+
+  return (
+    <View style={[styles.rootModalContainer, rootModalContainerStyle]}>
+      <View style={[styles.modalContent, modalContentStyle]}>
+        <Text style={[styles.modalContentItem, styles.modalConfigIndexText]}>
+          <Text style={styles.modalConfigIndexLabel}>
+            {'Config Index: '}
+          </Text>
+          <Text>
+            {props.currentModalConfigIndex}
+          </Text>
+        </Text>
+        {props.shouldShowModalBgColor && (
+          <React.Fragment>
+            <Text>"Adaptive Modal"</Text>
+            <Text>"Red = inner container"</Text>
+            <Text>"blue = outer/root container"</Text>
+          </React.Fragment>
+        )}
+        {props.presetItem.shouldShowTextBox && (
+          <View style={[styles.modalContentItem, styles.textInputContainer]}>
+            <Text style={styles.textInputLabel}>
+              {'Textbox Input:'}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder={"Text Input..."}
+            />
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
 
 export function AdaptiveModalViewTest01(props: ExampleItemProps) {
   const modalRef = React.createRef<AdaptiveModalView>();
@@ -20,10 +73,10 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
   ] = React.useState(0);
 
   const modalConfigPresetIndex = 
-    modalConfigPresetCounter % AdaptiveModalConfigPresets.length;
+    modalConfigPresetCounter % AdaptiveModalConfigPresetsWithMetadata.length;
 
-  const currentModalConfigPreset = 
-    AdaptiveModalConfigPresets[modalConfigPresetIndex];
+  const currentModalConfigPresetItem = 
+    AdaptiveModalConfigPresetsWithMetadata[modalConfigPresetIndex];
 
   const [
     modalContentAnchorModeCounter, 
@@ -51,20 +104,6 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
     shouldShowModalBgColor, 
     setShouldShowModalBgColor
   ] = React.useState(false);
-  
-  const rootModalContainerStyle: ViewStyle = {
-    backgroundColor: (shouldShowModalBgColor
-      ? 'blue'
-      : 'clear'
-    ),
-  };
-
-  const modalContentStyle: ViewStyle = {
-    backgroundColor: (shouldShowModalBgColor
-      ? 'red'
-      : 'clear'
-    ),
-  };
 
   const [
     enableContinuousLayoutResizingDuringAnimation, 
@@ -83,18 +122,16 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
     >
       <AdaptiveModalView
         ref={modalRef}
-        modalConfig={currentModalConfigPreset}
+        modalConfig={currentModalConfigPresetItem.modalConfig}
         modalContentAnchorMode={currentModalContentAnchorMode}
         modalAnimationMode={currentModalAnimationMode}
         shouldEnableContinuousLayoutResizingDuringAnimation={enableContinuousLayoutResizingDuringAnimation}
       >
-        <View style={[styles.rootModalContainer, rootModalContainerStyle]}>
-          <View style={[styles.modalContent, modalContentStyle]}>
-            <Text>"Adaptive Modal"</Text>
-            <Text>"Red = inner container"</Text>
-            <Text>"blue = outer/root container"</Text>
-          </View>
-        </View>
+        <ModalContent
+          shouldShowModalBgColor={shouldShowModalBgColor}
+          currentModalConfigIndex={modalConfigPresetIndex}
+          presetItem={currentModalConfigPresetItem}
+        />
       </AdaptiveModalView>
       <CardButton
         title={'Next Modal Config'}
@@ -158,5 +195,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'red',
+  },
+  modalConfigIndexText: {
+    fontSize: 16,
+    backgroundColor: 'rgba(0,0,0,0.07)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  modalConfigIndexLabel: {
+    fontWeight: '600',
+    color: 'rgba(0,0,0,0.9)',
+
+  },
+  modalContentItem: {
+    marginBottom: 14,
+  },
+  textInputContainer: {
+    minWidth: 200,
+  },
+  textInputLabel: {
+    fontSize: 16,
+    marginBottom: 6,
+    marginLeft: 3,
+    fontWeight: '500',
+    color: 'rgba(0,0,0,0.6)',
+  },
+  textInput: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.4)',
+    borderRadius: 10,
+    padding: 10,
   },
 });
