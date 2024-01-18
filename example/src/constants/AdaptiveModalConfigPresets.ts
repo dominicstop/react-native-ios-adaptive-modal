@@ -962,6 +962,91 @@ export const AdaptiveModalConfigPresetDemo07: AdaptiveModalConfig = {
   },
 };
 
+export const AdaptiveModalConfigPresetDemo08: AdaptiveModalConfig = {
+  snapPoints: [
+    // Snap Point 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'stretch',
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.3
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.2,
+        modalShadowRadius: 7,
+        modalCornerRadius: 0,
+        modalMaskedCorners: [
+          'layerMinXMinYCorner',
+          'layerMaxXMinYCorner'
+        ],
+        modalBackgroundOpacity: 0.9,
+        modalBackgroundVisualEffect: 'systemUltraThinMaterial',
+        modalBackgroundVisualEffectIntensity: 1,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0
+      },
+    },
+
+    // Snap Point 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'stretch',
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.75
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.2,
+        modalShadowRadius: 7,
+        modalCornerRadius: 15,
+        modalMaskedCorners: [
+          'layerMinXMinYCorner',
+          'layerMaxXMinYCorner'
+        ],
+        modalBackgroundOpacity: 0.85,
+        modalBackgroundVisualEffectIntensity: 0.25,
+        backgroundVisualEffectIntensity: 0.75
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'fitScreen',
+    },
+  },
+};
+
 
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
   // Index: 0 - demo01
@@ -984,4 +1069,7 @@ export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] = [
 
   // Index: 6 - demo07
   AdaptiveModalConfigPresetDemo07,
+
+  // Index: 7 - demo08
+  AdaptiveModalConfigPresetDemo08,
 ];
