@@ -1283,6 +1283,110 @@ export const AdaptiveModalConfigPresetDemo10: AdaptiveModalConfig = {
   },
 };
 
+// Index: 10 - Keyboard
+export const AdaptiveModalConfigPresetDemo11: AdaptiveModalConfig = {
+  snapPoints: [
+    // Snap Point 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'stretch',
+          },
+        },
+        height: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'percent',
+              percentValue: 0.3,
+            }, {
+              mode: 'conditionalLayoutValue',
+              condition: {
+                mode: 'keyboardPresent',
+              },
+              trueValue: {
+                mode: 'keyboardRelativeSize',
+                sizeKey: 'height',
+              },
+              falseValue: {
+                mode: 'safeAreaInsets',
+                insetKey: 'bottom',
+              },
+            }],
+          },
+        },
+        paddingLeft: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'left',
+            }, {
+              mode: 'constant',
+              value: 15,
+            }],
+          },
+        },
+        paddingRight: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'right',
+            }, {
+              mode: 'constant',
+              value: 15,
+            }],
+          },
+        },
+        paddingBottom: {
+          mode: {
+            mode: 'conditionalLayoutValue',
+            condition: {
+              mode: 'keyboardPresent',
+            },
+            trueValue: {
+              mode: 'keyboardRelativeSize',
+              sizeKey: 'height',
+            },
+            falseValue: {
+              mode: 'safeAreaInsets',
+              insetKey: 'bottom',
+            },
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 0,
+          height: -2,
+        },
+        modalShadowOpacity: 0.25,
+        modalShadowRadius: 7,
+        modalCornerRadius: 12,
+        modalMaskedCorners: ['topCorners'],
+        modalBackgroundOpacity: 0.9,
+        modalBackgroundVisualEffect: 'systemUltraThinMaterial',
+        modalBackgroundVisualEffectIntensity: 1,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'fitScreenVertically'
+    },
+  },
+};
+
+
 export const AdaptiveModalConfigPresetsWithMetadata: {
   modalConfig: AdaptiveModalConfig;
   shouldShowTextBox: boolean;
@@ -1345,6 +1449,12 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
   {
     modalConfig: AdaptiveModalConfigPresetDemo10,
     shouldShowTextBox: false,
+  },
+
+  // Index: 10 - Demo11
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo11,
+    shouldShowTextBox: true,
   },
 ];
 
