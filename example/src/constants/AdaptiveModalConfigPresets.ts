@@ -1557,8 +1557,58 @@ export const AdaptiveModalConfigPresetDemo13: AdaptiveModalConfig = {
     },
   },
 
-}; 
+};
 
+// Index: 13 - demo14 - ScrollView
+export const AdaptiveModalConfigPresetDemo14: AdaptiveModalConfig = {
+  snapPoints: [
+    // snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'stretch',
+          }
+        },
+        height: {
+          mode: {
+            mode: 'stretch',
+          }
+        }
+      },
+      keyframeConfig: {
+        modalContentOpacity: 1,
+        backgroundOpacity: 0.2,
+        backgroundVisualEffectIntensity: 1
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  undershootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenBottom',
+    },
+    keyframeConfig: {
+      modalContentOpacity: 0,
+      modalBackgroundOpacity: 0,
+      backgroundColor: 'white',
+      backgroundOpacity: 0,
+      backgroundVisualEffect: 'regular',
+      backgroundVisualEffectIntensity: 0
+    },
+  },
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'halfOffscreenTop',
+    },
+  },
+  dragHandlePosition: 'none'
+};
 
 
 export const AdaptiveModalConfigPresetsWithMetadata: {
@@ -1640,6 +1690,12 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
   // Index: 12 - Demo13
   {
     modalConfig: AdaptiveModalConfigPresetDemo13,
+    shouldShowTextBox: false,
+  },
+
+  // Index: 13 - Demo14
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo14,
     shouldShowTextBox: false,
   },
 ];
