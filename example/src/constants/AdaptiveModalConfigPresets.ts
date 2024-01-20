@@ -1386,6 +1386,96 @@ export const AdaptiveModalConfigPresetDemo11: AdaptiveModalConfig = {
   },
 };
 
+// Index: 11 - demo12
+export const AdaptiveModalConfigPresetDemo12: AdaptiveModalConfig = {
+  snapPoints: [
+    // Snap Point 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'right',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5
+          },
+        },
+        marginRight: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'right',
+            }, {
+              mode: 'constant',
+              value: 10,
+            }],
+          },
+        },
+      },
+      keyframeConfig: {
+        secondaryGestureAxisDampingPercent: 0.25,
+        modalCornerRadius: 10,
+      },
+    },
+
+    // Snap Point 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'left',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5
+          },
+        },
+        marginLeft: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'left',
+            }, {
+              mode: 'constant',
+              value: 10
+            }],
+          },
+        },
+      },
+    },
+  ],
+
+  snapDirection: 'rightToLeft',
+  undershootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenRight'
+    }, 
+  },
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenLeft'
+    }, 
+  },
+  dragHandlePosition: 'none',
+};
+
 
 export const AdaptiveModalConfigPresetsWithMetadata: {
   modalConfig: AdaptiveModalConfig;
@@ -1455,6 +1545,12 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
   {
     modalConfig: AdaptiveModalConfigPresetDemo11,
     shouldShowTextBox: true,
+  },
+
+  // Index: 11 - Demo12
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo12,
+    shouldShowTextBox: false,
   },
 ];
 
