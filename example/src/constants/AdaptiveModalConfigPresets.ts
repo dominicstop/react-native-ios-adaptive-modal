@@ -1476,6 +1476,90 @@ export const AdaptiveModalConfigPresetDemo12: AdaptiveModalConfig = {
   dragHandlePosition: 'none',
 };
 
+// Index: 12 - demo13 - ScrollView
+export const AdaptiveModalConfigPresetDemo13: AdaptiveModalConfig = {
+  snapPoints: [
+    // snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.9,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.3,
+          },
+        }
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 7,
+        modalCornerRadius: 10,
+        modalMaskedCorners: ['topCorners'],
+        modalBackgroundOpacity: 0.9,
+        modalBackgroundVisualEffect: 'regular',
+        modalBackgroundVisualEffectIntensity: 1,
+        backgroundOpacity: 0,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0
+      },
+    },
+
+    // snap point - 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.9
+          }
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.7
+          }
+        }
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 2, 
+          height: 2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 8,
+        modalBackgroundOpacity: 0.8,
+        modalBackgroundVisualEffectIntensity: 0.8,
+        backgroundOpacity: 0.2,
+        backgroundVisualEffectIntensity: 0.1
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'fitScreenVertically',
+    },
+  },
+
+}; 
+
+
 
 export const AdaptiveModalConfigPresetsWithMetadata: {
   modalConfig: AdaptiveModalConfig;
@@ -1550,6 +1634,12 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
   // Index: 11 - Demo12
   {
     modalConfig: AdaptiveModalConfigPresetDemo12,
+    shouldShowTextBox: false,
+  },
+
+  // Index: 12 - Demo13
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo13,
     shouldShowTextBox: false,
   },
 ];
