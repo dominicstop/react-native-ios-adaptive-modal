@@ -19,7 +19,9 @@ extension RNIAdaptiveModalController: AdaptiveModalDisplayLinkEventsNotifiable {
     displayLink: CADisplayLink,
     modalFrame: CGRect
   ) {
+    guard let layer = self.view.layer.presentation() else { return };
+    let nextSize = layer.bounds.size;
     
-    self.updateModalContentSize(withSize: modalFrame.size);
+    self.updateModalContentSize(withSize: nextSize);
   };
 };
