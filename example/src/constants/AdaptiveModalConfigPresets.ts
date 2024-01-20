@@ -1610,6 +1610,150 @@ export const AdaptiveModalConfigPresetDemo14: AdaptiveModalConfig = {
   dragHandlePosition: 'none'
 };
 
+// Index: 14 - demo14 - ScrollView
+export const AdaptiveModalConfigPresetDemo15: AdaptiveModalConfig = {
+  snapPoints: [
+    // snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.9
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.3,
+          },
+          minValue: {
+            mode: 'constant',
+            value: 300,
+          },
+        },
+        paddingTop: {
+          mode: {
+            mode: 'constant',
+            value: 0
+          },
+        },
+      },
+      keyframeConfig: {
+        secondaryGestureAxisDampingPercent: 0.5,
+        modalTransform: {
+          scaleX: 1,
+          scaleY: 1
+        },
+        modalShadowOffset: {
+          width: 0, 
+          height: -2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 7,
+        modalCornerRadius: 15,
+        modalMaskedCorners: ['allCorners'],
+        modalContentOpacity: 1,
+        modalBackgroundOpacity: 0.9,
+        modalBackgroundVisualEffect: 'regular',
+        modalBackgroundVisualEffectIntensity: 1,
+        modalDragHandleSize: {
+          width: 50, 
+          height: 6.5
+        },
+        modalDragHandleOffset: -16.5,
+        modalDragHandleColor: 'white',
+        modalDragHandleOpacity: 0.8,
+        backgroundOpacity: 0,
+        backgroundVisualEffect: 'regular',
+        backgroundVisualEffectIntensity: 0
+      },
+    },
+
+    // snap point - 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'center',
+        verticalAlignment: 'bottom',
+        width: {
+          mode: {
+            mode: 'stretch',
+          },
+        },
+        height: {
+          mode: {
+            mode: 'stretch',
+          },
+        },
+        marginTop: {
+          mode: {
+            mode: 'multipleValues',
+            values: [{
+              mode: 'safeAreaInsets',
+              insetKey: 'top',
+            }],
+          },
+        },
+        paddingTop: {
+          mode: {
+            mode: 'constant',
+            value: 6 + 8 + 6,
+          },
+        },
+      },
+      keyframeConfig: {
+        secondaryGestureAxisDampingPercent: 1,
+        modalShadowOffset: {
+          width: 2, 
+          height: 2
+        },
+        modalShadowOpacity: 0.3,
+        modalShadowRadius: 7,
+        modalCornerRadius: 10,
+        modalMaskedCorners: ['topCorners'],
+        modalBackgroundOpacity: 0.8,
+        modalBackgroundVisualEffectIntensity: 0.8,
+        modalDragHandleSize: {
+          width: 40, 
+          height: 6
+        },
+        modalDragHandleOffset: 8,
+        modalDragHandleColor: 'gray',
+        modalDragHandleOpacity: 0.9,
+        backgroundOpacity: 0.2,
+        backgroundVisualEffectIntensity: 0.1
+      },
+    },
+  ],
+  snapDirection: 'bottomToTop',
+  undershootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenBottom'
+    },
+    keyframeConfig: {
+      modalTransform: {
+        scaleX: 0.75,
+        scaleY: 0.75
+      },
+      modalCornerRadius: 15,
+      modalMaskedCorners: ['allCorners'],
+      modalContentOpacity: 0.25
+    },
+  },
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'fitScreenVertically',
+    },
+  },
+  modalSwipeGestureEdgeHeight: 20
+};
+
 
 export const AdaptiveModalConfigPresetsWithMetadata: {
   modalConfig: AdaptiveModalConfig;
@@ -1696,6 +1840,12 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
   // Index: 13 - Demo14
   {
     modalConfig: AdaptiveModalConfigPresetDemo14,
+    shouldShowTextBox: false,
+  },
+
+  // Index: 13 - Demo15
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo15,
     shouldShowTextBox: false,
   },
 ];
