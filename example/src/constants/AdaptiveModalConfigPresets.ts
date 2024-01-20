@@ -962,7 +962,7 @@ export const AdaptiveModalConfigPresetDemo07: AdaptiveModalConfig = {
   },
 };
 
-// Custom Snap Pont Test
+// Custom Snap Point Test
 export const AdaptiveModalConfigPresetDemo08: AdaptiveModalConfig = {
   snapPoints: [
     // Snap Point 1
@@ -1134,6 +1134,155 @@ export const AdaptiveModalConfigPresetDemo09: AdaptiveModalConfig = {
   },
 };
 
+export const AdaptiveModalConfigPresetDemo10: AdaptiveModalConfig = {
+  snapPoints: [
+    // snap point - 1
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'left',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.5,
+          },
+        }
+      },
+      keyframeConfig: {
+        modalTransform: {
+            scaleX: 1,
+            scaleY: 1,
+            rotateY: {
+              mode: "degrees",
+              value: 0,
+            },
+          },
+          modalShadowOffset: {
+            width: 1, 
+            height: 1
+          },
+          modalShadowOpacity: 0.3,
+          modalShadowRadius: 8,
+          modalCornerRadius: 10,
+          modalMaskedCorners: ['rightCorners'],
+          modalContentOpacity: 1,
+          modalBackgroundOpacity: 0.8,
+          modalBackgroundVisualEffect: 'regular',
+          modalBackgroundVisualEffectIntensity: 1,
+          modalDragHandleOffset: -14,
+          modalDragHandleColor: 'systemBackground',
+          backgroundVisualEffect: 'regular',
+          backgroundVisualEffectIntensity: 0.04
+      },
+    },
+
+    // snap point - 2
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'left',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.7,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.85,
+          },
+        }
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 2, 
+          height: 2
+        },
+        modalShadowOpacity: 0.2,
+        modalShadowRadius: 12,
+        modalCornerRadius: 15,
+        modalBackgroundOpacity: 0.9,
+        modalBackgroundVisualEffectIntensity: 0.6,
+        modalDragHandleOffset: 6,
+        modalDragHandleColor: 'systemGray',
+        backgroundVisualEffectIntensity: 0.4
+      },
+    },
+
+    // snap point - 3
+    {
+      mode: 'standard',
+      layoutConfig: {
+        horizontalAlignment: 'left',
+        verticalAlignment: 'center',
+        width: {
+          mode: {
+            mode: 'percent',
+            percentValue: 0.95,
+          },
+        },
+        height: {
+          mode: {
+            mode: 'stretch'
+          },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: 2.5, 
+          height: 0
+        },
+        modalShadowOpacity: 0.35,
+        modalShadowRadius: 10,
+        modalCornerRadius: 20,
+        modalBackgroundOpacity: 0.87,
+        modalBackgroundVisualEffectIntensity: 0.4,
+        modalDragHandleOffset: 6,
+        modalDragHandleColor: 'systemGray',
+        backgroundVisualEffectIntensity: 0.9
+      },
+    },
+  ],
+  snapDirection: 'leftToRight',
+  undershootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'offscreenLeft'
+    },
+    keyframeConfig: {
+      modalTransform: {
+        scaleX: 0.5,
+        scaleY: 0.5,
+        rotateY: {
+          mode: 'degrees',
+          value: -45,
+        },
+        perspective: 1 / 750
+      },
+      modalCornerRadius: 5,
+      modalContentOpacity: 0.25,
+      modalBackgroundVisualEffectIntensity: 1,
+      modalDragHandleOffset: -14,
+      backgroundVisualEffectIntensity: 0
+    },
+  },
+  overshootSnapPoint: {
+    layoutPreset: {
+      mode: 'preset',
+      preset: 'fitScreenHorizontally',
+    },
+  },
+};
+
 export const AdaptiveModalConfigPresetsWithMetadata: {
   modalConfig: AdaptiveModalConfig;
   shouldShowTextBox: boolean;
@@ -1190,6 +1339,12 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
   {
     modalConfig: AdaptiveModalConfigPresetDemo09,
     shouldShowTextBox: true,
+  },
+
+  // Index: 9 - Demo10
+  {
+    modalConfig: AdaptiveModalConfigPresetDemo10,
+    shouldShowTextBox: false,
   },
 ];
 
