@@ -1,14 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import * as React from 'react';
+import * as React from "react";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import type { ExampleItemProps } from './SharedExampleTypes';
+import type { ExampleItemProps } from "./SharedExampleTypes";
 
-import { ExampleItemCard } from '../components/ExampleItemCard';
-import { CardButton } from '../components/Card/CardButton';
-import { SHARED_ENV } from '../constants/SharedEnv';
-
+import { ExampleItemCard } from "../components/ExampleItemCard";
+import { CardButton } from "../components/Card/CardButton";
+import { SHARED_ENV } from "../constants/SharedEnv";
 
 export function DebugControls(props: ExampleItemProps) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -18,25 +17,33 @@ export function DebugControls(props: ExampleItemProps) {
     <ExampleItemCard
       style={props.style}
       index={props.index}
-      title={'Debug Controls'}
-      subtitle={'For testing and stuff'}
+      title={"Debug Controls"}
+      subtitle={"For testing and stuff"}
     >
       <CardButton
-        title={'Push: Home'}
+        title={"Push: Home"}
         subtitle={'Navigate to "Home" screen...'}
         onPress={() => {
           // @ts-ignore
-          navigation.push('Home');
+          navigation.push("Home");
         }}
       />
       <CardButton
-        title={'Push: Test 01'}
+        title={"Push: Example"}
+        subtitle={'Navigate to "Example" screen...'}
+        onPress={() => {
+          // @ts-ignore
+          navigation.push("Example");
+        }}
+      />
+      <CardButton
+        title={"Push: Test 01"}
         subtitle={'Navigate to "Test" screen...'}
         onPress={() => {
           // @ts-ignore
-          navigation.push('Test');
+          navigation.push("Test");
         }}
       />
     </ExampleItemCard>
   );
-};
+}
