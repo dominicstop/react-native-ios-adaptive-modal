@@ -1,5 +1,5 @@
 PODS:
-  - AdaptiveModal (1.5.4):
+  - AdaptiveModal (2.0.0):
     - ComputableLayout (~> 0.7)
     - DGSwiftUtilities (~> 0.11)
   - boost (1.76.0)
@@ -452,7 +452,7 @@ PODS:
     - React-logger (= 0.72.5)
     - React-perflogger (= 0.72.5)
   - ReactNativeIosAdaptiveModal (0.2.1):
-    - AdaptiveModal (~> 1.3)
+    - AdaptiveModal (~> 2.0)
     - ComputableLayout
     - DGSwiftUtilities
     - ExpoModulesCore
@@ -634,7 +634,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AdaptiveModal: afe0d92e46116f826d26da531b02dcf4e222105b
+  AdaptiveModal: 131089d8c200907b34e2f428cb7d40e2e92fa74e
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
   DGSwiftUtilities: 46adca3abbb5b5fc83a785b7d7aeada4a6e38010
@@ -685,7 +685,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: cc32add98c45c5df18436a6a52a7e1f6edec102c
   React-utils: 7a9918a1ffdd39aba67835d42386f592ea3f8e76
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
-  ReactNativeIosAdaptiveModal: 265284e33fc9a496f9c2ba7c9e0e70756fa66c03
+  ReactNativeIosAdaptiveModal: 275e5119b0a5247e9630467f05420cc2f5e86f23
   ReactNativeIosUtilities: 3afbf317fecfe2dfa8fe98fb9cd1156ac9baad72
   RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
@@ -693,4 +693,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6a5ef93626966f45f97d6f3eba01827d3f50f62e
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.14.2
