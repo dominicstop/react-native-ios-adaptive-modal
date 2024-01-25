@@ -10,6 +10,7 @@ import * as radix from "@radix-ui/colors";
 
 // import { TestScreen } from './src/screens/Test01Screen';
 
+
 import { SHARED_ENV } from "./src/constants/SharedEnv";
 import { ExampleScreen } from "./src/screens/Example";
 
@@ -51,11 +52,17 @@ export default function App() {
           initialRouteName='Home'
           screenOptions={{
             contentStyle: {
-              backgroundColor: "black",
+              backgroundColor: (SHARED_ENV.shouldSetAppBackground
+                ? "black"
+                : undefined
+              ),
             },
             headerShadowVisible: false,
             headerStyle: {
-              backgroundColor: "black",
+              backgroundColor: (SHARED_ENV.shouldSetAppBackground
+                ? "black"
+                : undefined
+              ),
             },
           }}
         >
@@ -65,7 +72,10 @@ export default function App() {
             options={{
               headerTitle: () => (
                 <Image
-                  source={require("./assets/beatgig-black.png")}
+                  source={(SHARED_ENV.shouldSetAppBackground
+                    ? require("./assets/beatgig-black.png")
+                    : require("./assets/beatgig-256.png")
+                  )}
                   style={{
                     height: 45,
                     width: 115,
