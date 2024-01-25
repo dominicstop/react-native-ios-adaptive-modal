@@ -16,10 +16,7 @@ import ComputableLayout
 extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
 
   public func notifyOnModalWillSnap(
-    sender: AdaptiveModalManager, prevSnapPointIndex: Int?,
-    nextSnapPointIndex: Int,
-    prevSnapPointConfig: AdaptiveModalSnapPointConfig?,
-    nextSnapPointConfig: AdaptiveModalSnapPointConfig,
+    sender: AdaptiveModalManager,
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     nextInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
@@ -28,10 +25,6 @@ extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
   
   public func notifyOnModalDidSnap(
     sender: AdaptiveModal.AdaptiveModalManager,
-    prevSnapPointIndex: Int?,
-    currentSnapPointIndex: Int,
-    prevSnapPointConfig: AdaptiveModalSnapPointConfig?,
-    currentSnapPointConfig: AdaptiveModalSnapPointConfig,
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     currentInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {

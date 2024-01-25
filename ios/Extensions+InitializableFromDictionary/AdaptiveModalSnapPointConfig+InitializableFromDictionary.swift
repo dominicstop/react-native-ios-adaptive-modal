@@ -23,7 +23,12 @@ extension AdaptiveModalSnapPointConfig: InitializableFromDictionary {
       type: Mode.self
     );
     
-    let layoutConfig = try dict.getValueFromDictionary(
+    let key = try? dict.getValueFromDictionary(
+      forKey: "key",
+      type: String.self
+    );
+    
+    let layoutConfig = try? dict.getValueFromDictionary(
       forKey: "layoutConfig",
       type: ComputableLayout.self
     );
@@ -35,14 +40,27 @@ extension AdaptiveModalSnapPointConfig: InitializableFromDictionary {
     
     switch mode {
       case .standard:
-        self = .snapPoint(
-          layoutConfig: layoutConfig,
+        guard let layoutConfig = layoutConfig else {
+          throw RNIAdaptiveModalError(
+            errorCode: .unexpectedNilValue,
+            description: "layoutConfig is nil"
+          );
+        };
+        
+        self = .init(
+          key: key,
+          type: .standard(
+            layoutConfig: layoutConfig
+          ),
           keyframeConfig: keyframeConfig
         );
         
       case .inBetween:
-        self = .inBetweenSnapPoint(
-          layoutConfig: layoutConfig,
+        self = .init(
+          key: key,
+          type: .inBetween(
+            layoutConfig: layoutConfig
+          ),
           keyframeConfig: keyframeConfig
         );
     };

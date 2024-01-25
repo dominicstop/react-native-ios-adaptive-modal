@@ -18,10 +18,6 @@ extension RNIAdaptiveModalController: AdaptiveModalPresentationEventsNotifiable 
   
   func notifyOnModalWillSnap(
     sender: AdaptiveModalManager,
-    prevSnapPointIndex: Int?,
-    nextSnapPointIndex: Int,
-    prevSnapPointConfig: AdaptiveModalSnapPointConfig?,
-    nextSnapPointConfig: AdaptiveModalSnapPointConfig,
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     nextInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
@@ -30,10 +26,6 @@ extension RNIAdaptiveModalController: AdaptiveModalPresentationEventsNotifiable 
   
   func notifyOnModalDidSnap(
     sender: AdaptiveModalManager,
-    prevSnapPointIndex: Int?,
-    currentSnapPointIndex: Int,
-    prevSnapPointConfig: AdaptiveModalSnapPointConfig?,
-    currentSnapPointConfig: AdaptiveModalSnapPointConfig,
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     currentInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
