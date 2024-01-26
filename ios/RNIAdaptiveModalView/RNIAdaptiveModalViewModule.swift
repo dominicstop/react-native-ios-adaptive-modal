@@ -55,7 +55,15 @@ public class RNIAdaptiveModalViewModule: Module {
 
     View(RNIAdaptiveModalView.self) {
       Events("onModalContentInitialized");
+      Events("onModalWillSnap");
+      Events("onModalDidSnap");
+      Events("onModalWillShow");
+      Events("onModalDidShow");
+      Events("onModalWillHide");
       Events("onModalDidHide");
+      Events("onModalPresentCancelled");
+      Events("onModalDismissCancelled");
+      Events("onCurrentModalConfigDidChange");
       
       Prop("modalConfig") {
         $0.modalConfigProp = $1;

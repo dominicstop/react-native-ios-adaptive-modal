@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import { TSEventEmitter } from '@dominicstop/ts-event-emitter';
 import { RNIDetachedView, Helpers } from 'react-native-ios-utilities';
 
-import { OnModalContentInitializedEvent, OnModalDidHideEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
+import { OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
+
 import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
-import { TSEventEmitter } from '@dominicstop/ts-event-emitter';
 
 
 const NATIVE_ID_KEYS = {
@@ -67,13 +69,7 @@ export class AdaptiveModalView extends
         ),
       },
 
-      // C. Pass down, and group event props...
-      // WIP - TBA
-      eventProps: {
-      },
-
-
-      // D. Move all the default view-related
+      // B. Move all the default view-related
       //    props here...
       viewProps,
     };
@@ -108,8 +104,41 @@ export class AdaptiveModalView extends
     this.emitter.emit('onModalContentInitialized', event.nativeEvent);
   };
 
+  _handleOnModalWillSnap: OnModalWillSnapEvent = (event) => {
+    this.props.onModalWillSnap?.(event);
+  };
+
+  _handleOnModalDidSnap: OnModalDidSnapEvent = (event) => {
+    this.props.onModalDidSnap?.(event);
+  };
+
+  _handleOnModalWillShow: OnModalWillShowEvent = (event) => {
+    this.props.onModalWillShow?.(event);
+  };
+
+  _handleOnModalDidShow: OnModalDidShowEvent = (event) => {
+    this.props.onModalDidShow?.(event);
+  };
+
+  _handleOnModalWillHide: OnModalWillHideEvent = (event) => {
+    this.props.onModalWillHide?.(event);
+  };
+
   _handleOnModalDidHide: OnModalDidHideEvent = (event) => {
-    this.setState({shouldMountModalContent: false});
+    this.props.onModalDidHide?.(event);
+    this.setState({shouldMountModalContent: false});  
+  };
+
+  _handleOnModalPresentCancelled: OnModalPresentCancelledEvent = (event) => {
+    this.props.onModalPresentCancelled?.(event);
+  };
+
+  _handleOnModalDismissCancelled: OnModalDismissCancelledEvent = (event) => {
+    this.props.onModalDismissCancelled?.(event);
+  };
+
+  _handleOnCurrentModalConfigDidChange: OnCurrentModalConfigDidChangeEvent = (event) => {
+    this.props.onCurrentModalConfigDidChange?.(event);
   };
 
   // Render
@@ -126,7 +155,15 @@ export class AdaptiveModalView extends
         ref={r => { this.nativeRef = r! }}
         style={[styles.nativeView, props.viewProps.style]}
         onModalContentInitialized={this._handleOnModalContentDetached}
+        onModalWillSnap={this._handleOnModalWillSnap}
+        onModalDidSnap={this._handleOnModalDidSnap}
+        onModalWillShow={this._handleOnModalWillShow}
+        onModalDidShow={this._handleOnModalDidShow}
+        onModalWillHide={this._handleOnModalWillHide}
         onModalDidHide={this._handleOnModalDidHide}
+        onModalPresentCancelled={this._handleOnModalPresentCancelled}
+        onModalDismissCancelled={this._handleOnModalDismissCancelled}
+        onCurrentModalConfigDidChange={this._handleOnCurrentModalConfigDidChange}
       >
         {state.shouldMountModalContent && (
           <RNIDetachedView

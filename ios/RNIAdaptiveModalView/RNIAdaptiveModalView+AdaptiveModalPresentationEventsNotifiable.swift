@@ -13,6 +13,22 @@ import DGSwiftUtilities
 import AdaptiveModal
 import ComputableLayout
 
+
+fileprivate extension AdaptiveModalInterpolationPoint {
+  
+  var eventPayload: Dictionary<String, Any> {
+    var eventPayload: Dictionary<String, Any> = [
+      "index": self.snapPoint.index,
+    ];
+    
+    if let nextSnapPointKey = self.snapPoint.key {
+      eventPayload["key"] = nextSnapPointKey;
+    };
+
+    return eventPayload;
+  };
+};
+
 extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
 
   public func notifyOnModalWillSnap(
@@ -20,7 +36,16 @@ extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     nextInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
-    // no-op
+  
+    var eventPayload: Dictionary<String, Any> = [
+      "nextInterpolationPoint": nextInterpolationPoint.eventPayload
+    ];
+    
+    if let prevInterpolationPoint = prevInterpolationPoint {
+      eventPayload["prevInterpolationPoint"] = prevInterpolationPoint.eventPayload;
+    };
+
+    self.onModalWillSnap.callAsFunction(eventPayload);
   };
   
   public func notifyOnModalDidSnap(
@@ -28,19 +53,28 @@ extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
     prevInterpolationPoint: AdaptiveModalInterpolationPoint?,
     currentInterpolationPoint: AdaptiveModalInterpolationPoint
   ) {
-    // no-op
+    
+    var eventPayload: Dictionary<String, Any> = [
+      "currentInterpolationPoint": currentInterpolationPoint.eventPayload
+    ];
+    
+    if let prevInterpolationPoint = prevInterpolationPoint {
+      eventPayload["prevInterpolationPoint"] = prevInterpolationPoint.eventPayload;
+    };
+
+    self.onModalDidSnap.callAsFunction(eventPayload);
   };
   
   public func notifyOnAdaptiveModalWillShow(sender: AdaptiveModalManager) {
-    // no-op
+    self.onModalWillShow.callAsFunction();
   };
   
   public func notifyOnAdaptiveModalDidShow(sender: AdaptiveModalManager) {
-    // no-op
+    self.onModalDidShow.callAsFunction();
   };
   
   public func notifyOnAdaptiveModalWillHide(sender: AdaptiveModalManager) {
-    // no-op
+    self.onModalWillHide.callAsFunction();
   };
   
   public func notifyOnAdaptiveModalDidHide(sender: AdaptiveModalManager) {
@@ -56,11 +90,11 @@ extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
   };
   
   public func notifyOnModalPresentCancelled(sender: AdaptiveModalManager) {
-    // no-op
+    self.onModalPresentCancelled.callAsFunction();
   };
   
   public func notifyOnModalDismissCancelled(sender: AdaptiveModalManager) {
-    // no-op
+    self.onModalDismissCancelled.callAsFunction();
   };
   
   public func notifyOnCurrentModalConfigDidChange(
@@ -68,6 +102,7 @@ extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
     currentModalConfig: AdaptiveModalConfig?,
     prevModalConfig: AdaptiveModalConfig?
   ) {
-    // no-op
+  
+    self.onCurrentModalConfigDidChange.callAsFunction();
   };
 };

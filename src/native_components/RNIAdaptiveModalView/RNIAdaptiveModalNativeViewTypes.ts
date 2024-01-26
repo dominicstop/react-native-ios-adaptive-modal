@@ -1,10 +1,10 @@
 import type { ViewProps } from 'react-native';
 import type { RNICleanupMode } from 'react-native-ios-utilities';
 
-import type { OnModalContentInitializedEvent, OnModalDidHideEvent } from './RNIAdaptiveModalViewEvents';
-import { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
-import { RNIModalContentAnchorMode } from './RNIModalContentAnchorMode';
-import { AdaptiveModalAnimationMode } from '../../types/AdaptiveModalAnimationMode';
+import type { OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent } from './RNIAdaptiveModalViewEvents';
+import type { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
+import type { RNIModalContentAnchorMode } from './RNIModalContentAnchorMode';
+import type { AdaptiveModalAnimationMode } from '../../types/AdaptiveModalAnimationMode';
 
 
 export type RNIAdaptiveModalNativeViewBaseProps = {
@@ -25,7 +25,16 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
   // ------------------
 
   onModalContentInitialized: OnModalContentInitializedEvent;
+  
+  onModalWillSnap: OnModalWillSnapEvent;
+  onModalDidSnap: OnModalDidSnapEvent;
+  onModalWillShow: OnModalWillShowEvent;
+  onModalDidShow: OnModalDidShowEvent;
+  onModalWillHide: OnModalWillHideEvent;
   onModalDidHide: OnModalDidHideEvent;
+  onModalPresentCancelled: OnModalPresentCancelledEvent;
+  onModalDismissCancelled: OnModalDismissCancelledEvent;
+  onCurrentModalConfigDidChange: OnCurrentModalConfigDidChangeEvent;
 };
 
 export type RNIAdaptiveModalNativeViewProps = 

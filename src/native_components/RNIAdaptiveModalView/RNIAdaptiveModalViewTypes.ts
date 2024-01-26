@@ -11,7 +11,15 @@ export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseP
   | 'shouldEnableContinuousLayoutResizingDuringAnimation'
   // Events
   | 'onModalContentInitialized'
+  | 'onModalWillSnap'
+  | 'onModalDidSnap'
+  | 'onModalWillShow'
+  | 'onModalDidShow'
+  | 'onModalWillHide'
   | 'onModalDidHide'
+  | 'onModalPresentCancelled'
+  | 'onModalDismissCancelled'
+  | 'onCurrentModalConfigDidChange'
 >;
 
 export type RNIAdaptiveModalViewProps = 

@@ -124,7 +124,20 @@ public class RNIAdaptiveModalView:
   // ---------------------------------
   
   public let onModalContentInitialized = EventDispatcher("onModalContentInitialized");
+  
+  public let onModalWillSnap = EventDispatcher("onModalWillSnap");
+  public let onModalDidSnap = EventDispatcher("onModalDidSnap");
+  
+  public let onModalWillShow = EventDispatcher("onModalWillShow");
+  public let onModalDidShow = EventDispatcher("onModalDidShow");
+  
+  public let onModalWillHide = EventDispatcher("onModalWillHide");
   public let onModalDidHide = EventDispatcher("onModalDidHide");
+  
+  public let onModalPresentCancelled = EventDispatcher("onModalPresentCancelled");
+  public let onModalDismissCancelled = EventDispatcher("onModalDismissCancelled");
+  
+  public let onCurrentModalConfigDidChange = EventDispatcher("onCurrentModalConfigDidChange");
   
   // MARK: - Computed Properties
   // ---------------------------
