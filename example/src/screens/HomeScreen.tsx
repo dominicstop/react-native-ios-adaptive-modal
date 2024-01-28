@@ -11,6 +11,7 @@ import type { ExampleItemProps } from "../examples/SharedExampleTypes";
 
 import { AdaptiveModalViewTest01 } from "../examples/AdaptiveModalViewTest01";
 import { AdaptiveModalViewTest02 } from "../examples/AdaptiveModalViewTest02";
+import { AdaptiveModalViewTest03 } from "../examples/AdaptiveModalViewTest03/AdaptiveModalViewTest03";
 
 import { DebugControls } from "../examples/DebugControls";
 import { SHARED_ENV } from "../constants/SharedEnv";
@@ -21,7 +22,11 @@ type ExampleListItem = {
 };
 
 const EXAMPLE_COMPONENTS = (() => {
-  const items = [AdaptiveModalViewTest01, AdaptiveModalViewTest02];
+  const items = [
+    AdaptiveModalViewTest01, 
+    AdaptiveModalViewTest02,
+    AdaptiveModalViewTest03,
+  ];
 
   if (SHARED_ENV.enableReactNavigation) {
     items.splice(0, 0, ...[DebugControls]);

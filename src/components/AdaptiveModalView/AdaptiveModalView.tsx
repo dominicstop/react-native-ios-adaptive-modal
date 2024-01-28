@@ -170,7 +170,7 @@ export class AdaptiveModalView extends
             contentTargetMode={'subview'}
             style={styles.modalContent}
             nativeID={NATIVE_ID_KEYS.modalContent}
-            shouldCleanupOnComponentWillUnmount={false}
+            shouldCleanupOnComponentWillUnmount={true}
           >
             {props.viewProps.children}
           </RNIDetachedView>
