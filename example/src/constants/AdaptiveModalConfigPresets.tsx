@@ -1,6 +1,6 @@
 import { ComponentProps, createElement } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
-import { AdaptiveModalConfig } from "react-native-ios-adaptive-modal";
+import { AdaptiveModalConfig, AdaptiveModalViewProps } from "react-native-ios-adaptive-modal";
 import { CGSize } from "react-native-ios-utilities";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -1789,9 +1789,29 @@ export const AdaptiveModalConfigPresetDemo15: AdaptiveModalConfig = {
   modalSwipeGestureEdgeHeight: 20,
 };
 
+type AdaptiveModalPropsOverride = Pick<AdaptiveModalViewProps,
+  | 'shouldEnableOverShooting'
+  | 'overrideShouldSnapToUnderShootSnapPoint'
+  | 'overrideShouldSnapToOvershootSnapPoint'
+  | 'shouldDismissModalOnSnapToUnderShootSnapPoint'
+  | 'shouldDismissModalOnSnapToOverShootSnapPoint'
+  | 'shouldDismissKeyboardOnGestureSwipe'
+>;
+
+const ADAPTIVE_MODAL_DEFAULT_PROPS: AdaptiveModalPropsOverride = {
+  shouldEnableOverShooting: undefined,
+  overrideShouldSnapToUnderShootSnapPoint: undefined,
+  overrideShouldSnapToOvershootSnapPoint: undefined,
+  shouldDismissModalOnSnapToUnderShootSnapPoint: undefined,
+  shouldDismissModalOnSnapToOverShootSnapPoint: undefined,
+  shouldDismissKeyboardOnGestureSwipe: undefined,
+};
+
+
 export const AdaptiveModalConfigPresetsWithMetadata: {
   modalConfig: AdaptiveModalConfig;
   shouldShowTextBox: boolean;
+  adaptiveModalProps: AdaptiveModalPropsOverride;
   title: string;
   description: string;
   component?: React.ComponentType;
@@ -1802,6 +1822,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `The sheet you dreamt of`,
     description: `Snap points aren't the half of it...`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 1 - demo02
@@ -1810,6 +1833,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `Horizontal snap points too...`,
     description: `And automatic layout animations`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 2 - demo03
@@ -1818,6 +1844,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `Bottom sheet?`,
     description: `Drop the "bottom" – just "sheet"`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 3 - demo04
@@ -1826,6 +1855,11 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `And while we're at it...`,
     description: `Why not a "top sheet"?`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+      overrideShouldSnapToOvershootSnapPoint: true,
+      shouldDismissModalOnSnapToOverShootSnapPoint: true,
+    },
   },
 
   // Index: 4 - demo05
@@ -1834,6 +1868,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: "Make it a drawer",
     description: `And drag it into a modal...`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 5 - demo06
@@ -1842,6 +1879,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: "Try eating Family-style.",
     description: `CC @benjitaylor`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 6 - demo07
@@ -1850,6 +1890,10 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `Feeling full screen?`,
     description: `Even the status bar animates in sync.`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+      shouldEnableOverShooting: false,
+    },
   },
 
   // Index: 7 - demo08
@@ -1858,6 +1902,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `Keep it simple`,
     description: `2 snap points with a blurry background`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 8 - demo09
@@ -1866,6 +1913,10 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: true,
     title: `Keyboard support?`,
     description: `Easy.`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+      shouldDismissKeyboardOnGestureSwipe: true,
+    },
   },
 
   // Index: 9 - Demo10
@@ -1874,6 +1925,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `So...which fields can you animate?`,
     description: "Yes.",
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 10 - Demo11
@@ -1882,6 +1936,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: true,
     title: `What about a boring old keyboard?`,
     description: `No problem.`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 11 - Demo12
@@ -1890,6 +1947,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: `Can your "bottom sheet" do this?`,
     description: `And power it from UIKit?`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 12 - Demo13
@@ -1923,6 +1983,11 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
           </ScrollView>
         </View>
       );
+    },
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+      overrideShouldSnapToOvershootSnapPoint: true,
+      shouldDismissModalOnSnapToOverShootSnapPoint: true,
     },
   },
 
@@ -2063,6 +2128,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
         </View>
       );
     },
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 
   // Index: 13 - Demo15
@@ -2071,6 +2139,9 @@ export const AdaptiveModalConfigPresetsWithMetadata: {
     shouldShowTextBox: false,
     title: "I go up, I go down...",
     description: `But also side to side.`,
+    adaptiveModalProps: {
+      ...ADAPTIVE_MODAL_DEFAULT_PROPS,
+    },
   },
 ];
 
