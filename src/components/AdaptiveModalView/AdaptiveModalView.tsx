@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { TSEventEmitter } from '@dominicstop/ts-event-emitter';
 import { RNIDetachedView, Helpers } from 'react-native-ios-utilities';
 
-import { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
+import { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalStateWillChangeEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent, RNIAdaptiveModalView } from '../../native_components/RNIAdaptiveModalView';
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
 
 import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
@@ -145,6 +145,10 @@ export class AdaptiveModalView extends
     this.props.onBackgroundTapGesture?.(event);
   };
 
+  _handleOnModalStateWillChange: OnModalStateWillChangeEvent = (event) => {
+    this.props.onModalStateWillChange?.(event);
+  };
+
   // Render
   // -----
   
@@ -169,6 +173,7 @@ export class AdaptiveModalView extends
         onModalDismissCancelled={this._handleOnModalDismissCancelled}
         onCurrentModalConfigDidChange={this._handleOnCurrentModalConfigDidChange}
         onBackgroundTapGesture={this._handleOnBackgroundTapGesture}
+        onModalStateWillChange={this._handleOnModalStateWillChange}
       >
         {state.shouldMountModalContent && (
           <RNIDetachedView

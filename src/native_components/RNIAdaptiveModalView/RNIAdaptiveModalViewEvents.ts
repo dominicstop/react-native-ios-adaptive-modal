@@ -1,4 +1,5 @@
 import type { NativeSyntheticEvent } from 'react-native';
+import { AdaptiveModalState } from './AdaptiveModalState';
 
 export type AdaptiveModalInterpolationPointEventObject = {
   index: number;
@@ -19,6 +20,12 @@ export type OnModalWillSnapEventObject = NativeSyntheticEvent<{
 export type OnModalDidSnapEventObject = NativeSyntheticEvent<{
   currentInterpolationPoint: AdaptiveModalInterpolationPointEventObject;
   prevInterpolationPoint?: AdaptiveModalInterpolationPointEventObject;
+}>;
+
+export type OnModalStateWillChangeEventObject = NativeSyntheticEvent<{
+  prevState: AdaptiveModalState;
+  currentState: AdaptiveModalState;
+  nextState: AdaptiveModalState;
 }>;
 
 export type OnModalWillShowEventObject = NativeSyntheticEvent<{
@@ -90,4 +97,8 @@ export type OnCurrentModalConfigDidChangeEvent = (
 
 export type OnBackgroundTapGestureEvent = (
   event: OnBackgroundTapGestureEventObject
+) => void;
+
+export type OnModalStateWillChangeEvent = (
+  event: OnModalStateWillChangeEventObject
 ) => void;

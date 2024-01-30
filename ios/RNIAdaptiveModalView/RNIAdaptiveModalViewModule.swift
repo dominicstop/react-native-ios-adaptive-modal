@@ -65,6 +65,7 @@ public class RNIAdaptiveModalViewModule: Module {
       Events("onModalDismissCancelled");
       Events("onCurrentModalConfigDidChange");
       Events("onBackgroundTapGesture");
+      Events("onModalStateWillChange");
       
       Prop("modalConfig") {
         $0.modalConfigProp = $1;

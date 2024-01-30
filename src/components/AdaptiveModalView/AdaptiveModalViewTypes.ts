@@ -16,6 +16,7 @@ export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBasePr
   | 'onModalDismissCancelled'
   | 'onCurrentModalConfigDidChange'
   | 'onBackgroundTapGesture'
+  | 'onModalStateWillChange'
   
 > & Pick<RNIAdaptiveModalViewBaseProps, 
   // B - Required Props from `RNIAdaptiveModalBaseProps`

@@ -1,7 +1,7 @@
 import type { ViewProps } from 'react-native';
 import type { RNICleanupMode } from 'react-native-ios-utilities';
 
-import type { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent } from './RNIAdaptiveModalViewEvents';
+import type { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalStateWillChangeEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent } from './RNIAdaptiveModalViewEvents';
 import type { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
 import type { RNIModalContentAnchorMode } from './RNIModalContentAnchorMode';
 import type { AdaptiveModalAnimationMode } from '../../types/AdaptiveModalAnimationMode';
@@ -36,6 +36,7 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
   onModalDismissCancelled: OnModalDismissCancelledEvent;
   onCurrentModalConfigDidChange: OnCurrentModalConfigDidChangeEvent;
   onBackgroundTapGesture: OnBackgroundTapGestureEvent;
+  onModalStateWillChange: OnModalStateWillChangeEvent;
 };
 
 export type RNIAdaptiveModalNativeViewProps = 
