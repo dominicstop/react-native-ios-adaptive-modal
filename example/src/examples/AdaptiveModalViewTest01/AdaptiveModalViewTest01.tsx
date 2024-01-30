@@ -74,6 +74,7 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
       ]}
     >
       <AdaptiveModalView
+        {...currentModalConfigPresetItem.adaptiveModalProps}
         ref={modalRef}
         modalConfig={currentModalConfigPresetItem.modalConfig}
         modalContentAnchorMode={currentModalContentAnchorMode}

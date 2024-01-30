@@ -6,7 +6,7 @@ import { AdaptiveModalView } from 'react-native-ios-adaptive-modal';
 import type { ExampleItemProps } from '../SharedExampleTypes';
 import { ExampleItemCard } from '../../components/ExampleItemCard';
 import { CardButton } from '../../components/Card';
-import { AdaptiveModalConfigPresets } from '../../constants/AdaptiveModalConfigPresets';
+import { AdaptiveModalConfigPresets, AdaptiveModalConfigPresetsWithMetadata } from '../../constants/AdaptiveModalConfigPresets';
 import { EventItem } from './SharedTypes';
 import { ModalContent } from './ModalContent';
 
@@ -19,8 +19,8 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
   const modalConfigPresetIndex =
     modalConfigPresetCounter % AdaptiveModalConfigPresets.length;
 
-  const currentModalConfigPreset =
-    AdaptiveModalConfigPresets[modalConfigPresetIndex];
+  const currentModalConfigPresetItem =
+    AdaptiveModalConfigPresetsWithMetadata[modalConfigPresetIndex];
 
   const modalRef = React.createRef<AdaptiveModalView>();
 
@@ -60,8 +60,9 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
       ]}
     >
       <AdaptiveModalView
+        {...currentModalConfigPresetItem.adaptiveModalProps}
         ref={modalRef}
-        modalConfig={currentModalConfigPreset}
+        modalConfig={currentModalConfigPresetItem.modalConfig}
         modalContentAnchorMode={'stretch'}
         onModalWillSnap={(event) => {
           addEvent(
