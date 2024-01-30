@@ -20,6 +20,7 @@ export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseP
   | 'onModalPresentCancelled'
   | 'onModalDismissCancelled'
   | 'onCurrentModalConfigDidChange'
+  | 'onBackgroundTapGesture'
 >;
 
 export type RNIAdaptiveModalViewProps = 

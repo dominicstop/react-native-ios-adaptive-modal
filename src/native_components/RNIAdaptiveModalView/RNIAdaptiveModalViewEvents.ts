@@ -42,6 +42,9 @@ export type OnModalDismissCancelledEventObject = NativeSyntheticEvent<{
 export type OnCurrentModalConfigDidChangeEventObject = NativeSyntheticEvent<{
 }>;
 
+export type OnBackgroundTapGestureEventObject = NativeSyntheticEvent<{
+}>;
+
 // Event Handler Types
 // -------------------
 
@@ -83,4 +86,8 @@ export type OnModalDismissCancelledEvent = (
 
 export type OnCurrentModalConfigDidChangeEvent = (
   event: OnCurrentModalConfigDidChangeEventObject
+) => void;
+
+export type OnBackgroundTapGestureEvent = (
+  event: OnBackgroundTapGestureEventObject
 ) => void;

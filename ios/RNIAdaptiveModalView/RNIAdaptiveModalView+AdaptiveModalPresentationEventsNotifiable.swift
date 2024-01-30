@@ -29,6 +29,7 @@ fileprivate extension AdaptiveModalInterpolationPoint {
   };
 };
 
+
 extension RNIAdaptiveModalView: AdaptiveModalPresentationEventsNotifiable {
 
   public func notifyOnModalWillSnap(

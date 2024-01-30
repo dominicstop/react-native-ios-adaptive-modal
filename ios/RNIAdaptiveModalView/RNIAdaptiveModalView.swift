@@ -139,6 +139,8 @@ public class RNIAdaptiveModalView:
   
   public let onCurrentModalConfigDidChange = EventDispatcher("onCurrentModalConfigDidChange");
   
+  public let onBackgroundTapGesture = EventDispatcher("onBackgroundTapGesture");
+  
   // MARK: - Computed Properties
   // ---------------------------
   
@@ -258,6 +260,7 @@ public class RNIAdaptiveModalView:
     
     let modalManager = AdaptiveModalManager(staticConfig: modalConfig);
     modalManager.presentationEventsDelegate.add(self);
+    modalManager.backgroundTapDelegate.add(self);
     modalManager.animationMode = self.modalAnimationMode;
     
     self.modalManager = modalManager;
