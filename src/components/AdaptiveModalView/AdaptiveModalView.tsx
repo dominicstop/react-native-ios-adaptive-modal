@@ -47,6 +47,19 @@ export class AdaptiveModalView extends
       modalContentAnchorMode,
       modalAnimationMode,
       shouldEnableContinuousLayoutResizingDuringAnimation,
+      shouldEnableSnapping,
+      shouldEnableOverShooting,
+      shouldDismissKeyboardOnGestureSwipe,
+      shouldLockAxisToModalDirection,
+      overrideShouldSnapToUnderShootSnapPoint,
+      overrideShouldSnapToOvershootSnapPoint,
+      shouldDismissModalOnSnapToUnderShootSnapPoint,
+      shouldDismissModalOnSnapToOverShootSnapPoint,
+      isSwipeGestureEnabled,
+      isModalContentSwipeGestureEnabled,
+      allowModalToDragWhenAtMinScrollViewOffset,
+      allowModalToDragWhenAtMaxScrollViewOffset,
+      isModalDragHandleGestureEnabled,
       ...viewProps
     } = this.props;
 
@@ -56,6 +69,8 @@ export class AdaptiveModalView extends
         // Pass down props...
         modalConfig,
         modalAnimationMode,
+        overrideShouldSnapToUnderShootSnapPoint,
+        overrideShouldSnapToOvershootSnapPoint,
 
         // Pass down props w/ default value...
         internalCleanupMode: (
@@ -66,6 +81,39 @@ export class AdaptiveModalView extends
         ),
         shouldEnableContinuousLayoutResizingDuringAnimation: (
           shouldEnableContinuousLayoutResizingDuringAnimation ?? true
+        ),
+        shouldEnableSnapping: (
+          shouldEnableSnapping ?? true
+        ),
+        shouldEnableOverShooting: (
+          shouldEnableOverShooting ?? true
+        ),
+        shouldDismissKeyboardOnGestureSwipe: (
+          shouldDismissKeyboardOnGestureSwipe ?? false
+        ),
+        shouldLockAxisToModalDirection: (
+          shouldLockAxisToModalDirection ?? false
+        ),
+        shouldDismissModalOnSnapToUnderShootSnapPoint: (
+          shouldDismissModalOnSnapToUnderShootSnapPoint ?? true
+        ),
+        shouldDismissModalOnSnapToOverShootSnapPoint: (
+          shouldDismissModalOnSnapToOverShootSnapPoint ?? false
+        ),
+        isSwipeGestureEnabled: (
+          isSwipeGestureEnabled ?? true
+        ),
+        isModalContentSwipeGestureEnabled: (
+          isModalContentSwipeGestureEnabled ?? true
+        ),
+        allowModalToDragWhenAtMinScrollViewOffset: (
+          allowModalToDragWhenAtMinScrollViewOffset ?? true
+        ),
+        allowModalToDragWhenAtMaxScrollViewOffset: (
+          allowModalToDragWhenAtMaxScrollViewOffset ?? true
+        ),
+        isModalDragHandleGestureEnabled: (
+          isModalDragHandleGestureEnabled ?? true
         ),
       },
 

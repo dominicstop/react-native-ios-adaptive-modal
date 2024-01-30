@@ -82,6 +82,58 @@ public class RNIAdaptiveModalViewModule: Module {
       Prop("shouldEnableContinuousLayoutResizingDuringAnimation") {
         $0.shouldEnableContinuousLayoutResizingDuringAnimation = $1;
       };
+      
+      Prop("shouldEnableSnapping") {
+        $0.shouldEnableSnapping = $1;
+      };
+      
+      Prop("shouldEnableOverShooting") {
+        $0.shouldEnableOverShooting = $1;
+      };
+      
+      Prop("shouldDismissKeyboardOnGestureSwipe") {
+        $0.shouldDismissKeyboardOnGestureSwipe = $1;
+      };
+      
+      Prop("shouldLockAxisToModalDirection") {
+        $0.shouldLockAxisToModalDirection = $1;
+      };
+      
+      Prop("overrideShouldSnapToUnderShootSnapPoint") {
+        $0.overrideShouldSnapToUnderShootSnapPoint = $1;
+      };
+      
+      Prop("overrideShouldSnapToOvershootSnapPoint") {
+        $0.overrideShouldSnapToOvershootSnapPoint = $1;
+      };
+      
+      Prop("shouldDismissModalOnSnapToUnderShootSnapPoint") {
+        $0.shouldDismissModalOnSnapToUnderShootSnapPoint = $1;
+      };
+      
+      Prop("shouldDismissModalOnSnapToOverShootSnapPoint") {
+        $0.shouldDismissModalOnSnapToOverShootSnapPoint = $1;
+      };
+      
+      Prop("isSwipeGestureEnabled") {
+        $0.isSwipeGestureEnabled = $1;
+      };
+      
+      Prop("isModalContentSwipeGestureEnabled") {
+        $0.isModalContentSwipeGestureEnabled = $1;
+      };
+      
+      Prop("allowModalToDragWhenAtMinScrollViewOffset") {
+        $0.allowModalToDragWhenAtMinScrollViewOffset = $1;
+      };
+      
+      Prop("allowModalToDragWhenAtMaxScrollViewOffset") {
+        $0.allowModalToDragWhenAtMaxScrollViewOffset = $1;
+      };
+      
+      Prop("isModalDragHandleGestureEnabled") {
+        $0.isModalDragHandleGestureEnabled = $1;
+      };
     };
   };
 };

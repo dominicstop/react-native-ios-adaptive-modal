@@ -19,7 +19,21 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
   modalConfig: AdaptiveModalConfig | undefined;
   modalContentAnchorMode: RNIModalContentAnchorMode | undefined;
   modalAnimationMode: AdaptiveModalAnimationMode | undefined;
+
   shouldEnableContinuousLayoutResizingDuringAnimation: boolean;
+  shouldEnableSnapping: boolean;
+  shouldEnableOverShooting: boolean;
+  shouldDismissKeyboardOnGestureSwipe: boolean;
+  shouldLockAxisToModalDirection: boolean;
+  overrideShouldSnapToUnderShootSnapPoint: boolean | undefined;
+  overrideShouldSnapToOvershootSnapPoint: boolean | undefined;
+  shouldDismissModalOnSnapToUnderShootSnapPoint: boolean;
+  shouldDismissModalOnSnapToOverShootSnapPoint: boolean;
+  isSwipeGestureEnabled: boolean;
+  isModalContentSwipeGestureEnabled: boolean;
+  allowModalToDragWhenAtMinScrollViewOffset: boolean;
+  allowModalToDragWhenAtMaxScrollViewOffset: boolean;
+  isModalDragHandleGestureEnabled: boolean;
 
   // Events - Lifecycle
   // ------------------

@@ -120,6 +120,132 @@ public class RNIAdaptiveModalView:
     }
   };
   
+  public var shouldEnableSnapping: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.shouldEnableSnapping = newValue;
+    }
+  };
+  
+  public var shouldEnableOverShooting: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.shouldEnableOverShooting = newValue;
+    }
+  };
+  
+  public var shouldDismissKeyboardOnGestureSwipe: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.shouldDismissKeyboardOnGestureSwipe = newValue;
+    }
+  };
+  
+  public var shouldLockAxisToModalDirection: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.shouldLockAxisToModalDirection = newValue;
+    }
+  };
+  
+  public var overrideShouldSnapToUnderShootSnapPoint: Bool? {
+    willSet {
+      guard let modalManager = self.modalManager else { return };
+      modalManager.overrideShouldSnapToUnderShootSnapPoint = newValue;
+    }
+  };
+  
+  public var overrideShouldSnapToOvershootSnapPoint: Bool? {
+    willSet {
+      guard let modalManager = self.modalManager else { return };
+      modalManager.overrideShouldSnapToOvershootSnapPoint = newValue;
+    }
+  };
+  
+  public var shouldDismissModalOnSnapToUnderShootSnapPoint: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.shouldDismissModalOnSnapToUnderShootSnapPoint = newValue;
+    }
+  };
+  
+  public var shouldDismissModalOnSnapToOverShootSnapPoint: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.shouldDismissModalOnSnapToOverShootSnapPoint = newValue;
+    }
+  };
+  
+  public var isSwipeGestureEnabled: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.isSwipeGestureEnabled = newValue;
+    }
+  };
+  
+  public var isModalContentSwipeGestureEnabled: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.isModalContentSwipeGestureEnabled = newValue;
+    }
+  };
+  
+  public var allowModalToDragWhenAtMinScrollViewOffset: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.allowModalToDragWhenAtMinScrollViewOffset = newValue;
+    }
+  };
+  
+  public var allowModalToDragWhenAtMaxScrollViewOffset: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.allowModalToDragWhenAtMaxScrollViewOffset = newValue;
+    }
+  };
+  
+  public var isModalDragHandleGestureEnabled: Bool? {
+    willSet {
+      guard let newValue = newValue,
+            let modalManager = self.modalManager
+      else { return };
+      
+      modalManager.isModalDragHandleGestureEnabled = newValue;
+    }
+  };
+  
+  
+  
   // MARK: Properties - Props - Events
   // ---------------------------------
   
@@ -264,7 +390,57 @@ public class RNIAdaptiveModalView:
     modalManager.presentationEventsDelegate.add(self);
     modalManager.backgroundTapDelegate.add(self);
     modalManager.stateEventsDelegate.add(self);
+    
     modalManager.animationMode = self.modalAnimationMode;
+    if let value = self.shouldEnableSnapping {
+      modalManager.shouldEnableSnapping = value;
+    };
+    
+    if let value = self.shouldEnableOverShooting {
+      modalManager.shouldEnableOverShooting = value;
+    };
+    
+    if let value = self.shouldDismissKeyboardOnGestureSwipe {
+      modalManager.shouldDismissKeyboardOnGestureSwipe = value;
+    };
+    
+    if let value = self.shouldLockAxisToModalDirection {
+      modalManager.shouldLockAxisToModalDirection = value;
+    };
+    
+    modalManager.overrideShouldSnapToUnderShootSnapPoint =
+      self.overrideShouldSnapToUnderShootSnapPoint;
+      
+    modalManager.overrideShouldSnapToOvershootSnapPoint =
+      self.overrideShouldSnapToOvershootSnapPoint;
+    
+    if let value = self.shouldDismissModalOnSnapToUnderShootSnapPoint {
+      modalManager.shouldDismissModalOnSnapToUnderShootSnapPoint = value;
+    };
+    
+    if let value = self.shouldDismissModalOnSnapToOverShootSnapPoint {
+      modalManager.shouldDismissModalOnSnapToOverShootSnapPoint = value;
+    };
+    
+    if let value = self.isSwipeGestureEnabled {
+      modalManager.isSwipeGestureEnabled = value;
+    };
+    
+    if let value = self.isModalContentSwipeGestureEnabled {
+      modalManager.isModalContentSwipeGestureEnabled = value;
+    };
+    
+    if let value = self.allowModalToDragWhenAtMinScrollViewOffset {
+      modalManager.allowModalToDragWhenAtMinScrollViewOffset = value;
+    };
+    
+    if let value = self.allowModalToDragWhenAtMaxScrollViewOffset {
+      modalManager.allowModalToDragWhenAtMaxScrollViewOffset = value;
+    };
+    
+    if let value = self.isModalDragHandleGestureEnabled {
+      modalManager.isModalDragHandleGestureEnabled = value;
+    };
     
     self.modalManager = modalManager;
   };
