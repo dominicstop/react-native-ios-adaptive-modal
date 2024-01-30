@@ -123,6 +123,12 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
             event.nativeEvent,
           );
         }}
+        onModalStateWillChange={(event) => {
+          addEvent(
+            'onModalStateWillChange',
+            event.nativeEvent,
+          );
+        }}
       >
         <ModalContent
           eventItems={eventItems.slice(0, 25)}
