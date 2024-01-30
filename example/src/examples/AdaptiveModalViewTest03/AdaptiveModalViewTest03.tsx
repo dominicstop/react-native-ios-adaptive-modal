@@ -25,8 +25,11 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
   const modalRef = React.createRef<AdaptiveModalView>();
 
   const [eventItems, setEventItems] = React.useState<Array<EventItem>>([]);
+  const [shouldLogEvents, setShouldLogEvents] = React.useState<boolean>(true);
 
   const addEvent = (eventName: string, eventPayload: object) => {
+    if(!shouldLogEvents) return;
+
     const date = new Date();
 
     const h = Helpers.pad(date.getHours());
@@ -53,10 +56,7 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
       title={'AdaptiveModalViewTest03'}
       subtitle={'TBA'}
       description={[
-        `Test - ScrollView`,
-        (
-          `Current Modal Config Index: ${modalConfigPresetIndex}\n`
-        ),
+        `Test - Modal Events`,
       ]}
     >
       <AdaptiveModalView
@@ -136,9 +136,23 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
       </AdaptiveModalView>
       <CardButton
         title={'Next Modal Config'}
-        subtitle={'Cycle to next modal config preset...'}
+        subtitle={`Current preset index: ${modalConfigPresetIndex}`}
         onPress={() => {
           setModalConfigPresetCounter(prev => prev + 1);
+        }}
+      />
+      <CardButton
+        title={'Toggle Modal Event Logging'}
+        subtitle={`shouldLogEvents: ${shouldLogEvents}`}
+        onPress={() => {
+          setShouldLogEvents(value => !value);
+        }}
+      />
+      <CardButton
+        title={'Clear Modal Event Logs'}
+        subtitle={`Total event count: ${eventItems.length}`}
+        onPress={() => {
+          setEventItems([]);
         }}
       />
       <CardButton

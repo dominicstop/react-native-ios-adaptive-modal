@@ -95,11 +95,15 @@ const styles = StyleSheet.create({
   objectPropertyDisplayLabelTitle: {
     color: 'black',
     fontSize: undefined,
+    fontWeight: '500',
+    opacity: 0.8,
+
   },
   objectPropertyDisplayLabelValue: {
     color: 'black',
     opacity: 0.6,
     fontSize: undefined,
     maxWidth: '70%',
+    fontWeight: '300',
   },
 });
