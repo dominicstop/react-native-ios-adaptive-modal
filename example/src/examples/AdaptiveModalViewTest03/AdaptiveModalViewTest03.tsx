@@ -26,7 +26,6 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
 
   const [eventItems, setEventItems] = React.useState<Array<EventItem>>([]);
 
-
   const addEvent = (eventName: string, eventPayload: object) => {
     const date = new Date();
 
@@ -115,6 +114,12 @@ export function AdaptiveModalViewTest03(props: ExampleItemProps) {
         onCurrentModalConfigDidChange={(event) => {
           addEvent(
             'onCurrentModalConfigDidChange',
+            event.nativeEvent,
+          );
+        }}
+        onBackgroundTapGesture={(event) => {
+          addEvent(
+            'onBackgroundTapGesture',
             event.nativeEvent,
           );
         }}

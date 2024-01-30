@@ -2,10 +2,18 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 import { EventItem } from "./SharedTypes";
+import { ObjectPropertyDisplay } from '../../components/ObjectPropertyDisplay';
+
+
 
 export function ModalEventListItem(props: {
   eventItem: EventItem;
 }){
+
+  const hasEventPayload = 
+       props.eventItem.eventPayload != null 
+    && Object.keys(props.eventItem.eventPayload).length > 1;
+  
   return(
     <View style={styles.rootContainer}>
       <View style={styles.headingContainer}>
@@ -36,13 +44,21 @@ export function ModalEventListItem(props: {
           </Text>
         </Text>
       </View>
+      {(hasEventPayload) && (
+        <ObjectPropertyDisplay
+          object={props.eventItem.eventPayload}
+          style={styles.objectPropertyDisplay}
+          propertyLabelTextStyle={styles.objectPropertyDisplayLabelTitle}
+          propertyValueTextStyle={styles.objectPropertyDisplayLabelValue}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   rootContainer: {
-    backgroundColor: 'rgba(0,0,0,0.06)',
+    backgroundColor: 'rgba(0,0,0,0.05)',
     paddingHorizontal: 10,
     paddingVertical: 7,
     marginBottom: 10,
@@ -72,5 +88,17 @@ const styles = StyleSheet.create({
     fontVariant: ['tabular-nums'],
     fontWeight: '300',
     opacity: 0.6,
+  },
+  objectPropertyDisplay: {
+    backgroundColor: 'rgba(0,0,0,0.03)',
+  },
+  objectPropertyDisplayLabelTitle: {
+    color: 'black',
+    fontSize: undefined,
+  },
+  objectPropertyDisplayLabelValue: {
+    color: 'black',
+    opacity: 0.6,
+    fontSize: undefined,
   },
 });

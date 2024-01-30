@@ -180,6 +180,14 @@ class RNIAdaptiveModalController: UIViewController {
   func updateModalContentSize(withSize size: CGSize){
     guard let modalContentView = self.modalContentView else { return };
     
+    print(
+      "\(self._tempUpdateModalContentSizeCounter) - updateModalContentSize",
+      "\n - size:", size,
+      "\n"
+    );
+    
+    self._tempUpdateModalContentSizeCounter += 1;
+    
     switch self.contentAnchorMode {
       case .stretch:
         try? modalContentView.updateBounds(newSize: size);
@@ -203,7 +211,6 @@ class RNIAdaptiveModalController: UIViewController {
           !modalManager.isAnimating
     else { return }
     
-    guard let modalContentView = self.modalContentView else { return };
     let nextSize = self.view.bounds.size;
     
     // print(
