@@ -3,6 +3,7 @@ import type { NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
 
 import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
+import type { RNIAdaptiveModalCommandConfigSnapTo } from './RNIAdaptiveModalCommandSnapToTypes';
 
 
 interface RNIAdaptiveModalViewModule  {
@@ -24,6 +25,11 @@ interface RNIAdaptiveModalViewModule  {
   dismissModal: (
     reactTag: number,
     commandParams: RNIAdaptiveModalCommandConfigDismiss
+  ) => Promise<void>;
+
+  snapTo: (
+    reactTag: number,
+    commandParams: RNIAdaptiveModalCommandConfigSnapTo
   ) => Promise<void>;
 
 };

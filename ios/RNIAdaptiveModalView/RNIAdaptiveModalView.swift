@@ -616,6 +616,49 @@ public class RNIAdaptiveModalView:
     };
   };
   
+  func snapTo(
+    commandConfig: RNIAdaptiveModalCommandConfigSnapTo,
+    completion: (() -> Void)?
+  ) throws {
+  
+    guard let modalManager = self.modalManager else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalManager is nil",
+        extraDebugValues: [
+          "modalConfigProp": self.modalConfigProp ?? [:]
+        ]
+      );
+    };
+    
+    switch commandConfig.mode {
+      case let .index(snapPointIndex):
+        modalManager.snapTo(
+          snapPointIndex: snapPointIndex,
+          isAnimated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
+        );
+        
+      case let .key(snapPointKey):
+        try modalManager.snapTo(
+          key: snapPointKey,
+          isAnimated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
+        );
+        
+      case let .type(snapPointType):
+        try modalManager.snapTo(
+          key: nil,
+          type: snapPointType,
+          isAnimated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
+        );
+    };
+  };
+  
   // MARK: - Functions - View Module Commands
   // ----------------------------------------
 
