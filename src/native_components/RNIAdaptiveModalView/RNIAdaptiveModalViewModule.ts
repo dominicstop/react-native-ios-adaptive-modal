@@ -8,6 +8,10 @@ interface RNIAdaptiveModalViewModule  {
   presentModal: (
     reactTag: number
   ) => Promise<void>;
+
+  notifyDidLayoutSubviews: (
+    reactTag: number
+  ) => Promise<void>;
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 
