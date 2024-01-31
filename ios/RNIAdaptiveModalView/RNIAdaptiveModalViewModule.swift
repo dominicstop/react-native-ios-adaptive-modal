@@ -64,6 +64,37 @@ public class RNIAdaptiveModalViewModule: Module {
         };
       };
     };
+
+    AsyncFunction("clearSnapPointOverride") {
+      (
+        reactTag: Int,
+        commandParams: Dictionary<String, Any>,
+        promise: Promise
+      ) in
+      
+      DispatchQueue.main.async {
+        do {
+          let adaptiveModalView = try RNIModuleHelpers.getView(
+            withErrorType: RNIAdaptiveModalError.self,
+            forNode: reactTag,
+            type: RNIAdaptiveModalView.self
+          );
+          
+          guard let modalManager = adaptiveModalView.modalManager else {
+            throw RNIAdaptiveModalError(
+              errorCode: .unexpectedNilValue,
+              description: "`modalManager` is nil"
+            );
+          };
+
+          modalManager.clearSnapPointOverride(completion: nil);
+          promise.resolve();
+        
+        } catch let error {
+          promise.reject(error);
+        };
+      };
+    };
     AsyncFunction("presentModal") {
       (reactTag: Int, promise: Promise) in
       

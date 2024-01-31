@@ -12,6 +12,11 @@ interface RNIAdaptiveModalViewModule  {
   notifyDidLayoutSubviews: (
     reactTag: number
   ) => Promise<void>;
+
+  clearSnapPointOverride: (
+    reactTag: number
+  ) => Promise<void>;
+
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 
