@@ -478,7 +478,9 @@ public class RNIAdaptiveModalView:
     childVC.removeFromParent();
   };
   
-  func presentModal() throws {
+  func presentModal(
+    commandConfig: RNIAdaptiveModalCommandConfigPresent
+  ) throws {
   
     if self.modalManager == nil {
       try? self.setupInitModalManager();
@@ -539,10 +541,33 @@ public class RNIAdaptiveModalView:
       "\n"
     );
     
-    modalManager.presentModal(
-      viewControllerToPresent: modalVC,
-      presentingViewController: topVC
-    );
+    switch commandConfig.mode {
+      case .standard:
+        modalManager.presentModal(
+          viewControllerToPresent: modalVC,
+          presentingViewController: topVC,
+          animated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig
+        );
+        
+      case let .customSnapPointIndex(snapPointIndex):
+        modalManager.presentModal(
+          viewControllerToPresent: modalVC,
+          presentingViewController: topVC,
+          snapPointIndex: snapPointIndex,
+          animated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig
+        );
+        
+      case let .customSnapPointKey(snapPointKey):
+        modalManager.presentModal(
+          viewControllerToPresent: modalVC,
+          presentingViewController: topVC,
+          snapPointKey: snapPointKey,
+          animationConfig: commandConfig.animationConfig,
+          animated: commandConfig.isAnimated
+        );
+    };
   };
   
   // MARK: - Functions - View Module Commands

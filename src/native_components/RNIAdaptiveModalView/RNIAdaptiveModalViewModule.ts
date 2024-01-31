@@ -4,10 +4,6 @@ import type { NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
 
 interface RNIAdaptiveModalViewModule  {
   notifyOnComponentWillUnmount: NotifyOnComponentWillUnmount;
-  
-  presentModal: (
-    reactTag: number
-  ) => Promise<void>;
 
   notifyDidLayoutSubviews: (
     reactTag: number
@@ -17,6 +13,10 @@ interface RNIAdaptiveModalViewModule  {
     reactTag: number
   ) => Promise<void>;
 
+  presentModal: (
+    reactTag: number,
+    commandParams: RNIAdaptiveModalCommandConfigPresent
+  ) => Promise<void>;
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 

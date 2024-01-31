@@ -95,8 +95,34 @@ public class RNIAdaptiveModalViewModule: Module {
         };
       };
     };
+
     AsyncFunction("presentModal") {
-      (reactTag: Int, promise: Promise) in
+      (
+        reactTag: Int,
+        commandParams: Dictionary<String, Any>,
+        promise: Promise
+      ) in
+      
+      DispatchQueue.main.async {
+        do {
+          let adaptiveModalView = try RNIModuleHelpers.getView(
+            withErrorType: RNIAdaptiveModalError.self,
+            forNode: reactTag,
+            type: RNIAdaptiveModalView.self
+          );
+          
+          let commandConfig = try RNIAdaptiveModalCommandConfigPresent(
+            fromDict: commandParams
+          );
+          
+          try adaptiveModalView.presentModal(commandConfig: commandConfig);
+          promise.resolve();
+        
+        } catch let error {
+          promise.reject(error);
+        };
+      };
+    };
       
       DispatchQueue.main.async {
         do {
