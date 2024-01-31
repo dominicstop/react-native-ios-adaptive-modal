@@ -573,6 +573,45 @@ public class RNIAdaptiveModalView:
         );
     };
   };
+  
+  func dismissModal(
+    commandConfig: RNIAdaptiveModalCommandConfigDismiss,
+    completion: (() -> Void)?
+  ) throws {
+  
+    guard let modalManager = self.modalManager else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalManager is nil",
+        extraDebugValues: [
+          "modalConfigProp": self.modalConfigProp ?? [:]
+        ]
+      );
+    };
+    
+    switch commandConfig.mode {
+      case let .standard(useInBetweenSnapPoints):
+        modalManager.dismissModal(
+          useInBetweenSnapPoints: useInBetweenSnapPoints,
+          animated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
+        );
+        
+      case let .customSnapPointPreset(snapPointPreset):
+        modalManager.dismissModal(
+          snapPointPreset: snapPointPreset,
+          animated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
+        );
+        
+      case let .customKeyframe(keyframe):
+        modalManager.dismissModal(
+          keyframe: keyframe,
+          animated: commandConfig.isAnimated,
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
         );
     };
   };

@@ -125,6 +125,34 @@ public class RNIAdaptiveModalViewModule: Module {
       };
     };
 
+    AsyncFunction("dismissModal") {
+      (
+        reactTag: Int,
+        commandParams: Dictionary<String, Any>,
+        promise: Promise
+      ) in
+      
+      DispatchQueue.main.async {
+        do {
+          let adaptiveModalView = try RNIModuleHelpers.getView(
+            withErrorType: RNIAdaptiveModalError.self,
+            forNode: reactTag,
+            type: RNIAdaptiveModalView.self
+          );
+          
+          let commandConfig =
+            try RNIAdaptiveModalCommandConfigDismiss(fromDict: commandParams);
+
+          try adaptiveModalView.dismissModal(commandConfig: commandConfig){
+            promise.resolve();
+          };
+        
+        } catch let error {
+          promise.reject(error);
+        };
+      };
+    };
+
     View(RNIAdaptiveModalView.self) {
       Events("onModalContentInitialized");
       Events("onModalWillSnap");
