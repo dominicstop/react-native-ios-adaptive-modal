@@ -1,5 +1,5 @@
 import type { NativeSyntheticEvent } from 'react-native';
-import { AdaptiveModalState } from './AdaptiveModalState';
+import { AdaptiveModalState } from '../../types/AdaptiveModal';
 
 export type AdaptiveModalInterpolationPointEventObject = {
   index: number;
