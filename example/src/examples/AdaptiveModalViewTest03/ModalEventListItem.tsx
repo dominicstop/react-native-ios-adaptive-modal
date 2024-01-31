@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   objectPropertyDisplay: {
-    backgroundColor: 'rgba(0,0,0,0.04)',
+    backgroundColor: 'rgba(0,0,0,0.03)',
   },
   objectPropertyDisplayLabelTitle: {
     color: 'black',

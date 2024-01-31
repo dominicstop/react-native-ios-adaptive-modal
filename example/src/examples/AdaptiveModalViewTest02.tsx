@@ -86,7 +86,9 @@ export function AdaptiveModalViewTest02(props: ExampleItemProps) {
         title={'Show Modal'}
         subtitle={'Present modal using modal config preset...'}
         onPress={() => {
-          modalRef?.current?.presentModal();
+          modalRef?.current?.presentModal({
+            mode: 'standard'
+          });
         }}
       />
     </ExampleItemCard>
