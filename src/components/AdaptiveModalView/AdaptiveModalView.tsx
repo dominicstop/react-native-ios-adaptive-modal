@@ -8,6 +8,7 @@ import { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModa
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
 
 import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
+import { RNIAdaptiveModalCommandConfigPresent } from '../../native_components/RNIAdaptiveModalView/RNIAdaptiveModalCommandPresentTypes';
 
 
 const NATIVE_ID_KEYS = {
@@ -140,9 +141,11 @@ export class AdaptiveModalView extends
   // Public Functions
   // ----------------
 
-  presentModal = async () => {
+  presentModal = async (
+    commandConfig: RNIAdaptiveModalCommandConfigPresent
+  ) => {
     await this.mountModalContent();
-    await this.nativeRef.presentModal();
+    await this.nativeRef.presentModal(commandConfig);
   };
 
   // Event Handlers

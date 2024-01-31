@@ -115,24 +115,9 @@ public class RNIAdaptiveModalViewModule: Module {
             fromDict: commandParams
           );
           
-          try adaptiveModalView.presentModal(commandConfig: commandConfig);
-          promise.resolve();
-        
-        } catch let error {
-          promise.reject(error);
-        };
-      };
-    };
-      
-      DispatchQueue.main.async {
-        do {
-          let adaptiveModalView = try RNIModuleHelpers.getView(
-            withErrorType: RNIAdaptiveModalError.self,
-            forNode: reactTag,
-            type: RNIAdaptiveModalView.self
-          );
-          
-          try adaptiveModalView.presentModal();
+          try adaptiveModalView.presentModal(commandConfig: commandConfig){
+            promise.resolve();
+          };
         
         } catch let error {
           promise.reject(error);

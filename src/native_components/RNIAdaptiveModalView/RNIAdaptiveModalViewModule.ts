@@ -1,6 +1,7 @@
 import { requireNativeModule } from 'expo-modules-core';
 import type { NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
 
+import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 
 interface RNIAdaptiveModalViewModule  {
   notifyOnComponentWillUnmount: NotifyOnComponentWillUnmount;

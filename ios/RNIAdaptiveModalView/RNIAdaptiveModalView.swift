@@ -479,7 +479,8 @@ public class RNIAdaptiveModalView:
   };
   
   func presentModal(
-    commandConfig: RNIAdaptiveModalCommandConfigPresent
+    commandConfig: RNIAdaptiveModalCommandConfigPresent,
+    completion: (() -> Void)?
   ) throws {
   
     if self.modalManager == nil {
@@ -547,7 +548,8 @@ public class RNIAdaptiveModalView:
           viewControllerToPresent: modalVC,
           presentingViewController: topVC,
           animated: commandConfig.isAnimated,
-          animationConfig: commandConfig.animationConfig
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
         );
         
       case let .customSnapPointIndex(snapPointIndex):
@@ -556,7 +558,8 @@ public class RNIAdaptiveModalView:
           presentingViewController: topVC,
           snapPointIndex: snapPointIndex,
           animated: commandConfig.isAnimated,
-          animationConfig: commandConfig.animationConfig
+          animationConfig: commandConfig.animationConfig,
+          completion: completion
         );
         
       case let .customSnapPointKey(snapPointKey):
@@ -565,7 +568,11 @@ public class RNIAdaptiveModalView:
           presentingViewController: topVC,
           snapPointKey: snapPointKey,
           animationConfig: commandConfig.animationConfig,
-          animated: commandConfig.isAnimated
+          animated: commandConfig.isAnimated,
+          completion: completion
+        );
+    };
+  };
         );
     };
   };

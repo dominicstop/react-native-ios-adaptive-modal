@@ -6,6 +6,7 @@ import { RNIAdaptiveModalViewModule } from './RNIAdaptiveModalViewModule';
 import { RNIAdaptiveModalNativeView } from './RNIAdaptiveModalNativeView';
 
 import type { RNIAdaptiveModalViewProps } from './RNIAdaptiveModalViewTypes';
+import { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 
 
 export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalViewProps> {
@@ -40,12 +41,15 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     );
   };
 
-  presentModal = async () => {
+  presentModal = async (
+    commandConfig: RNIAdaptiveModalCommandConfigPresent
+  ) => {
     const reactTag = this.getNativeReactTag();
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.presentModal(
-      reactTag
+      reactTag,
+      commandConfig
     );
   };
 
