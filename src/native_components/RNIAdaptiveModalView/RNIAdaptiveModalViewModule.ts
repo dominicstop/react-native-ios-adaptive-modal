@@ -37,6 +37,14 @@ interface RNIAdaptiveModalViewModule  {
     commandParams: RNIAdaptiveModalCommandConfigSnapToOverride
   ) => Promise<void>;
 
+  snapToClosestSnapPoint: (
+    reactTag: number,
+    commandParams: {
+      isAnimated?: boolean;
+      animationConfig?: AnimationConfig;
+    }
+  ) => Promise<void>;
+
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 
