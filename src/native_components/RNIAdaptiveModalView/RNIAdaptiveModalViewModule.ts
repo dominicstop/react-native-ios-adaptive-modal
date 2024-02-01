@@ -53,6 +53,14 @@ interface RNIAdaptiveModalViewModule  {
     }
   ) => Promise<void>;
 
+  snapToCurrentSnapPointIndex: (
+    reactTag: number,
+    commandParams: {
+      isAnimated?: boolean;
+      animationConfig?: AnimationConfig;
+    }
+  ) => Promise<void>;
+
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 

@@ -282,6 +282,44 @@ public class RNIAdaptiveModalViewModule: Module {
         };
       };
     };
+
+    AsyncFunction("snapToCurrentSnapPointIndex") {
+      (
+        reactTag: Int,
+        commandParams: Dictionary<String, Any>,
+        promise: Promise
+      ) in
+      
+      DispatchQueue.main.async {
+        do {
+          let adaptiveModalView = try RNIModuleHelpers.getView(
+            withErrorType: RNIAdaptiveModalError.self,
+            forNode: reactTag,
+            type: RNIAdaptiveModalView.self
+          );
+          
+          guard let modalManager = adaptiveModalView.modalManager else {
+            throw RNIAdaptiveModalError(
+              errorCode: .unexpectedNilValue,
+              description: "`modalManager` is nil"
+            );
+          };
+          
+          let commandConfig = try RNIAdaptiveModalCommandConfigSnapToCommon(
+            fromDict: commandParams
+          );
+
+          modalManager.snapToCurrentSnapPointIndex(
+            isAnimated: commandConfig.isAnimated,
+            animationConfig: commandConfig.animationConfig
+          );
+        
+        } catch let error {
+          promise.reject(error);
+        };
+      };
+    };
+
     View(RNIAdaptiveModalView.self) {
       Events("onModalContentInitialized");
       Events("onModalWillSnap");
