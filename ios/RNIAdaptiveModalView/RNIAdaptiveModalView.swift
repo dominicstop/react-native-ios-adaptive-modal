@@ -659,6 +659,31 @@ public class RNIAdaptiveModalView:
     };
   };
   
+  func snapToOverride(
+    commandConfig: RNIAdaptiveModalCommandConfigSnapToOverride,
+    completion: (() -> Void)?
+  ) throws {
+  
+    guard let modalManager = self.modalManager else {
+      throw RNIAdaptiveModalError(
+        errorCode: .unexpectedNilValue,
+        description: "modalManager is nil",
+        extraDebugValues: [
+          "modalConfigProp": self.modalConfigProp ?? [:]
+        ]
+      );
+    };
+    
+    try modalManager.snapTo(
+      overrideSnapPointConfig: commandConfig.overrideSnapPointConfig,
+      overshootSnapPointPreset: commandConfig.overshootSnapPointPreset,
+      inBetweenSnapPointsMinPercentDiff: commandConfig.inBetweenSnapPointsMinPercentDiff,
+      isAnimated: commandConfig.isAnimated,
+      animationConfig: commandConfig.animationConfig,
+      completion: completion
+    );
+  };
+  
   // MARK: - Functions - View Module Commands
   // ----------------------------------------
 

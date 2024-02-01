@@ -32,6 +32,11 @@ interface RNIAdaptiveModalViewModule  {
     commandParams: RNIAdaptiveModalCommandConfigSnapTo
   ) => Promise<void>;
 
+  snapToOverride: (
+    reactTag: number,
+    commandParams: RNIAdaptiveModalCommandConfigSnapToOverride
+  ) => Promise<void>;
+
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 

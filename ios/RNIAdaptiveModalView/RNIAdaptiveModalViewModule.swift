@@ -181,6 +181,34 @@ public class RNIAdaptiveModalViewModule: Module {
       };
     };
 
+    AsyncFunction("snapToOverride") {
+      (
+        reactTag: Int,
+        commandParams: Dictionary<String, Any>,
+        promise: Promise
+      ) in
+      
+      DispatchQueue.main.async {
+        do {
+          let adaptiveModalView = try RNIModuleHelpers.getView(
+            withErrorType: RNIAdaptiveModalError.self,
+            forNode: reactTag,
+            type: RNIAdaptiveModalView.self
+          );
+          
+          let commandConfig =
+            try RNIAdaptiveModalCommandConfigSnapToOverride(fromDict: commandParams);
+
+          try adaptiveModalView.snapToOverride(commandConfig: commandConfig) {
+            promise.resolve();
+          };
+        
+        } catch let error {
+          promise.reject(error);
+        };
+      };
+    };
+
     View(RNIAdaptiveModalView.self) {
       Events("onModalContentInitialized");
       Events("onModalWillSnap");
