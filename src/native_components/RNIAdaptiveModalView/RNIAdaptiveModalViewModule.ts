@@ -1,5 +1,5 @@
 import { requireNativeModule } from 'expo-modules-core';
-import type { AnimationConfig, NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
+import type { NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
 
 import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';

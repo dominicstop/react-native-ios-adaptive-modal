@@ -148,6 +148,10 @@ export class AdaptiveModalView extends
     await this.nativeRef.presentModal(commandConfig);
   };
 
+  notifyDidLayoutSubviews = async () => {
+    this.nativeRef.notifyDidLayoutSubviews();
+  };
+
   // Event Handlers
   // --------------
   

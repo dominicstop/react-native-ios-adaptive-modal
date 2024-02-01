@@ -41,6 +41,13 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     );
   };
 
+  notifyDidLayoutSubviews = async () => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.notifyDidLayoutSubviews(reactTag);
+  };
+
   presentModal = async (
     commandConfig: RNIAdaptiveModalCommandConfigPresent
   ) => {
