@@ -48,6 +48,13 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     await RNIAdaptiveModalViewModule.notifyDidLayoutSubviews(reactTag);
   };
 
+  clearSnapPointOverride = async () => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.clearSnapPointOverride(reactTag);
+  };
+
   presentModal = async (
     commandConfig: RNIAdaptiveModalCommandConfigPresent
   ) => {

@@ -152,6 +152,10 @@ export class AdaptiveModalView extends
     this.nativeRef.notifyDidLayoutSubviews();
   };
 
+  clearSnapPointOverride = async () => {
+    this.nativeRef.clearSnapPointOverride();
+  };
+
   // Event Handlers
   // --------------
   
