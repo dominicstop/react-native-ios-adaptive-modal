@@ -1,9 +1,10 @@
 import { requireNativeModule } from 'expo-modules-core';
-import type { NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
+import type { AnimationConfig, NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
 
 import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
 import type { RNIAdaptiveModalCommandConfigSnapTo } from './RNIAdaptiveModalCommandSnapToTypes';
+import type { RNIAdaptiveModalCommandConfigSnapToOverride } from './RNIAdaptiveModalCommandSnapToOverrideTypes';
 
 
 interface RNIAdaptiveModalViewModule  {
@@ -61,6 +62,18 @@ interface RNIAdaptiveModalViewModule  {
     }
   ) => Promise<void>;
 
+  snapToNextSnapPointIndex: (
+    reactTag: number,
+    commandParams: {
+      isAnimated?: boolean;
+      animationConfig?: AnimationConfig;
+    }
+  ) => Promise<void>;
+
+  // TBA
+  // refreshCurrentModalConfig
+  // refreshSnapPoints
+  // getDeltaOfSnapPoints
 };
 
 export const RNIAdaptiveModalViewModule: RNIAdaptiveModalViewModule = 
