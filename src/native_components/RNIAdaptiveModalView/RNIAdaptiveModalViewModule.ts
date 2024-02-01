@@ -40,34 +40,22 @@ interface RNIAdaptiveModalViewModule  {
 
   snapToClosestSnapPoint: (
     reactTag: number,
-    commandParams: {
-      isAnimated?: boolean;
-      animationConfig?: AnimationConfig;
-    }
+    commandParams: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => Promise<void>;
 
   snapToPrevSnapPointIndex: (
     reactTag: number,
-    commandParams: {
-      isAnimated?: boolean;
-      animationConfig?: AnimationConfig;
-    }
+    commandParams: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => Promise<void>;
 
   snapToCurrentSnapPointIndex: (
     reactTag: number,
-    commandParams: {
-      isAnimated?: boolean;
-      animationConfig?: AnimationConfig;
-    }
+    commandParams: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => Promise<void>;
 
   snapToNextSnapPointIndex: (
     reactTag: number,
-    commandParams: {
-      isAnimated?: boolean;
-      animationConfig?: AnimationConfig;
-    }
+    commandParams: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => Promise<void>;
 
   // TBA
