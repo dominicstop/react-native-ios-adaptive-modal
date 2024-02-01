@@ -8,7 +8,7 @@ import { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModa
 import type { AdaptiveModalViewProps, AdaptiveModalViewState } from './AdaptiveModalViewTypes';
 
 import { AdaptiveModalEventEmitter } from './AdaptiveModalEventEmitter';
-import { RNIAdaptiveModalCommandConfigPresent } from '../../native_components/RNIAdaptiveModalView/RNIAdaptiveModalCommandPresentTypes';
+import { RNIAdaptiveModalCommandConfigPresent } from '../../native_components/RNIAdaptiveModalView';
 
 
 const NATIVE_ID_KEYS = {

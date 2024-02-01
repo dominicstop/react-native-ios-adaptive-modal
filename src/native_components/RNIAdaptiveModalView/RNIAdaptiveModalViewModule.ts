@@ -5,6 +5,7 @@ import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCom
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
 import type { RNIAdaptiveModalCommandConfigSnapTo } from './RNIAdaptiveModalCommandSnapToTypes';
 import type { RNIAdaptiveModalCommandConfigSnapToOverride } from './RNIAdaptiveModalCommandSnapToOverrideTypes';
+import type { RNIAdaptiveModalCommandConfigSnapToCommon } from './RNIAdaptiveModalCommandSnapToCommonTypes';
 
 
 interface RNIAdaptiveModalViewModule  {
