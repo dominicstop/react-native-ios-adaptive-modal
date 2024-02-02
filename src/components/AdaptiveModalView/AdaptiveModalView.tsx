@@ -141,19 +141,19 @@ export class AdaptiveModalView extends
   // Public Functions
   // ----------------
 
-  presentModal = async (
-    commandConfig: RNIAdaptiveModalCommandConfigPresent
-  ) => {
-    await this.mountModalContent();
-    await this.nativeRef.presentModal(commandConfig);
-  };
-
   notifyDidLayoutSubviews = async () => {
     this.nativeRef.notifyDidLayoutSubviews();
   };
 
   clearSnapPointOverride = async () => {
     this.nativeRef.clearSnapPointOverride();
+  };
+
+  presentModal = async (
+    commandConfig: RNIAdaptiveModalCommandConfigPresent
+  ) => {
+    await this.mountModalContent();
+    await this.nativeRef.presentModal(commandConfig);
   };
 
   // Event Handlers
