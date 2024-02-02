@@ -174,6 +174,12 @@ export class AdaptiveModalView extends
     await this.nativeRef.snapToOverride(commandConfig);
   };
 
+  snapToClosestSnapPoint = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+  ) => {
+    await this.nativeRef.snapToClosestSnapPoint(commandConfig);
+  };
+
   // Event Handlers
   // --------------
   

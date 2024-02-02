@@ -8,6 +8,7 @@ import { RNIAdaptiveModalNativeView } from './RNIAdaptiveModalNativeView';
 import type { RNIAdaptiveModalViewProps } from './RNIAdaptiveModalViewTypes';
 import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
+import type { RNIAdaptiveModalCommandConfigSnapToCommon } from './RNIAdaptiveModalCommandSnapToCommonTypes';
 import type { RNIAdaptiveModalCommandConfigSnapToOverride } from './RNIAdaptiveModalCommandSnapToOverrideTypes';
 import type { RNIAdaptiveModalCommandConfigSnapTo } from './RNIAdaptiveModalCommandSnapToTypes';
 
@@ -101,6 +102,18 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.snapToOverride(
+      reactTag,
+      commandConfig
+    );
+  };
+
+  snapToClosestSnapPoint = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+  ) => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.snapToClosestSnapPoint(
       reactTag,
       commandConfig
     );
