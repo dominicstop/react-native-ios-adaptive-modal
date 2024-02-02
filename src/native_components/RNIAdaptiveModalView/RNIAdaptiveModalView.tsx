@@ -6,7 +6,8 @@ import { RNIAdaptiveModalViewModule } from './RNIAdaptiveModalViewModule';
 import { RNIAdaptiveModalNativeView } from './RNIAdaptiveModalNativeView';
 
 import type { RNIAdaptiveModalViewProps } from './RNIAdaptiveModalViewTypes';
-import { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
+import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
+import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
 
 
 export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalViewProps> {
@@ -62,6 +63,18 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.presentModal(
+      reactTag,
+      commandConfig
+    );
+  };
+
+  dismissModal = async (
+    commandConfig: RNIAdaptiveModalCommandConfigDismiss
+  ) => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.dismissModal(
       reactTag,
       commandConfig
     );
