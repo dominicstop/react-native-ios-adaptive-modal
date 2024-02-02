@@ -8,6 +8,7 @@ import { RNIAdaptiveModalNativeView } from './RNIAdaptiveModalNativeView';
 import type { RNIAdaptiveModalViewProps } from './RNIAdaptiveModalViewTypes';
 import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
+import type { RNIAdaptiveModalCommandConfigSnapTo } from './RNIAdaptiveModalCommandSnapToTypes';
 
 
 export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalViewProps> {
@@ -75,6 +76,18 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.dismissModal(
+      reactTag,
+      commandConfig
+    );
+  };
+
+  snapTo = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapTo
+  ) => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.snapTo(
       reactTag,
       commandConfig
     );

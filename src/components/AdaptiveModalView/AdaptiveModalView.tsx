@@ -162,6 +162,12 @@ export class AdaptiveModalView extends
     await this.nativeRef.dismissModal(commandConfig);
   };
 
+  snapTo = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapTo
+  ) => {
+    await this.nativeRef.snapTo(commandConfig);
+  };
+
   // Event Handlers
   // --------------
   
