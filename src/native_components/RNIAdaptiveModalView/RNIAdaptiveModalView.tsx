@@ -143,6 +143,21 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
     );
   };
 
+  snapToNextSnapPointIndex = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+  ) => {
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    await RNIAdaptiveModalViewModule.snapToNextSnapPointIndex(
+      reactTag,
+      commandConfig
+    );
+  };
+
+  // Event Handlers
+  // --------------
+
   private _handleOnLayout = ({nativeEvent}: LayoutChangeEvent) => {
     // @ts-ignore
     this.reactTag = nativeEvent.target;

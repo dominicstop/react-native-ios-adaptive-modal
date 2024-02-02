@@ -192,6 +192,12 @@ export class AdaptiveModalView extends
     await this.nativeRef.snapToCurrentSnapPointIndex(commandConfig);
   };
 
+  snapToNextSnapPointIndex = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+  ) => {
+    await this.nativeRef.snapToNextSnapPointIndex(commandConfig);
+  };
+
   // Event Handlers
   // --------------
   
