@@ -168,6 +168,12 @@ export class AdaptiveModalView extends
     await this.nativeRef.snapTo(commandConfig);
   };
 
+  snapToOverride = async (
+    commandConfig: RNIAdaptiveModalCommandConfigSnapToOverride
+  ) => {
+    await this.nativeRef.snapToOverride(commandConfig);
+  };
+
   // Event Handlers
   // --------------
   
