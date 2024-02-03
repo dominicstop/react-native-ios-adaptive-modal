@@ -62,7 +62,12 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
     currentSnapPointIndex, 
     setCurrentSnapPointIndex
   ] = React.useState(0);
-  
+
+  const [
+    shouldIncrementSnapPointIndex, 
+    setShouldIncrementSnapPointIndex
+  ] = React.useState(true);
+
   return (
     <ExampleItemCard
       index={props.index}
@@ -85,6 +90,37 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
         }}
         onModalDidSnap={({nativeEvent}) => {
           setCurrentSnapPointIndex(nativeEvent.currentInterpolationPoint.index);
+
+          const prevIndex = nativeEvent.prevInterpolationPoint?.index ?? -1;
+          const nextIndex = nativeEvent.currentInterpolationPoint.index;
+
+          const lastIndex: number = (() => {
+            const modalConfig = currentModalConfigPresetItem.modalConfig;
+            let baseCount = modalConfig.snapPoints.length - 1;
+
+            const hasOverShootSnapPoint =  
+              modalConfig.overshootSnapPoint != null;
+
+            if(hasOverShootSnapPoint) {
+              baseCount++;
+            };
+
+            return baseCount;
+          })();
+          
+          if(nextIndex >= lastIndex) {
+            setShouldIncrementSnapPointIndex(false);
+          
+          } else if(nextIndex == 0) {
+            setShouldIncrementSnapPointIndex(true);
+          };
+          console.log(
+            "onModalDidSnap",
+            "\n - nextIndex:", nextIndex,
+            "\n - lastIndex:", lastIndex,
+            "\n - shouldIncrementSnapPointIndex:", shouldIncrementSnapPointIndex,
+          );
+          
         }}
       >
         <ModalContent
@@ -92,6 +128,17 @@ export function AdaptiveModalViewTest01(props: ExampleItemProps) {
           currentModalConfigIndex={modalConfigPresetIndex}
           presetItem={currentModalConfigPresetItem}
           currentSnapPointIndex={currentSnapPointIndex}
+          onPressConfigIndex={() => {
+            setModalConfigPresetCounter(prev => prev + 1);
+          }}
+          onPressSnapPointIndex={() => {
+            if(shouldIncrementSnapPointIndex){
+              modalRef.current?.snapToNextSnapPointIndex();
+              
+            } else {
+              modalRef.current?.snapToPrevSnapPointIndex();
+            };
+          }}
         />
       </AdaptiveModalView>
       <CardButton

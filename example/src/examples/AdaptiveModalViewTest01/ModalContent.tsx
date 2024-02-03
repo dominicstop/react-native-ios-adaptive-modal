@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, ViewStyle, TextInput } from 'react-native';
+import { StyleSheet, View, Text, ViewStyle, TextInput, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { AdaptiveModalConfigPresetWithMetadataItem } from '../../constants/AdaptiveModalConfigPresets';
 
 
@@ -8,6 +8,8 @@ export function ModalContent(props: {
   currentModalConfigIndex: number;
   presetItem: AdaptiveModalConfigPresetWithMetadataItem;
   currentSnapPointIndex: number;
+  onPressConfigIndex: (event: GestureResponderEvent) => void;
+  onPressSnapPointIndex: (event: GestureResponderEvent) => void;
 }) {
 
   const rootModalContainerStyle: ViewStyle = {
@@ -27,22 +29,32 @@ export function ModalContent(props: {
   return (
     <View style={[styles.rootModalContainer, rootModalContainerStyle]}>
       <View style={[styles.modalContent, modalContentStyle]}>
-        <Text style={[styles.modalContentItem, styles.pillLabel]}>
-          <Text style={styles.pillLabelTitle}>
-            {'Config Index: '}
+        <TouchableOpacity 
+          style={[styles.modalContentItem, styles.pillContainer]}
+          onPress={props.onPressConfigIndex}
+        >
+          <Text style={styles.pillLabel}>
+            <Text style={styles.pillLabelTitle}>
+              {'Config Index: '}
+            </Text>
+            <Text style={styles.pillLabelValue}>
+              {props.currentModalConfigIndex}
+            </Text>
           </Text>
-          <Text style={styles.pillLabelValue}>
-            {props.currentModalConfigIndex}
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={[styles.modalContentItem, styles.pillContainer]}
+          onPress={props.onPressSnapPointIndex}
+        >
+          <Text style={styles.pillLabel}>
+            <Text style={styles.pillLabelTitle}>
+              {'Snap Point Index: '}
+            </Text>
+            <Text style={styles.pillLabelValue}>
+              {props.currentSnapPointIndex}
+            </Text>
           </Text>
-        </Text>
-        <Text style={[styles.modalContentItem, styles.pillLabel]}>
-          <Text style={styles.pillLabelTitle}>
-            {'Snap Point Index: '}
-          </Text>
-          <Text style={styles.pillLabelValue}>
-            {props.currentSnapPointIndex}
-          </Text>
-        </Text>
+        </TouchableOpacity>
         {props.shouldShowModalBgColor && (
           <React.Fragment>
             <Text>"Adaptive Modal"</Text>
@@ -78,13 +90,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'red',
   },
-  pillLabel: {
-    fontSize: 14,
+  pillContainer: {
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: 'rgba(0,0,0,0.07)',
+  },
+  pillLabel: {
+    fontSize: 14,
   },
   pillLabelTitle: {
     fontWeight: '600',
