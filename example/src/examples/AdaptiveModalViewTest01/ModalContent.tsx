@@ -115,17 +115,19 @@ const styles = StyleSheet.create({
     minWidth: 200,
   },
   textInputLabel: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 6,
     marginLeft: 3,
     fontWeight: '500',
     color: 'rgba(0,0,0,0.6)',
   },
   textInput: {
-    height: 40,
+    height: 35,
     borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.4)',
+    borderColor: 'rgba(0,0,0,0.15)',
     borderRadius: 10,
-    padding: 10,
+    backgroundColor: 'rgba(0,0,0,0.04)',
+    paddingHorizontal: 12,
+    paddingVertical: 3,
   },
 });
