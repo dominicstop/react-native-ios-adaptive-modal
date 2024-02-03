@@ -69,6 +69,8 @@ public class RNIAdaptiveModalView:
           modalManager.updateModalConfig(
             .staticConfig(modalConfig)
           );
+          
+          modalManager.snapToClosestSnapPoint();
         };
         
       } catch {
@@ -243,8 +245,6 @@ public class RNIAdaptiveModalView:
       modalManager.isModalDragHandleGestureEnabled = newValue;
     }
   };
-  
-  
   
   // MARK: Properties - Props - Events
   // ---------------------------------
