@@ -1453,7 +1453,13 @@ export const AdaptiveModalConfigPresetDemo12: AdaptiveModalConfig = {
       },
       keyframeConfig: {
         secondaryGestureAxisDampingPercent: 0.25,
-        modalCornerRadius: 10,
+        modalCornerRadius: 15,
+        modalShadowOffset: {
+          width: 4,
+          height: -2.5,
+        },
+        modalShadowOpacity: 0.4,
+        modalShadowRadius: 8,
       },
     },
 
@@ -1489,6 +1495,12 @@ export const AdaptiveModalConfigPresetDemo12: AdaptiveModalConfig = {
               },
             ],
           },
+        },
+      },
+      keyframeConfig: {
+        modalShadowOffset: {
+          width: -4,
+          height: -2.5,
         },
       },
     },
