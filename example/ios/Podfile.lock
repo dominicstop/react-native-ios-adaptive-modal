@@ -457,7 +457,7 @@ PODS:
     - DGSwiftUtilities
     - ExpoModulesCore
     - ReactNativeIosUtilities
-  - ReactNativeIosUtilities (4.3.0-8):
+  - ReactNativeIosUtilities (4.3.0-9):
     - ComputableLayout (~> 0.7)
     - DGSwiftUtilities (~> 0.12)
     - ExpoModulesCore
@@ -686,7 +686,7 @@ SPEC CHECKSUMS:
   React-utils: 7a9918a1ffdd39aba67835d42386f592ea3f8e76
   ReactCommon: 91ece8350ebb3dd2be9cef662abd78b6948233c0
   ReactNativeIosAdaptiveModal: 349179e7d6dd485ecdbe138c42325a027dcf9817
-  ReactNativeIosUtilities: 3afbf317fecfe2dfa8fe98fb9cd1156ac9baad72
+  ReactNativeIosUtilities: d1cbd368be524b17aa090879f9e9d09aaba640cc
   RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6
