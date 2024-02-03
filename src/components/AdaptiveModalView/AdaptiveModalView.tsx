@@ -175,25 +175,25 @@ export class AdaptiveModalView extends
   };
 
   snapToClosestSnapPoint = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     await this.nativeRef.snapToClosestSnapPoint(commandConfig);
   };
 
   snapToPrevSnapPointIndex = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     await this.nativeRef.snapToPrevSnapPointIndex(commandConfig);
   };
 
   snapToCurrentSnapPointIndex = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     await this.nativeRef.snapToCurrentSnapPointIndex(commandConfig);
   };
 
   snapToNextSnapPointIndex = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     await this.nativeRef.snapToNextSnapPointIndex(commandConfig);
   };

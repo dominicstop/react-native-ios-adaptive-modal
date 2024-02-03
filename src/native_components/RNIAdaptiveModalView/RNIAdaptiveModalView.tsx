@@ -108,50 +108,50 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
   };
 
   snapToClosestSnapPoint = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     const reactTag = this.getNativeReactTag();
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.snapToClosestSnapPoint(
       reactTag,
-      commandConfig
+      commandConfig ?? {}
     );
   };
 
   snapToPrevSnapPointIndex = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     const reactTag = this.getNativeReactTag();
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.snapToPrevSnapPointIndex(
       reactTag,
-      commandConfig
+      commandConfig ?? {}
     );
   };
 
   snapToCurrentSnapPointIndex = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     const reactTag = this.getNativeReactTag();
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.snapToCurrentSnapPointIndex(
       reactTag,
-      commandConfig
+      commandConfig ?? {}
     );
   };
 
   snapToNextSnapPointIndex = async (
-    commandConfig: RNIAdaptiveModalCommandConfigSnapToCommon
+    commandConfig?: RNIAdaptiveModalCommandConfigSnapToCommon
   ) => {
     const reactTag = this.getNativeReactTag();
     if(typeof reactTag !== 'number') return;
 
     await RNIAdaptiveModalViewModule.snapToNextSnapPointIndex(
       reactTag,
-      commandConfig
+      commandConfig ?? {}
     );
   };
 
