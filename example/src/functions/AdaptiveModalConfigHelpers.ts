@@ -11,3 +11,16 @@ export function getSnapPointKeys(modalConfig: AdaptiveModalConfig){
   const snapPoints = getSnapPointsWithKeys(modalConfig);
   return snapPoints.map((item) => item.key!);
 };
+
+export function getSnapPointCount(modalConfig: AdaptiveModalConfig){
+  let baseSnapPointCount = modalConfig.snapPoints.length;
+
+  // undershoot snap point
+  baseSnapPointCount++;
+
+  if(modalConfig.overshootSnapPoint != null){
+    baseSnapPointCount++;
+  };
+
+  return baseSnapPointCount;
+};
