@@ -2186,12 +2186,12 @@ export type AdaptiveModalConfigPresetWithMetadataItem =
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] =
   AdaptiveModalConfigPresetsWithMetadata.map((item) => item.modalConfig);
 
-export const AdaptiveModalConfigPresetsWithMetadataThatHaveSnapPointKeys = (
-  AdaptiveModalConfigPresets.filter(item => {
-    const snapPoints = 
-      AdaptiveModalConfigHelpers.getSnapPointsWithKeys(item);
+export const AdaptiveModalConfigPresetsWithMetadataThatHaveSnapPointKeys: Array<
+  AdaptiveModalConfigPresetWithMetadataItem
+> = AdaptiveModalConfigPresetsWithMetadata.filter(item => {
+  const snapPoints = 
+    AdaptiveModalConfigHelpers.getSnapPointsWithKeys(item.modalConfig);
 
-    return snapPoints.length > 0;
-  })
-);
+  return snapPoints.length > 0;
+});
   
