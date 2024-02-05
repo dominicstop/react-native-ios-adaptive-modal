@@ -11,7 +11,8 @@ import type { ExampleItemProps } from "../examples/SharedExampleTypes";
 
 import { AdaptiveModalViewTest01 } from "../examples/AdaptiveModalViewTest01";
 import { AdaptiveModalViewTest02 } from "../examples/AdaptiveModalViewTest02";
-import { AdaptiveModalViewTest03 } from "../examples/AdaptiveModalViewTest03/AdaptiveModalViewTest03";
+import { AdaptiveModalViewTest03 } from "../examples/AdaptiveModalViewTest03";
+import { AdaptiveModalViewTest04 } from "../examples/AdaptiveModalViewTest04";
 
 import { DebugControls } from "../examples/DebugControls";
 import { SHARED_ENV } from "../constants/SharedEnv";
@@ -26,6 +27,7 @@ const EXAMPLE_COMPONENTS = (() => {
     AdaptiveModalViewTest01, 
     AdaptiveModalViewTest02,
     AdaptiveModalViewTest03,
+    AdaptiveModalViewTest04,
   ];
 
   if (SHARED_ENV.enableReactNavigation) {
