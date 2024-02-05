@@ -11,6 +11,11 @@ const ScreenSizes: Record<string, CGSize> = {
   },
 };
 
+export const PresetConfigSnapPointKeys = {
+  lastSnapPoint: "lastSnapPoint",
+  secondToLastSnapPoint: "secondToLastSnapPoint",
+};
+
 export const AdaptiveModalConfigPresetDemo01: AdaptiveModalConfig = {
   snapPoints: [
     {
@@ -107,6 +112,7 @@ export const AdaptiveModalConfigPresetDemo01: AdaptiveModalConfig = {
     {
       // Snap Point 3
       mode: "standard",
+      key: PresetConfigSnapPointKeys.secondToLastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "center",
@@ -149,6 +155,7 @@ export const AdaptiveModalConfigPresetDemo01: AdaptiveModalConfig = {
     {
       // Snap Point 4
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -240,6 +247,7 @@ export const AdaptiveModalConfigPresetDemo02: AdaptiveModalConfig = {
     // Snap point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.secondToLastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -273,6 +281,7 @@ export const AdaptiveModalConfigPresetDemo02: AdaptiveModalConfig = {
     // Snap point - 3
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -382,6 +391,7 @@ export const AdaptiveModalConfigPresetDemo03: AdaptiveModalConfig = {
     // Snap Point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "center",
@@ -514,6 +524,7 @@ export const AdaptiveModalConfigPresetDemo04: AdaptiveModalConfig = {
     // Snap Point 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "center",
@@ -620,6 +631,7 @@ export const AdaptiveModalConfigPresetDemo05: AdaptiveModalConfig = {
     // Snap Point 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "center",
@@ -737,6 +749,7 @@ export const AdaptiveModalConfigPresetDemo06: AdaptiveModalConfig = {
     // snap point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.secondToLastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -778,6 +791,7 @@ export const AdaptiveModalConfigPresetDemo06: AdaptiveModalConfig = {
     // snap point - 3
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -918,6 +932,7 @@ export const AdaptiveModalConfigPresetDemo07: AdaptiveModalConfig = {
     // snap point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "center",
@@ -1018,6 +1033,7 @@ export const AdaptiveModalConfigPresetDemo08: AdaptiveModalConfig = {
     // Snap Point 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -1205,6 +1221,7 @@ export const AdaptiveModalConfigPresetDemo10: AdaptiveModalConfig = {
     // snap point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.secondToLastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "left",
         verticalAlignment: "center",
@@ -1240,6 +1257,7 @@ export const AdaptiveModalConfigPresetDemo10: AdaptiveModalConfig = {
     // snap point - 3
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "left",
         verticalAlignment: "center",
@@ -1466,6 +1484,7 @@ export const AdaptiveModalConfigPresetDemo12: AdaptiveModalConfig = {
     // Snap Point 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "left",
         verticalAlignment: "center",
@@ -1565,6 +1584,7 @@ export const AdaptiveModalConfigPresetDemo13: AdaptiveModalConfig = {
     // snap point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
@@ -1721,6 +1741,7 @@ export const AdaptiveModalConfigPresetDemo15: AdaptiveModalConfig = {
     // snap point - 2
     {
       mode: "standard",
+      key: PresetConfigSnapPointKeys.lastSnapPoint,
       layoutConfig: {
         horizontalAlignment: "center",
         verticalAlignment: "bottom",
