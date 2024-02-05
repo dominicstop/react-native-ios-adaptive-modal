@@ -153,9 +153,70 @@ export const AnimationConfigSpringDampingPresets: Array<AnimationConfig> = [{
   dampingRatio: 0.5,
 }];
 
+export const AnimationConfigSpringPhysicsPresets: Array<AnimationConfig> = [
+  // Bouncy and fast
+  {
+    mode: 'springPhysics',
+    duration: 1,
+    mass: 1.0,
+    stiffness: 100.0,
+    damping: 0.25,
+    initialVelocity: { dx: 0.0, dy: 0.0 },
+  },
+
+  // Smooth and controlled
+  {
+    mode: 'springPhysics',
+    duration: 2,
+    mass: 5.0,
+    stiffness: 50.0,
+    damping: 0.9,
+    initialVelocity: { dx: 0.0, dy: 0.0 }
+  },
+
+  // Fast start and quick stop
+  {
+    mode: 'springPhysics',
+    duration: 1,
+    mass: 1.0,
+    stiffness: 200.0,
+    damping: 0.25,
+    initialVelocity: { dx: 1.0, dy: 0.0 },
+  },
+
+  // Slow and damped animation
+  {
+    mode: 'springPhysics',
+    duration: 2,
+    mass: 10.0,
+    stiffness: 20.0,
+    damping: 1.0,
+    initialVelocity: { dx: 0.0, dy: 0.0 },
+  },
+
+  {
+    mode: 'springPhysics',
+    duration: 1,
+    mass: 5.0,
+    stiffness: 50.0,
+    damping: 0.95,
+    initialVelocity: { dx: 1.0, dy: 0.0 }, 
+  },
+  
+  {
+    mode: 'springPhysics',
+    duration: 1,
+    mass: 0.25,
+    stiffness: 30.0,
+    damping: 0.9,
+    initialVelocity: { dx: 0.0, dy: 0.0 },
+  },
+]
+
 export const AnimationConfigPresets: Array<AnimationConfig> = [
   ...AnimationConfigCurvePresets,
   ...AnimationConfigSpringPresets,
   ...AnimationConfigBezierCurvePresets,
   ...AnimationConfigSpringDampingPresets,
+  ...AnimationConfigSpringPhysicsPresets,
 ];
