@@ -4,6 +4,8 @@ import { AdaptiveModalConfig, AdaptiveModalViewProps } from "react-native-ios-ad
 import { CGSize } from "react-native-ios-utilities";
 import { Ionicons } from "@expo/vector-icons";
 
+import * as AdaptiveModalConfigHelpers from '../functions/AdaptiveModalConfigHelpers';
+
 const ScreenSizes: Record<string, CGSize> = {
   iPhone8: {
     width: 375,
@@ -2183,3 +2185,13 @@ export type AdaptiveModalConfigPresetWithMetadataItem =
 
 export const AdaptiveModalConfigPresets: AdaptiveModalConfig[] =
   AdaptiveModalConfigPresetsWithMetadata.map((item) => item.modalConfig);
+
+export const AdaptiveModalConfigPresetsWithMetadataThatHaveSnapPointKeys = (
+  AdaptiveModalConfigPresets.filter(item => {
+    const snapPoints = 
+      AdaptiveModalConfigHelpers.getSnapPointsWithKeys(item);
+
+    return snapPoints.length > 0;
+  })
+);
+  
