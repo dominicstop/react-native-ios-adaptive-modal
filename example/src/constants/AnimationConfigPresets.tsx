@@ -147,8 +147,15 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   },
 ];
 
+export const AnimationConfigSpringDampingPresets: Array<AnimationConfig> = [{
+  mode: 'springDamping',
+  duration: 1,
+  dampingRatio: 0.5,
+}];
+
 export const AnimationConfigPresets: Array<AnimationConfig> = [
   ...AnimationConfigCurvePresets,
   ...AnimationConfigSpringPresets,
   ...AnimationConfigBezierCurvePresets,
+  ...AnimationConfigSpringDampingPresets,
 ];
