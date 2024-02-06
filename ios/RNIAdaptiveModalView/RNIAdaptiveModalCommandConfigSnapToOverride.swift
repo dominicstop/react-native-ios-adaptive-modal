@@ -47,7 +47,8 @@ struct RNIAdaptiveModalCommandConfigSnapToOverride: InitializableFromDictionary 
     }();
     
     self.animationConfig = try? dict.getValueFromDictionary(
-      forKey: "animationConfig"
+      forKey: "animationConfig",
+      type: AnimationConfig.self
     );
   };
 };

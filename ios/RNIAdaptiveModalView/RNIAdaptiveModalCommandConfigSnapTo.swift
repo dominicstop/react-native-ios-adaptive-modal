@@ -28,7 +28,9 @@ struct RNIAdaptiveModalCommandConfigSnapTo: InitializableFromDictionary {
       return value ?? true;
     }();
     
-    self.animationConfig =
-      try? dict.getValueFromDictionary(forKey: "animationConfig");
+    self.animationConfig = try? dict.getValueFromDictionary(
+      forKey: "animationConfig",
+      type: AnimationConfig.self
+    );
   };
 };
