@@ -45,6 +45,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Linear
   {
     mode: 'bezierCurve',
+    duration: 1,
     controlPoint1: {
       x: 0,
       y: 0,
@@ -58,6 +59,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Ease-in
   {
     mode: 'bezierCurve',
+    duration: 1.5,
     controlPoint1: {
       x: 0.2,
       y: 0,
@@ -71,6 +73,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Ease-out
   {
     mode: 'bezierCurve',
+    duration: 1.5,
     controlPoint1: {
       x: 0.0,
       y: 0.5,
@@ -84,6 +87,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Ease-in-out
   {
     mode: 'bezierCurve',
+    duration: 2,
     controlPoint1: {
       x: 0.4,
       y: 0,
@@ -97,6 +101,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Subtle ease-in:
   {
     mode: 'bezierCurve',
+    duration: 2,
     controlPoint1: {
       x: 0.1,
       y: 0,
@@ -110,6 +115,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Sharp ease-out:
   {
     mode: 'bezierCurve',
+    duration: 2,
     controlPoint1: {
       x: 0.2,
       y: 1.0,
@@ -123,6 +129,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // Quick stop and bounce:
   {
     mode: 'bezierCurve',
+    duration: 1.5,
     controlPoint1: {
       x: 0.2,
       y: 0.0,
@@ -136,6 +143,7 @@ export const AnimationConfigBezierCurvePresets: Array<AnimationConfig> = [
   // S-shaped curve
   {
     mode: 'bezierCurve',
+    duration: 2,
     controlPoint1: {
       x: 0.2,
       y: 0.5,
