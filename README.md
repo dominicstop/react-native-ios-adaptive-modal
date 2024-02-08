@@ -85,6 +85,27 @@ It is essentially just a function that turns a config into raw x, y, width and h
 
 <br><br>
 
+### Layout and Snapping Points
+
+The layout config you provide defines the snapping point; i.e. the position of the modal in the screen defines the snapping point.
+
+* A snapping point is a unique position in the screen that we want the modal to “snap to” either via￼ gesture (e.g. a user dragging the modal), or programmatically (via a function call).
+* As the modal is being dragged around, it will morph between each snapping point you defined, using the gesture’s position to drive the interpolation of the modal.
+
+- Each snapping point has a corresponding “percentage” that is derived based on its position on the screen, and the current modal direction defined in the config.
+- The computed percentage is used to drive the modal animation as the user drags the modal around.
+
+<br>
+
+As such, each snapping point must be unique (no repeats/duplicates), and their corresponding computed percentage must change, either increasing or decreasing consistently in one direction.
+
+- **Example 01**: A “left to right” modal’s snap points must continually move to the right; i.e. the layout the snapping points defined must change it’s width and/or increment its horizontal position, such that the modal’s `CGRect.maxX` (rightmost edge) increases continuously.<br><br>
+- **Example 02**: A “bottom to top” modal’s snap points must continually move towards the top; i.e the layout the snapping points defined must change either it’s height, and/or increment its vertical position, such that the modal’s `CGRect.minY` (topmost edge) increases continuously.<br><br>
+- **Example 03**: A “right to left” modal’s snap points must continually move to the left; i.e. the layout the snapping points defined must change it’s width and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.<br><br>
+- **Example 04**: A “top to bottom” modal’s snap points must continually move to the bottom; i.e. the layout the snapping points defined must change it’s height and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.
+
+<br><br>
+
 ## F.  Usage and Examples
 
 TBA
