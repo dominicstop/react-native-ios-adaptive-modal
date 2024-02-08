@@ -10,6 +10,17 @@ TBA
 
 ## B. Installation
 
+For bare React Native projects, you must ensure that you have [installed and configured the `expo` package](https://docs.expo.dev/bare/installing-expo-modules/) before continuing.
+
+```
+# 1. install library + dependencies
+npm install react-native-ios-utilities
+npm install react-native-ios-adaptive-modal
+
+# 2. then run pod install (uses auto-linking)
+cd ios && pod install
+```
+
 <br><br>
 
 ## C. Basic Usage
