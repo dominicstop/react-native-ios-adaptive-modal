@@ -41,36 +41,47 @@ TBA
 
 ####  Dependecy: `AdaptiveModal`
 
-All of the modal presentation and animation is handled by a small library written in swift called [`adaptive-modal`](https://github.com/dominicstop/adaptive-modal/). This library uses it under the hood for presenting a view controller with custom modal presentation.
+All of the modal presentation and animation is handled by a small library written in swift called: [`adaptive-modal`](https://github.com/dominicstop/adaptive-modal/). This library uses it under the hood for natively presenting a view controller with custom modal presentation.
 
 ![adaptive-modal-demo-01](https://github.com/dominicstop/adaptive-modal/raw/main/assets/demo-01-to-15.gif)
 
 ![adaptive-modal-demo-02](https://github.com/dominicstop/adaptive-modal/raw/main/assets/paginated-demo-01-02-03-04-05.gif)
 
-`adaptive-modal` accepts a [config](https://github.com/dominicstop/adaptive-modal/blob/084bd51fa0f4afb02c1f0cc1f7aa00f0d88c510d/example/src/AdaptiveModalConfigDemoPresets.swift#L35-L147) that describes the state, behavior and layout of the modal, e.g.: 
+`adaptive-modal` accepts a [config](https://github.com/dominicstop/adaptive-modal/blob/084bd51fa0f4afb02c1f0cc1f7aa00f0d88c510d/example/src/AdaptiveModalConfigDemoPresets.swift#L35-L147) that describes the state, behavior and layout of the modal:
 
-* The various snapping points + layout of the modal (e.g. its width + height, margin, padding, etc).
-* The modal transition animation (e.g. duration, easing, etc), presentation and dismissal style.
-* Animating and applying the [keyframes](https://github.com/dominicstop/adaptive-modal/blob/084bd51fa0f4afb02c1f0cc1f7aa00f0d88c510d/Sources/AdaptiveModalConfig/AdaptiveModalKeyframeConfig.swift#L209-L263) (e.g. background blur, modal content background blur, background color, corner radius, etc).
+* The config defines all the various snapping points (e.g. the position of the modal, and its layout, e.g. height, width, margin, padding, etc).
+
+* The config defines the presentation, dismissal, and snapping animations, as well as how the modal should be animated (e.g. the animation duration, easing, etc),
+* The config defines the associated [keyframes](https://github.com/dominicstop/adaptive-modal/blob/084bd51fa0f4afb02c1f0cc1f7aa00f0d88c510d/Sources/AdaptiveModalConfig/AdaptiveModalKeyframeConfig.swift#L209-L263) to apply for each snap point (e.g. the type and intensity of background + modal content background blur, the background color, corner radius, etc).
 * Etc.
 
 <br>
 
-It then transforms that config into something `UIKit` can understand via:
+It then uses the modal config, and transforms it into something `UIKit` can understand via:
 
 * Handling all the necessary conformances to `UIViewControllerAnimatedTransitioning`, `UIAdaptivePresentationControllerDelegate`, `UIViewControllerTransitioningDelegate`
 * Handling the interpolation applied to the modal + keyframes when the modal is dragged around via gesture. 
-* Using the defined keyframes and layout to animate the modal via `UIViewPropertyAnimator`. 
+* Using the defined keyframes and layout to animate the modal via `UIViewPropertyAnimator`, and `CADisplayLink`.
 
 <br>
 
 #### Dependency: `ComputableLayout`
 
-To define the various snapping points, a small helper swift library called  [`ComputableLayout`](https://github.com/dominicstop/ComputableLayout) is used to configure the size and position of the modal. It's a very naive layout system custom built for [`adaptive-modal`](https://github.com/dominicstop/adaptive-modal/). 
+To define the various snapping points for the modal, a small helper library written in swift called  [`ComputableLayout`](https://github.com/dominicstop/ComputableLayout) is used to configure the size and position of the modal. This library is a very naive layout system/calculator custom built for [`adaptive-modal`](https://github.com/dominicstop/adaptive-modal/). 
 
-It is essentially just a function that turns a config into raw x, y, width and height values; in other words, it's a way to cheaply calculate layout for a given configuration without having to instantiate a view. 
+This helper library is essentially just a function that turns a [config](https://github.com/dominicstop/ComputableLayout/blob/b9f9301497e23f18cd61d92c37ab1f9f65ce95b3/Example/Examples/ComputaleLayoutTestPresets.swift#L24-L671) (e.g. the desired horizontal/vertical position) into a `CGRect` (i.e. raw x, y, width and height values); in other words, this library is used to cheaply calculate layout for a given configuration without having to instantiate a view. 
 
-`ComputableLayout` allows us to compute all the snapping points for a target view's size; conversely, this also allows to quickly recalculate all of the snap points whenever there's a layout change for the target view (e.g. when the screen rotates, the window resizes, the appearance of a keyboard, etc).
+The layout config allows us to add placeholder values that are then substituted to the real values during  calculation; some of these values are: 
+
+* The safe area insets of the screen/window.
+* The keyboard size (if it's currently visible)
+* The `CGRect`/`CGSize` of various views, e.g target view, the current window, the device's screen, etc.
+
+<br>
+
+The layout config also allows us to compose multiple layout values together, or have conditions that get evaluated during calculation.
+
+In summary: `ComputableLayout` allows us to compute all the snapping points for a target view's size, and allows for the quick recalculation all of the snap points whenever there's a layout change for the target view (e.g. when the screen rotates, the window resizes, the appearance of a keyboard, etc).
 
 ![ComputableLayout-Demo-01](https://github.com/dominicstop/ComputableLayout/raw/main/Assets/2023-08-25-ComputaleLayoutTestPresets-02.gif)
 
@@ -80,29 +91,32 @@ It is essentially just a function that turns a config into raw x, y, width and h
 
 [`DGSwiftUtilities`](https://github.com/dominicstop/DGSwiftUtilities) and [`react-native-ios-utilities`](https://github.com/dominicstop/react-native-ios-utilities) are just helper libraries. 
 
-* `DGSwiftUtilities` contains shared code + helpers for the swift libraries
+* `DGSwiftUtilities` contains shared code + helpers for the swift libraries.
 * `react-native-ios-utilities` contains shared code + helpers for the `react-native` libraries on iOS.
 
 <br><br>
 
 ### Layout and Snapping Points
 
-The layout config you provide defines the snapping point; i.e. the position of the modal in the screen defines the snapping point.
+The layout config you provide defines the snapping point.
 
+* To be more specific, the layout config is used to calculate the position of the modal. The computed position of the modal in the screen defines the snapping point.
 * A snapping point is a unique position in the screen that we want the modal to “snap to” either via￼ gesture (e.g. a user dragging the modal), or programmatically (via a function call).
-* As the modal is being dragged around, it will morph between each snapping point you defined, using the gesture’s position to drive the interpolation of the modal.
+* As the modal is being dragged around, it will morph between each snapping point you defined; using the gesture’s position to drive the interpolation of the modal.
 
-- Each snapping point has a corresponding “percentage” that is derived based on its position on the screen, and the current modal direction defined in the config.
-- The computed percentage is used to drive the modal animation as the user drags the modal around.
+- Each snapping point has a corresponding “percentage” that is derived based on its position on the screen, in relation to the current modal direction defined in the modal config.
+- The snap point's computed percentage is then used in the interpolation function to drive the modal animation as the user drags the modal around.
 
 <br>
 
-As such, each snapping point must be unique (no repeats/duplicates), and their corresponding computed percentage must change, either increasing or decreasing consistently in one direction.
 
-- **Example 01**: A “left to right” modal’s snap points must continually move to the right; i.e. the layout the snapping points defined must change it’s width and/or increment its horizontal position, such that the modal’s `CGRect.maxX` (rightmost edge) increases continuously.<br><br>
-- **Example 02**: A “bottom to top” modal’s snap points must continually move towards the top; i.e the layout the snapping points defined must change either it’s height, and/or increment its vertical position, such that the modal’s `CGRect.minY` (topmost edge) increases continuously.<br><br>
-- **Example 03**: A “right to left” modal’s snap points must continually move to the left; i.e. the layout the snapping points defined must change it’s width and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.<br><br>
-- **Example 04**: A “top to bottom” modal’s snap points must continually move to the bottom; i.e. the layout the snapping points defined must change it’s height and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.
+
+Due to the quirks described in the previous bullet points, each snapping point must be unique (no repeats or duplicates), and their corresponding computed percentage must change, either increasing or decreasing consistently in one direction.
+
+- **Example 01**: A “left to right” modal’s snap points must continually move to the right; i.e. the layout that the snapping points defined must change it’s width and/or increment its horizontal position, such that the modal’s `CGRect.maxX` (rightmost edge) increases continuously.<br><br>
+- **Example 02**: A “bottom to top” modal’s snap points must continually move towards the top; i.e the layout that the snapping points defined must change either it’s height, and/or increment its vertical position, such that the modal’s `CGRect.minY` (topmost edge) increases continuously.<br><br>
+- **Example 03**: A “right to left” modal’s snap points must continually move to the left; i.e. the layout that the snapping points defined must change it’s width and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.<br><br>
+- **Example 04**: A “top to bottom” modal’s snap points must continually move to the bottom; i.e. the layout that the snapping points defined must change it’s height and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.
 
 <br><br>
 
