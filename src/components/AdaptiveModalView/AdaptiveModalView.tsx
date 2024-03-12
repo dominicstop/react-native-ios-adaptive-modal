@@ -34,17 +34,12 @@ export class AdaptiveModalView extends
     this.emitter = new TSEventEmitter();
   };
 
-  componentWillUnmount(): void {
-    this.nativeRef.notifyOnComponentWillUnmount();
-  };
-
   // Internal Functions
   // ------------------
 
   private getProps = () => {
     const {
       modalConfig,
-      internalCleanupMode,
       modalContentAnchorMode,
       modalAnimationMode,
       shouldEnableContinuousLayoutResizingDuringAnimation,
@@ -61,6 +56,7 @@ export class AdaptiveModalView extends
       allowModalToDragWhenAtMinScrollViewOffset,
       allowModalToDragWhenAtMaxScrollViewOffset,
       isModalDragHandleGestureEnabled,
+      internalViewCleanupMode,
       ...viewProps
     } = this.props;
 
@@ -74,9 +70,6 @@ export class AdaptiveModalView extends
         overrideShouldSnapToOvershootSnapPoint,
 
         // Pass down props w/ default value...
-        internalCleanupMode: (
-          internalCleanupMode ?? 'reactComponentWillUnmount'
-        ),
         modalContentAnchorMode: (
           modalContentAnchorMode ?? 'center'
         ),
@@ -115,6 +108,9 @@ export class AdaptiveModalView extends
         ),
         isModalDragHandleGestureEnabled: (
           isModalDragHandleGestureEnabled ?? true
+        ),
+        internalViewCleanupMode: (
+          internalViewCleanupMode ?? { mode: 'default' }
         ),
       },
 

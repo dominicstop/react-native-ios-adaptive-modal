@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 
+import { RNIUtilitiesModule } from 'react-native-ios-utilities';
+
 import { RNIAdaptiveModalViewModule } from './RNIAdaptiveModalViewModule';
 import { RNIAdaptiveModalNativeView } from './RNIAdaptiveModalNativeView';
 
@@ -23,7 +25,15 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
   };
 
   componentWillUnmount(){
-    this.notifyOnComponentWillUnmount(false);
+    const reactTag = this.getNativeReactTag();
+    if(typeof reactTag !== 'number') return;
+
+    RNIUtilitiesModule.notifyOnComponentWillUnmount(
+      reactTag, {
+        shouldForceCleanup: true,
+        shouldIgnoreCleanupTriggers: false,
+      }
+    );
   };
 
   getNativeRef: () => View | undefined = () => {
@@ -33,16 +43,6 @@ export class RNIAdaptiveModalView extends React.PureComponent<RNIAdaptiveModalVi
   getNativeReactTag: () => number | undefined = () => {
     // @ts-ignore
     return this.nativeRef?.nativeTag ?? this.reactTag
-  };
-
-  notifyOnComponentWillUnmount = async (isManuallyTriggered: boolean = true) => {
-    const reactTag = this.getNativeReactTag();
-    if(typeof reactTag !== 'number') return;
-
-    await RNIAdaptiveModalViewModule.notifyOnComponentWillUnmount(
-      reactTag, 
-      isManuallyTriggered
-    );
   };
 
   notifyDidLayoutSubviews = async () => {

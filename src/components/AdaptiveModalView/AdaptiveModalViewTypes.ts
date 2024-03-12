@@ -1,9 +1,14 @@
 import { ViewProps } from "react-native";
-import { RNIAdaptiveModalViewBaseProps } from "../../native_components/RNIAdaptiveModalView";
+import { RNIAdaptiveModalViewProps } from "../../native_components/RNIAdaptiveModalView";
 
-export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBaseProps,
-  // A - Optional Props from `RNIAdaptiveModalBaseProps`
-  | 'internalCleanupMode'
+
+export type AdaptiveModalViewInheritedRequiredProps = Pick<RNIAdaptiveModalViewProps, 
+  | 'modalConfig'
+  | 'modalContentAnchorMode'
+>;
+
+export type AdaptiveModalViewInheritedOptionalProps = Partial<Pick<RNIAdaptiveModalViewProps,
+  | 'internalViewCleanupMode'
   | 'modalAnimationMode'
   | 'shouldEnableContinuousLayoutResizingDuringAnimation'
   | 'shouldEnableSnapping'
@@ -30,16 +35,12 @@ export type AdaptiveModalViewBaseProps = Partial<Pick<RNIAdaptiveModalViewBasePr
   | 'onCurrentModalConfigDidChange'
   | 'onBackgroundTapGesture'
   | 'onModalStateWillChange'
-  
-> & Pick<RNIAdaptiveModalViewBaseProps, 
-  // B - Required Props from `RNIAdaptiveModalBaseProps`
-  | 'modalConfig'
-  | 'modalContentAnchorMode'
-> & {
-}>; 
+>>;
 
 export type AdaptiveModalViewProps = 
-  AdaptiveModalViewBaseProps & ViewProps;
+  & AdaptiveModalViewInheritedOptionalProps
+  & AdaptiveModalViewInheritedRequiredProps 
+  & ViewProps;
 
 export type AdaptiveModalViewState = {
   shouldMountModalContent: boolean;

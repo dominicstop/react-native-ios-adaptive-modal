@@ -13,8 +13,7 @@ import AdaptiveModal
 import ComputableLayout
 
 
-public class RNIAdaptiveModalView:
-  ExpoView, RNICleanable, RNIJSComponentWillUnmountNotifiable {
+public class RNIAdaptiveModalView: ExpoView, RNICleanable {
 
   // MARK: - Embedded Types
   // ----------------------
@@ -39,20 +38,30 @@ public class RNIAdaptiveModalView:
   // MARK: - Properties - Flags
   // --------------------------
   
-  var didTriggerCleanup = false;
-  var didAttachToParentVC = false;
+  var _didTriggerCleanup = false;
+  var _didAttachToParentVC = false;
   
   // MARK: Properties - Props
   // ------------------------
   
-  private(set) public var internalCleanupMode: RNICleanupMode = .automatic;
-  public var internalCleanupModeRaw: String? {
+  private(set) public var viewCleanupMode: RNIViewCleanupMode = .default;
+  public var internalViewCleanupModeProp: Dictionary<String, Any>? {
     willSet {
-      guard let rawString = newValue,
-            let cleanupMode = RNICleanupMode(rawValue: rawString)
-      else { return };
+      let nextValue: RNIViewCleanupMode = {
+        guard let newValue = newValue,
+              let viewCleanupMode = try? RNIViewCleanupMode(fromDict: newValue)
+        else {
+          return .default;
+        };
+        
+        return viewCleanupMode;
+      }();
       
-      self.internalCleanupMode = cleanupMode;
+      self.viewCleanupMode = nextValue;
+      
+      if let cleanableViewItem = self.associatedCleanableViewItem {
+        cleanableViewItem.viewCleanupMode = nextValue;
+      };
     }
   };
   
@@ -269,21 +278,6 @@ public class RNIAdaptiveModalView:
   
   public let onModalStateWillChange = EventDispatcher("onModalStateWillChange");
   
-  // MARK: - Computed Properties
-  // ---------------------------
-  
-  var cleanupMode: RNICleanupMode {
-    get {
-      switch self.internalCleanupMode {
-        case .automatic:
-          return .reactComponentWillUnmount;
-          
-        default:
-          return self.internalCleanupMode;
-      };
-    }
-  };
-  
   // MARK: Init + Lifecycle
   // ----------------------
 
@@ -293,6 +287,13 @@ public class RNIAdaptiveModalView:
   
   public required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented");
+  };
+  
+  deinit {
+    try? self.viewCleanupMode.triggerCleanupIfNeededForDeinit(
+      for: self,
+      shouldForceCleanup: true
+    );
   };
   
   // MARK: - RN Lifecycle
@@ -331,44 +332,23 @@ public class RNIAdaptiveModalView:
   // ----------------------
   
   public override func didMoveToWindow() {
-    let didMoveToNilWindow = self.window == nil;
-    
-    /// A. Not attached to a parent VC yet
-    /// B. Moving to a non-nil window
-    /// C. attach as "child vc" to "parent vc" enabled
-    ///
-    /// the VC attached to this view is possibly being attached as a child
-    /// view controller to a view controller managed by
-    /// `UINavigationController`...
-    ///
-    let shouldAttachToParentVC =
-         !self.didAttachToParentVC
-      && !didMoveToNilWindow
-      && self.cleanupMode.shouldAttachToParentVC;
-      
-    
-    /// A. Moving to a nil window
-    /// B. Not attached to a parent VC yet
-    /// C. Attach as "child vc" to "parent vc" disabled
-    /// D. Cleanup mode is set to: `didMoveToWindowNil`
-    ///
-    /// Moving to nil window and not attached to parent vc, possible end of
-    /// lifecycle for this view...
-    ///
-    let shouldTriggerCleanup =
-          didMoveToNilWindow
-      && !self.didAttachToParentVC
-      && !self.cleanupMode.shouldAttachToParentVC
-      && self.cleanupMode == .didMoveToWindowNil;
-      
+    let shouldAttachToParentVC = self.viewCleanupMode.shouldAttachToParentController(
+      forView: self,
+      associatedViewController: self.navigationEventsController,
+      currentWindow: self.window
+    );
       
     if shouldAttachToParentVC {
       // begin setup - attach this view as child vc
       self.attachToParentVC();
     
-    } else if shouldTriggerCleanup {
+    } else {
       // trigger manual cleanup
-      self.cleanup();
+      try? self.viewCleanupMode.triggerCleanupIfNeededForDidMoveToWindow(
+        forView: self,
+        associatedViewController: self.navigationEventsController,
+        currentWindow: self.window
+      );
     };
   };
   
@@ -444,19 +424,18 @@ public class RNIAdaptiveModalView:
     
     self.modalManager = modalManager;
   };
-
+  
   func attachToParentVC(){
-    guard self.cleanupMode.shouldAttachToParentVC,
-          !self.didAttachToParentVC,
-          
-          // find the nearest parent view controller
-          let parentVC = RNIHelpers.getParent(
-            responder: self,
-            type: UIViewController.self
-          )
-    else { return };
+    guard !self._didAttachToParentVC else { return };
+        
+    // find the nearest parent view controller
+    let parentVC = RNIHelpers.getParent(
+      responder: self,
+      type: UIViewController.self
+    );
     
-    self.didAttachToParentVC = true;
+    guard let parentVC = parentVC else { return };
+    self._didAttachToParentVC = true;
     
     let childVC = RNINavigationEventsReportingViewController();
     childVC.view = self;
@@ -470,12 +449,13 @@ public class RNIAdaptiveModalView:
   };
   
   func detachFromParentVCIfAny(){
-    guard !self.didAttachToParentVC,
+    guard !self._didAttachToParentVC,
           let childVC = self.navigationEventsController
     else { return };
     
     childVC.willMove(toParent: nil);
     childVC.removeFromParent();
+    childVC.view.removeFromSuperview();
   };
   
   func presentModal(
@@ -693,35 +673,13 @@ public class RNIAdaptiveModalView:
   // --------------------
   
   public func cleanup(){
-    guard self.cleanupMode.shouldEnableCleanup,
-          !self.didTriggerCleanup
-    else { return };
+    guard let viewCleanupKey = self.viewCleanupKey else { return };
     
-    self.didTriggerCleanup = true;
-    
-    self.detachFromParentVCIfAny();
-    
-    // WIP - TBA
-    // Add: Cleanup for detached views here
-
-    self.detachedViews.forEach {
-      $0.ref?.cleanup();
-    };
-    
-    self.detachedViews = [];
-    
-    #if DEBUG
-    NotificationCenter.default.removeObserver(self);
-    #endif
-  };
-  
-  // MARK: - RNIJSComponentWillUnmountNotifiable
-  // -------------------------------------------
-  
-  public func notifyOnJSComponentWillUnmount(){
-    guard self.cleanupMode == .reactComponentWillUnmount
-    else { return };
-    
-    self.cleanup();
+    try? RNICleanableViewRegistryShared.notifyCleanup(
+      forKey: viewCleanupKey,
+      sender: .cleanableViewDelegate(self),
+      shouldForceCleanup: true,
+      cleanupTrigger: nil
+    );
   };
 };

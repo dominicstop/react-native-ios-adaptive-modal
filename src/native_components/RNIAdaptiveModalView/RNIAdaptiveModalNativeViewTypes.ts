@@ -1,5 +1,5 @@
 import type { ViewProps } from 'react-native';
-import type { RNICleanupMode } from 'react-native-ios-utilities';
+import type { RNIViewCleanupModeProp } from 'react-native-ios-utilities';
 
 import type { OnBackgroundTapGestureEvent, OnCurrentModalConfigDidChangeEvent, OnModalContentInitializedEvent, OnModalDidHideEvent, OnModalDidShowEvent, OnModalDidSnapEvent, OnModalDismissCancelledEvent, OnModalPresentCancelledEvent, OnModalStateWillChangeEvent, OnModalWillHideEvent, OnModalWillShowEvent, OnModalWillSnapEvent } from './RNIAdaptiveModalViewEvents';
 import type { AdaptiveModalConfig } from '../../types/AdaptiveModalConfig';
@@ -9,13 +9,9 @@ import type { AdaptiveModalAnimationMode } from '../../types/AdaptiveModal';
 
 export type RNIAdaptiveModalNativeViewBaseProps = {
 
-  // Internal
-  // --------
-
-  internalCleanupMode: RNICleanupMode;
-
   // Value Props
   // -----------
+  
   modalConfig: AdaptiveModalConfig | undefined;
   modalContentAnchorMode: RNIModalContentAnchorMode | undefined;
   modalAnimationMode: AdaptiveModalAnimationMode | undefined;
@@ -54,4 +50,6 @@ export type RNIAdaptiveModalNativeViewBaseProps = {
 };
 
 export type RNIAdaptiveModalNativeViewProps = 
-  RNIAdaptiveModalNativeViewBaseProps & ViewProps;
+  & RNIViewCleanupModeProp
+  & RNIAdaptiveModalNativeViewBaseProps 
+  & ViewProps;

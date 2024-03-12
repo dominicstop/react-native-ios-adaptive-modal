@@ -1,5 +1,4 @@
 import { requireNativeModule } from 'expo-modules-core';
-import type { NotifyOnComponentWillUnmount } from 'react-native-ios-utilities';
 
 import type { RNIAdaptiveModalCommandConfigPresent } from './RNIAdaptiveModalCommandPresentTypes';
 import type { RNIAdaptiveModalCommandConfigDismiss } from './RNIAdaptiveModalCommandConfigDismiss';
@@ -9,7 +8,6 @@ import type { RNIAdaptiveModalCommandConfigSnapToCommon } from './RNIAdaptiveMod
 
 
 interface RNIAdaptiveModalViewModule  {
-  notifyOnComponentWillUnmount: NotifyOnComponentWillUnmount;
 
   notifyDidLayoutSubviews: (
     reactTag: number

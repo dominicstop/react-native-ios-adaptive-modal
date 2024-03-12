@@ -1,10 +1,10 @@
 import { ViewProps } from 'react-native';
-import { RNIAdaptiveModalNativeViewBaseProps } from './RNIAdaptiveModalNativeViewTypes';
+import { RNIViewCleanupModeProp } from 'react-native-ios-utilities';
+import { RNIAdaptiveModalNativeViewProps } from './RNIAdaptiveModalNativeViewTypes';
 
 
-export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseProps,
+export type RNIAdaptiveModalViewInheritedProps = Pick<RNIAdaptiveModalNativeViewProps,
   // Props
-  | 'internalCleanupMode'
   | 'modalConfig'
   | 'modalContentAnchorMode'
   | 'modalAnimationMode'
@@ -22,6 +22,7 @@ export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseP
   | 'allowModalToDragWhenAtMinScrollViewOffset'
   | 'allowModalToDragWhenAtMaxScrollViewOffset'
   | 'isModalDragHandleGestureEnabled'
+  | 'internalViewCleanupMode'
   // Events
   | 'onModalContentInitialized'
   | 'onModalWillSnap'
@@ -38,4 +39,6 @@ export type RNIAdaptiveModalViewBaseProps = Pick<RNIAdaptiveModalNativeViewBaseP
 >;
 
 export type RNIAdaptiveModalViewProps = 
-  RNIAdaptiveModalViewBaseProps & ViewProps;
+  & RNIViewCleanupModeProp
+  & RNIAdaptiveModalViewInheritedProps 
+  & ViewProps;

@@ -13,27 +13,7 @@ public class RNIAdaptiveModalViewModule: Module {
 
   public func definition() -> ModuleDefinition {
     Name("RNIAdaptiveModalView");
-    
-    AsyncFunction("notifyOnComponentWillUnmount") {
-      (reactTag: Int, isManuallyTriggered: Bool, promise: Promise) in
-      
-      DispatchQueue.main.async {
-        do {
-          let adaptiveModalView = try RNIModuleHelpers.getView(
-            withErrorType: RNIAdaptiveModalError.self,
-            forNode: reactTag,
-            type: RNIAdaptiveModalView.self
-          );
-          
-          adaptiveModalView.notifyOnJSComponentWillUnmount();
-          promise.resolve();
-        
-        } catch let error {
-          promise.reject(error);
-        };
-      };
-    };
-    
+
     AsyncFunction("notifyDidLayoutSubviews") {
       (
         reactTag: Int,
@@ -357,7 +337,6 @@ public class RNIAdaptiveModalViewModule: Module {
       };
     };
     
-
     View(RNIAdaptiveModalView.self) {
       Events("onModalContentInitialized");
       Events("onModalWillSnap");
@@ -438,6 +417,10 @@ public class RNIAdaptiveModalViewModule: Module {
       
       Prop("isModalDragHandleGestureEnabled") {
         $0.isModalDragHandleGestureEnabled = $1;
+      };
+      
+      Prop("internalViewCleanupMode") {
+        $0.internalViewCleanupModeProp = $1;
       };
     };
   };

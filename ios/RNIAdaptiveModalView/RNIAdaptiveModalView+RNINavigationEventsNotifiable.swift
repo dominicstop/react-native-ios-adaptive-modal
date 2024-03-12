@@ -12,11 +12,7 @@ extension RNIAdaptiveModalView: RNINavigationEventsNotifiable {
   public func notifyViewControllerDidPop(
     sender: RNINavigationEventsReportingViewController
   ) {
-    if self.cleanupMode == .viewController {
-      // trigger cleanup
-      self.cleanup();
-    };
+    try? self.viewCleanupMode
+      .triggerCleanupIfNeededForViewControllerDidPopEvent(for: self);
   };
 };
-
- 
