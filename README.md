@@ -57,7 +57,7 @@ All of the modal presentation and animation is handled by a small library writte
 
 <br>
 
-It then uses the modal config, and transforms it into something `UIKit` can understand via:
+the modal config is then evaluated, and gets "transformed" into something `UIKit` can understand via:
 
 * Handling all the necessary conformances to `UIViewControllerAnimatedTransitioning`, `UIAdaptivePresentationControllerDelegate`, `UIViewControllerTransitioningDelegate`
 * Handling the interpolation applied to the modal + keyframes when the modal is dragged around via gesture. 
@@ -69,9 +69,9 @@ It then uses the modal config, and transforms it into something `UIKit` can unde
 
 To define the various snapping points for the modal, a small helper library written in swift called  [`ComputableLayout`](https://github.com/dominicstop/ComputableLayout) is used to configure the size and position of the modal. This library is a very naive layout system/calculator custom built for [`adaptive-modal`](https://github.com/dominicstop/adaptive-modal/). 
 
-This helper library is essentially just a function that turns a [config](https://github.com/dominicstop/ComputableLayout/blob/b9f9301497e23f18cd61d92c37ab1f9f65ce95b3/Example/Examples/ComputaleLayoutTestPresets.swift#L24-L671) (e.g. the desired horizontal/vertical position) into a `CGRect` (i.e. raw x, y, width and height values); in other words, this library is used to cheaply calculate layout for a given configuration without having to instantiate a view. 
+This helper library is essentially just a function that turns a [config](https://github.com/dominicstop/ComputableLayout/blob/b9f9301497e23f18cd61d92c37ab1f9f65ce95b3/Example/Examples/ComputaleLayoutTestPresets.swift#L24-L671) (e.g. the desired horizontal/vertical position) into a `CGRect` value (i.e. raw x, y, width and height values); in other words, this library is used to cheaply calculate layout for a given configuration without having to instantiate a view. 
 
-The layout config allows us to add placeholder values that are then substituted to the real values during  calculation; some of these values are: 
+The layout config allows us to add placeholder "layout values" that are then substituted to the real values during calculation; some of these values are: 
 
 * The safe area insets of the screen/window.
 * The keyboard size (if it's currently visible)
@@ -79,9 +79,11 @@ The layout config allows us to add placeholder values that are then substituted 
 
 <br>
 
-The layout config also allows us to compose multiple layout values together, or have conditions that get evaluated during calculation.
+The layout config also allows for the composition of multiple "layout values" together, or have conditions that get evaluated during calculation.
 
-In summary: `ComputableLayout` allows us to compute all the snapping points for a target view's size, and allows for the quick recalculation all of the snap points whenever there's a layout change for the target view (e.g. when the screen rotates, the window resizes, the appearance of a keyboard, etc).
+The layout config is calculated based on a provided target view/rect, i.e. in the case for `adaptive-modal`, the target view would be the `UITransitionView` where the modal `UIViewController` gets attached to.
+
+In summary: `ComputableLayout` allows us to compute all the snapping points for a target view's size, this allows for the quick recalculation of all the snapping points whenever there's a layout change for the target view (e.g. when the screen rotates, the window resizes, the appearance of a keyboard, etc).
 
 ![ComputableLayout-Demo-01](https://github.com/dominicstop/ComputableLayout/raw/main/Assets/2023-08-25-ComputaleLayoutTestPresets-02.gif)
 
@@ -109,14 +111,13 @@ The layout config you provide defines the snapping point.
 
 <br>
 
-
-
-Due to the quirks described in the previous bullet points, each snapping point must be unique (no repeats or duplicates), and their corresponding computed percentage must change, either increasing or decreasing consistently in one direction.
+Due to the quirks described in the previous bullet points, it is recommended that each snapping point be unique (no repeats or duplicates), and their corresponding computed percentage must change—either increasing or decreasing consistently in one direction.
 
 - **Example 01**: A “left to right” modal’s snap points must continually move to the right; i.e. the layout that the snapping points defined must change it’s width and/or increment its horizontal position, such that the modal’s `CGRect.maxX` (rightmost edge) increases continuously.<br><br>
 - **Example 02**: A “bottom to top” modal’s snap points must continually move towards the top; i.e the layout that the snapping points defined must change either it’s height, and/or increment its vertical position, such that the modal’s `CGRect.minY` (topmost edge) increases continuously.<br><br>
 - **Example 03**: A “right to left” modal’s snap points must continually move to the left; i.e. the layout that the snapping points defined must change it’s width and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.<br><br>
-- **Example 04**: A “top to bottom” modal’s snap points must continually move to the bottom; i.e. the layout that the snapping points defined must change it’s height and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.
+- **Example 04**: A “top to bottom” modal’s snap points must continually move to the bottom; i.e. the layout that the snapping points defined must change it’s height and/or decrement it’s horizontal position, such that the modal's `CGRect.minX` (leftmost edge) decreases continuously.<br><br>
+- **Summary**: You can think of `adaptive-modal` as a very limited/naive "range interpolator" (e.g. something like `lerp`). Because of this, the values in the "range" (in this case, the snapping points) must be continuous in one direction only, otherwise the resulting interpolated value (e.g. the position of the modal) will be invalid.
 
 <br><br>
 
