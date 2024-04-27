@@ -2,6 +2,14 @@
 
 TBA
 
+<br>
+
+## 🚧⚠️ Re-Write WIP 🚧⚠️
+
+This library is being re-written to support the new architecture. Please see this is [issue](https://github.com/dominicstop/react-native-ios-context-menu/issues/100#issuecomment-2077986438) for progress 😔
+
+<br>
+
 ## A. Introduction
 
 TBA
